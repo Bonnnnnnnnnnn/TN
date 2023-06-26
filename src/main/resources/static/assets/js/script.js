@@ -111,4 +111,5 @@ document.getElementById("register").addEventListener("click", function() {
 document.getElementById("login").addEventListener("click", function() {
     document.getElementById("container").classList.remove("right-panel-active");
 });
-});*/
+});
+*/
