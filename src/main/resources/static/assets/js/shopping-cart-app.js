@@ -52,9 +52,16 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       alert("Thêm vào giỏ thành công!");
     },
     remove(id) {
-      var index = this.items.findIndex((item) => item.id == id);
-      this.items.splice(index, 1);
-      this.saveToLocalStorage();
+	  var xacNhan = confirm("Bạn có muốn xóa không?");
+	  if(xacNhan) {
+		  var index = this.items.findIndex((item) => item.id == id);
+	      this.items.splice(index, 1);
+	      this.saveToLocalStorage();
+	  } else {
+		  // Người dùng chọn "Cancel", không thực hiện xóa
+		  console.log("Xóa bị hủy");
+	  }
+      
     },
     clear() {
       this.items = [];
