@@ -768,7 +768,7 @@ ol {
 	list-style: none;
 	display: inline-block;
 	margin-right: 15px;
-	cursor: po
+	cursor: pointer;
 }
 
 .header__cart ul li:last-child {
@@ -2361,8 +2361,8 @@ ol {
 -----------------------*/
 
 .checkout {
-	padding-top: 80px;
-	padding-bottom: 60px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .checkout h6 {
@@ -2401,12 +2401,12 @@ ol {
 	margin-bottom: 24px;
 }
 
-.checkout__input p {
+.checkout__input .form-label {
 	color: #1c1c1c;
 	margin-bottom: 20px;
 }
 
-.checkout__input p span {
+.checkout__input .star {
 	color: #dd2222;
 }
 
@@ -3334,6 +3334,7 @@ ol {
 		list-style: none;
 		display: inline-block;
 		margin-right: 15px;
+		cursor: pointer;
 	}
 	.humberger__menu__cart ul li:last-child {
 		margin-right: 0;
