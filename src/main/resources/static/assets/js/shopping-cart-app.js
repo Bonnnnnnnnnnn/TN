@@ -8,7 +8,26 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 	    }
 	};
   
-  
+  	// Thêm sự kiện tăng giảm số lượng
+	$scope.increaseQuantity = function(item) {
+		// Kiểm tra số lượng trong kho
+		if (item.qty < item.productQuantity) {
+			// Nếu số lượng của item chưa vượt quá số lượng trong kho
+			// thì tăng số lượng của item lên 1
+			item.qty += 1;
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
+		$scope.cart.saveToLocalStorage();
+	};
+
+	$scope.decreaseQuantity = function(item) {
+		if (item.qty > 1) {
+			item.qty -= 1;
+			$scope.cart.saveToLocalStorage();
+		}
+	};
+  	
   // Trong controller hoặc script tương ứng
 	$scope.getSubtotal = function() {
 	    var subtotal = 0;
@@ -24,8 +43,13 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     add(id) {
       var item = this.items.find((item) => item.id == id);
       if (item) {
-        item.qty++;
-        this.saveToLocalStorage();
+		if(item.qty < item.productQuantity){
+			// Kiểm tra số lượng sản phẩm trong giỏ hàng với số lượng sản phẩm trong kho
+			item.qty++;
+        	this.saveToLocalStorage();
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
       } else {
         $http.get(`/rest/products/${id}`).then((resp) => {
           resp.data.qty = 1;
@@ -40,8 +64,12 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       var quantityValue = parseInt(quantityInput.value);
       var item = this.items.find((item) => item.id == id);
       if (item) {
-        item.qty += quantityValue;
-        this.saveToLocalStorage();
+		if(item.qty < item.productQuantity){
+			item.qty += quantityValue;
+        	this.saveToLocalStorage();
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
       } else {
         $http.get(`/rest/products/${id}`).then((resp) => {
           resp.data.qty = quantityValue;

@@ -56,10 +56,13 @@
 
 	                        <p>[[*{description}]]</p>
 	                        <div class="product__details__quantity">
-	                            <div class="quantity">
-	                                <div class="pro-qty">
+	                            <div class="quantity" >
+	                            	<button type="button" ng-click="decreaseQuantity(item)">-</button>
+									<input ng-model="item.qty" type="text" min="1" id="quantityInput" value="1" />
+									<button type="button" ng-click="increaseQuantity(item)">+</button>
+	                                <!-- <div class="pro-qty">	                                	
 	                                    <input id="quantityInput" type="text" value="1" >
-	                                </div>
+	                                </div> -->
 	                            </div>
 	                        </div>
 	                        <a th:attr="ng-click=@{|cart.add2(*{id})|}" class="primary-btn" style="color: #ffffff">ADD TO CARD</a>

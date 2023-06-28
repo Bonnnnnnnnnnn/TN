@@ -30,20 +30,18 @@
 					</div>
 					<div class="col-lg-5 col-md-6">
 						<div class="checkout__order">
-							<h4>Your Order</h4>
+							<h4>Đơn Hàng</h4>
 							<div class="checkout__order__products">
-								Products <span>Total</span>
+								Sản Phẩm <span>Tổng Tiền</span>
 							</div>
-							<ul>
-								<li>Vegetable’s Package <span>$75.99</span></li>
-								<li>Fresh Vegetable <span>$151.99</span></li>
-								<li>Organic Bananas <span>$53.99</span></li>
+							<ul ng-repeat="item in cart.items">
+								<li>{{item.name}}<span>{{item.price*item.qty|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 							</ul>
 							<div class="checkout__order__subtotal">
-								Subtotal <span>$750.99</span>
+								Tổng Tiền Hàng <span>$750.99</span>
 							</div>
 							<div class="checkout__order__total">
-								Total <span>$750.99</span>
+								Tổng Thanh Toán <span>$750.99</span>
 							</div>
 							<div class="checkout__input__checkbox">
 								<label for="payment"> Check Payment <input
@@ -55,7 +53,7 @@
 									id="paypal"> <span class="checkmark"></span>
 								</label>
 							</div>
-							<button type="submit" class="site-btn">PLACE ORDER</button>
+							<button type="submit" class="site-btn">Đặt Hàng</button>
 						</div>
 					</div>
 				</div>

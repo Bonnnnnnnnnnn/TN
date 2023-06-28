@@ -34,6 +34,8 @@ public class Product {
 	private String name;
 	private String image;
 	private Double price;
+	@Column(name = "Productquantity")
+	private Integer productQuantity;
 	private String description;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
