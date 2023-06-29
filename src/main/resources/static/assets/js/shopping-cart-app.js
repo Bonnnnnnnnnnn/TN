@@ -131,6 +131,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     },
     purchase() {
       var order = angular.copy(this);
+      // thực hiện đặt hàng, orders này là giá trị truyền vào JsonNode orderData bên Controller
       $http.post("/rest/orders", order).then((resp) => {
         alert("Đặt hàng thành công!");
         $scope.cart.clear();

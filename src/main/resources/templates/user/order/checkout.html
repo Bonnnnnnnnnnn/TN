@@ -38,10 +38,10 @@
 								<li>{{item.name}}<span>{{item.price*item.qty|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 							</ul>
 							<div class="checkout__order__subtotal">
-								Tổng Tiền Hàng <span>$750.99</span>
+								Tổng Tiền Hàng <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span>
 							</div>
 							<div class="checkout__order__total">
-								Tổng Thanh Toán <span>$750.99</span>
+								Tổng Thanh Toán <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span>
 							</div>
 							<div class="checkout__input__checkbox">
 								<label for="payment"> Check Payment <input
@@ -53,7 +53,7 @@
 									id="paypal"> <span class="checkmark"></span>
 								</label>
 							</div>
-							<button type="submit" class="site-btn">Đặt Hàng</button>
+							<button ng-click="order.purchase()" class="site-btn">Đặt Hàng</button>
 						</div>
 					</div>
 				</div>

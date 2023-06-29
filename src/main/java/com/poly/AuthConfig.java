@@ -27,6 +27,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().cors();
 		http.authorizeRequests()
 		.antMatchers("/order/**").authenticated()
+		.antMatchers("/cart/**").authenticated()
 		.antMatchers("/admin/**").hasAnyRole("STAF", "DIRE")
 		.antMatchers("/rest/authorities").hasRole("DIRE")
 		.anyRequest().permitAll();
