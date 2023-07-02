@@ -8,21 +8,19 @@
 				<div class="card-body row">
 					<div class="form-group col-md-6">
 						<label for="title">Category id</label>
-						<select ng-model="form.category.categoryId" class="form-control">
-			                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
-			            </select>
+						<input ng-model="form.category.id" class="form-control">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="title">Product id</label>
-						<input ng-model="form.productId" class="form-control">
+						<input ng-model="form.id" class="form-control">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="title">Product name</label>
-						<input ng-model="form.productName" class="form-control">
+						<input ng-model="form.name" class="form-control">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="title">Product price</label>
-						<input ng-model="form.productPrice" class="form-control">
+						<input ng-model="form.price" class="form-control">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="title">Product quantity</label>
@@ -32,19 +30,29 @@
 					<div class="form-group col-md-6">
 						<label for="title">Product image</label>
 						<div class="custom-file mb-4">
-	                    	<label for="image" class="custom-file-label">{{form.productImage}}</label>
+	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
 	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
 	                    </div>						
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label for="title">Available</label>
+						<input ng-model="form.available" class="form-control">
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label for="title">Status</label>
+						<input ng-model="form.status" class="form-control">
 					</div>
 
 
 					<div class="form-group col-md-6">
 						<label for="title">Description</label>
-						<textarea ng-model="form.productDescription" class="form-control" rows="5" cols="4"></textarea>
+						<textarea ng-model="form.description" class="form-control" rows="5" cols="4"></textarea>
 					</div>
 					<div class="form-group col-md-6 text-center" style="align-items: center; display: flex;">
 						<label for="image" style="margin: 0;">
-							<img ng-src="{{'/folder/images/' + form.productImage}}" style="width: 15%;" />
+							<img ng-src="{{'/folder/images/' + form.image}}" style="width: 50%;" />
 						</label>
 					</div>
 				</div>
@@ -67,28 +75,32 @@
 			<table id="example1" class="table table-bordered table-striped text-center">
 				<thead>
 					<tr>
-						<td>Category id</td>
 						<td>Product id</td>
 						<th>Name</th>
+						<th>Image</th>
 						<th>Quantity</th>
 						<th>Price</th>
 						<th>Create date</th>
-						<th>Image</th>
+						<th>Available</th>
+						<th>Status</th>
+						<th>CategoryId</th>
 						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="product in getCurrentItems()">
-						<td style="width: 5%">{{product.category.categoryId}}</td>
-						<td style="width: 10%">{{product.productId}}</td>
-						<td style="width: 20%">{{product.productName}}</td>
+						<td style="width: 10%">{{product.id}}</td>
+						<td style="width: 20%">{{product.name}}</td>
+						<td style="width: 10%"><img style="width: 50%; height: auto" ng-src="/folder/images/{{product.image}}" alt="" /></td>
 						<td style="width: 5%">{{product.productQuantity}}</td>
-						<td>${{product.productPrice}}</td>
-						<td>{{product.productCreateDate}}</td>
-						<td style="width: 10%"><img style="width: 50%; height: auto" ng-src="/folder/images/{{product.productImage}}" alt="" /></td>
+						<td>${{product.price}}</td>
+						<td>{{product.createDate}}</td>
+						<td>${{product.available}}</td>
+						<td>${{product.status}}</td>
+						<td style="width: 5%">{{product.category.id}}</td>
 						<td>
-							<button ng-click="edit(product.productId)" class="btn btn-light btn-sm">Edit</button>
-							<button ng-click="delete(product.productId)" class="btn btn-danger btn-sm">Delete</button>
+							<button ng-click="edit(product.id)" class="btn btn-light btn-sm">Edit</button>
+							<button ng-click="delete(product.id)" class="btn btn-danger btn-sm">Delete</button>
 						</td>
 					</tr>
 				</tbody>

@@ -79,7 +79,7 @@ app.controller("ctrl-product", function($scope, $http){
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		}).then(resp => {
-			$scope.form.productImage = resp.data.name; 
+			$scope.form.image = resp.data.name; 
 		}).catch(error => {
 			alert("Error upload image");
 			console.log("Error", error);

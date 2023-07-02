@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.category.id=?1")
-    List<Product> getByCategoryId(Integer cid);
+    List<Product> getByCategoryId(String cid);
     
     @Query(value="SELECT * FROM Products WHERE Status = 1", nativeQuery = true)
     List<Product> getByProductNew();

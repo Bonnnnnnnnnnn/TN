@@ -16,7 +16,10 @@
 					</div>
 					<div class="form-group">
 						<label for="title">Image</label>
-						<input type="file" ng-model="form.image" class="form-control">
+						<div class="custom-file mb-4">
+	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
+	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
+	                    </div>	
 					</div>
 				</div>
 				<div class="card-footer">
