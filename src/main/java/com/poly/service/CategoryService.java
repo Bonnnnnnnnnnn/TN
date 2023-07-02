@@ -10,8 +10,9 @@ import com.poly.model.Category;
 public interface CategoryService {
 	
 	List<Category> findAll();
+	boolean existsById(String categoryId);
 	
-	Category findById(Integer id);
+	Category findById(String categoryId);
 	
 	List<Category> findByTop4Categoy();
 	
@@ -19,5 +20,5 @@ public interface CategoryService {
 	
 	Category update(Category category);
 	
-	void delete(Integer id);
+	void delete(String categoryId);
 }

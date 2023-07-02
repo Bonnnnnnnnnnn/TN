@@ -31,4 +31,8 @@ public class Category implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
+	public String getCategoryId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
