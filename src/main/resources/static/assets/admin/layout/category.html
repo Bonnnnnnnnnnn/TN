@@ -7,18 +7,22 @@
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-						<label for="title">Category id</label>
-						<input ng-model="form.categoryId" class="form-control">
+						<label for="title">Id</label>
+						<input ng-model="form.id" class="form-control">
 					</div>
 					<div class="form-group">
-						<label for="title">Category logo</label>
-						<input ng-model="form.categoryLogo" class="form-control">
+						<label for="title">Name</label>
+						<input ng-model="form.name" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="title">Image</label>
+						<input type="file" ng-model="form.image" class="form-control">
 					</div>
 				</div>
 				<div class="card-footer">
 					<button ng-click="create()" class="btn btn-success btn-sm">Insert</button>
 					<button ng-click="update()" class="btn btn-warning btn-sm">Update</button>
-					<button ng-click="delete(form.categoryId)" type="submit" class="btn btn-danger btn-sm">Delete</button>
+					<button ng-click="delete(form.id)" type="submit" class="btn btn-danger btn-sm">Delete</button>
 					<button ng-click="reset()" class="btn btn-primary btn-sm">Reset</button>
 				</div>
 			</div>
@@ -33,21 +37,27 @@
 			<table id="example1" class="table table-bordered table-striped text-center">
 				<thead>
 					<tr>
-						<th>Category id</th>
-						<th>Category logo</th>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Image</th>
 						<th>Edit</th>
 					</tr>
+					
 				</thead>
 				<tbody>
+				
 					<tr ng-repeat="category in items">
-						<td>{{category.categoryId}}</td>
-						<td>{{category.categoryLogo}}</td>
+						<td>{{category.id}}</td>
+						<td>{{category.name}}</td>
+						<td>{{category.image}}</td>
 						<td>
-							<button ng-click="edit(category.categoryId)" class="btn btn-light btn-sm">Edit</button>
-							<button ng-click="delete(category.categoryId)" class="btn btn-danger btn-sm">Delete</button>
+							<button ng-click="edit(category.id)" class="btn btn-light btn-sm">Edit</button>
+							<button ng-click="delete(category.id)" class="btn btn-danger btn-sm">Delete</button>
 						</td>
+						
 					</tr>
 				</tbody>
+				
 			</table>
 			
 		</div>

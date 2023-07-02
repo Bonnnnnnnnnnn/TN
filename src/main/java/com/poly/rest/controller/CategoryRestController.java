@@ -15,57 +15,61 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.model.Category;
 import com.poly.service.CategoryService;
-import com.poly.service.impl.CategoryServiceImpl;
-
 
 @CrossOrigin("*")
 @RestController
 public class CategoryRestController {
-	@Autowired
-	CategoryService categoryService = new CategoryServiceImpl();
-	
-	// Get all categories
-	@GetMapping("/rest/category")
-	public ResponseEntity<List<Category>> getAll(){
-		return ResponseEntity.ok(categoryService.findAll());
-	}
-	
-	// Get one category by id
-	@GetMapping("/rest/category/{categoryId}")
-	public ResponseEntity<Category> findOne(@PathVariable("categoryId") String categoryId){
-		if(categoryService.existsById(categoryId)) {
-			return ResponseEntity.ok(categoryService.findById(categoryId));
-		}
-		return ResponseEntity.notFound().build();
-	}
-	
-	// Create a new category
-	@PostMapping("/rest/category")
-	public ResponseEntity<Category> post(@RequestBody Category category){
-		if(categoryService.existsById(category.getCategoryId())) {
-			return ResponseEntity.badRequest().build(); // 400 bad request
-		}
-		categoryService.create(category);
-		return ResponseEntity.ok(category);
-	}
-	
-	// Update a category
-	@PutMapping("/rest/category/{categoryId}")
-	public ResponseEntity<Category> put(@PathVariable("categoryId") String categoryId, @RequestBody Category category){
-		if(categoryService.existsById(categoryId)) {
-			categoryService.update(category);
-			return ResponseEntity.ok(category);
-		}
-		return ResponseEntity.notFound().build(); // 404 not found
-	}
-	
-	// Delete category
-	@DeleteMapping("/rest/category/{categoryId}")
-	public ResponseEntity<Void> delete(@PathVariable("categoryId") String categoryId){
-		if(categoryService.existsById(categoryId)) {
-			categoryService.delete(categoryId);
-			return ResponseEntity.ok().build();
-		}
-		return ResponseEntity.notFound().build(); // 404 not found
-	}
+    private final CategoryService categoryService;
+
+    @Autowired
+    public CategoryRestController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    // Get all categories
+    @GetMapping("/rest/category")
+    public ResponseEntity<List<Category>> getAll() {
+        List<Category> categories = categoryService.findAll();
+        return ResponseEntity.ok(categories);
+    }
+
+    // Get one category by id
+    @GetMapping("/rest/category/{id}")
+    public ResponseEntity<Category> findOne(@PathVariable("id") Integer id) {
+        Category category = categoryService.findById(id);
+        if (category != null) {
+            return ResponseEntity.ok(category);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Create a new category
+    @PostMapping("/rest/category")
+    public ResponseEntity<Category> post(@RequestBody Category category) {
+        Category createdCategory = categoryService.create(category);
+        return ResponseEntity.ok(createdCategory);
+    }
+
+    // Update a category
+    @PutMapping("/rest/category/{id}")
+    public ResponseEntity<Category> put(@PathVariable("id") Integer id, @RequestBody Category category) {
+        Category existingCategory = categoryService.findById(id);
+        if (existingCategory != null) {
+            category.setId(id);
+            Category updatedCategory = categoryService.update(category);
+            return ResponseEntity.ok(updatedCategory);
+        }
+        return ResponseEntity.notFound().build(); // 404 not found
+    }
+
+    // Delete category
+    @DeleteMapping("/rest/category/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+        Category existingCategory = categoryService.findById(id);
+        if (existingCategory != null) {
+            categoryService.delete(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build(); // 404 not found
+    }
 }

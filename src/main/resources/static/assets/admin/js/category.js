@@ -14,10 +14,10 @@ app.controller("ctrl-category", function($scope, $http){
         });
     }
     
-    $scope.edit = function(categoryId){
-		var url = `${pathCategory}/category/${categoryId}`;
+    $scope.edit = function(id){
+		var url = `${pathCategory}/category/${id}`;
 		$http.get(url).then(resp => {
-			$scope.form = resp.data;
+			$scope.form = angular.copy(resp.data); // Thêm angular.copy để tạo một bản sao của đối tượng
 			console.log("Success", resp);
 		}).catch(errors => {
 			console.log("Error", errors);
@@ -26,9 +26,9 @@ app.controller("ctrl-category", function($scope, $http){
 	
 	$scope.update = function(){
         var category = angular.copy($scope.form);
-        var url = `${pathCategory}/category/${$scope.form.categoryId}`;
+        var url = `${pathCategory}/category/${$scope.form.id}`;
         $http.put(url, category).then(resp => {
-            var index = $scope.items.findIndex(category => category.categoryId == $scope.form.categoryId);
+            var index = $scope.items.findIndex(category => category.id == $scope.form.id);
             $scope.items[index] = resp.data;
             console.log("Success", resp);
         }).catch(error => {
@@ -40,7 +40,7 @@ app.controller("ctrl-category", function($scope, $http){
         var item = angular.copy($scope.form);
         var url = `${pathCategory}/category`;
         $http.post(url, item).then(resp => {
-            $scope.items.push(item);
+            $scope.items.push(resp.data); // Sử dụng resp.data thay vì item để lấy đối tượng đã được tạo
             $scope.reset();
             console.log("Success", resp);
         }).catch(error => {
@@ -48,18 +48,34 @@ app.controller("ctrl-category", function($scope, $http){
         });
     }
     
-    $scope.delete = function(categoryId){
-        var url = `${pathCategory}/category/${categoryId}`;
+    $scope.delete = function(id){
+        var url = `${pathCategory}/category/${id}`;
         $http.delete(url).then(resp => {
-            // tìm ra phần tử tại vị trí sẽ xóa.
-            var index = $scope.items.findIndex(item => item.categoryId == categoryId);
-            $scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
+            var index = $scope.items.findIndex(item => item.id == id);
+            $scope.items.splice(index, 1);
             $scope.reset();
             console.log("Success", resp);
         }).catch(error => {
             console.log("Error", error);
         });
     }
+	
+	$scope.imageChanged = function(files) {
+		var data = new FormData();
+		data.append("file", files[0]);
+		$http
+			.post("/rest/upload/images", data, {
+				transformRequest: angular.identity,
+				headers: { "Content-Type": undefined },
+			})
+			.then((resp) => {
+				$scope.form.image = resp.data.name;
+			})
+			.catch((error) => {
+				alert("Lỗi upload hình ảnh!");
+				console.log("Error", error);
+			});
+	};
 	
 	$scope.reset = function(){
 		$scope.form = {};
