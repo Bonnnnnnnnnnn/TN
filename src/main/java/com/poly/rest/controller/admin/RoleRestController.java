@@ -1,4 +1,4 @@
-package com.poly.rest.controller;
+package com.poly.rest.controller.admin;
 
 import java.util.List;
 

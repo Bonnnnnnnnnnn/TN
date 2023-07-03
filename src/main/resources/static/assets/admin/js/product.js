@@ -33,7 +33,7 @@ app.controller("ctrl-product", function($scope, $http){
 	
 	$scope.update = function(){
         var item = angular.copy($scope.form);
-        var url = `${pathProduct}/product/${$scope.form.productId}`;
+        var url = `${pathProduct}/product/${$scope.form.id}`;
         $http.put(url, item).then(resp => {
             var index = $scope.items.findIndex(item => item.productId == $scope.form.productId);
             $scope.items[index] = resp.data;
@@ -57,10 +57,10 @@ app.controller("ctrl-product", function($scope, $http){
     }
     
     $scope.delete = function(productId){
-        var url = `${pathProduct}/product/${productId}`;
+        var url = `${pathProduct}/product/${id}`;
         $http.delete(url).then(resp => {
             // tìm ra phần tử tại vị trí sẽ xóa.
-            var index = $scope.items.findIndex(item => item.productId == productId);
+            var index = $scope.items.findIndex(item => item.id == id);
             $scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
             $scope.reset();
             console.log("Success", resp);

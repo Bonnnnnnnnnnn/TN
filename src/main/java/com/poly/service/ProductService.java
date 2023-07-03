@@ -17,6 +17,7 @@ public interface ProductService {
 	Product create(Product product);
 	
 	Product update(Product product);
+	boolean existsById(Integer integer);
 	
-	void delete(Integer id);
+	public void delete(Integer id);
 }
