@@ -125,7 +125,7 @@
 						                    	<th:block th:if="${#request.remoteUser}">			
 							                        <li><a href="#">Giỏ Hàng Của Tôi</a></li>
 							                        <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
-							                        	<a href="#">Trang Quản Trị</a>
+							                        	<a th:href="@{/admin/index}">Trang Quản Trị</a>
 							                        </li>
 							                        <li><a  th:href="@{/security/logoff}">Đăng Xuất</a></li>
 						                    	</th:block>

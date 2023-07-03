@@ -10,7 +10,7 @@ public interface ProductService {
 	
 	Product findById(Integer id);
 	
-	List<Product> findByCategoryId(Integer cid);
+	List<Product> findByCategoryId(String id);
 	
 	List<Product> findByProductNew();
 	

@@ -36,7 +36,10 @@ public class Product {
 	private Double price;
 	@Column(name = "Productquantity")
 	private Integer productQuantity;
+	
+	@Column(name = "Description")
 	private String description;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
 	private Date createDate = new Date();
@@ -48,4 +51,8 @@ public class Product {
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "product")
 //	List<OrderDetail> orderDetails;
+	public void setProductId(Integer id2) {
+		// TODO Auto-generated method stub
+		
+	}
 }

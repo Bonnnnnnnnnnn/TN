@@ -1,8 +1,11 @@
 package com.poly.rest.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.model.Product;
@@ -18,33 +20,55 @@ import com.poly.service.ProductService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/products")
 public class ProductRestController {
 	@Autowired
-	ProductService productService;
-	
-	@GetMapping("")
-	public List<Product> getAll() {
-		return productService.findAll();
+	private ProductService productService;
+
+	@GetMapping("/rest/product-quantity/{id}")
+	public ResponseEntity<List<Product>> getQuantitiesByProduct(@PathVariable("id") String id) {
+		List<Product> products = productService.findByCategoryId(id);
+		return ResponseEntity.ok(products);
 	}
-	
-	@GetMapping("{id}")
-	public Product getOne(@PathVariable("id")Integer id) {
-		return productService.findById(id);
+
+	@GetMapping("/rest/product")
+	public ResponseEntity<List<Product>> getAll() {
+		List<Product> products = productService.findAll();
+		return ResponseEntity.ok(products);
 	}
-	
-//	@PostMapping
-//	public Product creat(@RequestBody Product product ) {
-//		return productService.create(product);
-//	}
-//	
-//	@PutMapping("{id}")
-//	public Product update(@PathVariable("id")Integer id,@RequestBody Product product ) {
-//		return productService.update(product); 
-//	}
-//	
-//	@DeleteMapping("{id}")
-//	public void delete(@PathVariable("id")Integer id) {
-//		productService.delete(id); 
-//	}
+
+	@GetMapping("/rest/product/{id}")
+	public ResponseEntity<Product> findOne(@PathVariable("id") Integer id) {
+		Product product = productService.findById(id);
+		if (product != null) {
+			return ResponseEntity.ok(product);
+		}
+		return ResponseEntity.notFound().build();
+	}
+
+	@PostMapping("/rest/product")
+	public ResponseEntity<Product> post(@RequestBody Product product) {
+		Product createdProduct = productService.create(product);
+		return ResponseEntity.ok(createdProduct);
+	}
+
+	@PutMapping("/rest/product/{id}")
+	public ResponseEntity<Product> put(@PathVariable("id") Integer id, @RequestBody Product product) {
+		Product existingProduct = productService.findById(id);
+		if (existingProduct != null) {
+			product.setProductId(id);
+			Product updatedProduct = productService.update(product);
+			return ResponseEntity.ok(updatedProduct);
+		}
+		return ResponseEntity.notFound().build();
+	}
+
+	@DeleteMapping("/rest/product/{productId}")
+	public ResponseEntity<Void> delete(@PathVariable("productId") Integer productId) {
+		Product existingProduct = productService.findById(productId);
+		if (existingProduct != null) {
+			productService.delete(productId);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
+	}
 }
