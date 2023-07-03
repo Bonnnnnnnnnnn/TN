@@ -21,5 +21,6 @@ public interface OrderService {
 	
 	// Admin: hiển thị các hóa đơn theo ngày chỉ định
 	List<Order> getOrderByDay(String day);
-
+	
+	List<Order> findAll();
 }

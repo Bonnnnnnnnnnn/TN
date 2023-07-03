@@ -1,8 +1,5 @@
 package com.poly.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,30 +12,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Orderdetails")
-public class OrderDetail implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-
+public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "Orderid")
-	Order order;
-	
+	private Double price;
+	private Integer quantity;
 	@ManyToOne
 	@JoinColumn(name = "Productid")
-	Product product;
-	
-	@Column(name = "Quantity")
-	private Integer quantity;
-	
-	@Column(name = "Price")
-	private Double price;
+	private Product product;
+	@ManyToOne
+	@JoinColumn(name = "Orderid")
+	private Order order;
 }
