@@ -22,30 +22,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@SuppressWarnings("serial")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Orders")
 public class Order implements Serializable{
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Long id;
-	
+	private String address;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "Createdate")
+	private Date createDate= new Date();
 	@ManyToOne
 	@JoinColumn(name = "Username")
-	Account account;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "CreateDate")
-	private Date createDate = new Date();
-	
-	@Column(name= "DiscountId")
-	private String discountId;
-	
-	@Column(name = "Address")
-	private String address;
+	private Account account;
+	@JsonIgnore
+	@OneToMany(mappedBy = "order")
+	List<OrderDetail> orderDetails;
 }

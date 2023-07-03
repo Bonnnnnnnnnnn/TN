@@ -1,16 +1,15 @@
 package com.poly.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.poly.dao.AccountDAO;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
@@ -30,6 +29,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	ProductDAO productDao;
+	
+	@Autowired
+	AccountDAO accountDAO;
 	
 	// Tạo order (đơn hàng mới của khách đặt)
 	@Override
@@ -120,6 +122,11 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public List<Order> getOrderByDay(String day) {
 		return dao.getOrderByDay(day);
+	}
+
+	@Override
+	public List<Order> findAll() {
+		return dao.findAll();
 	}
 
 }

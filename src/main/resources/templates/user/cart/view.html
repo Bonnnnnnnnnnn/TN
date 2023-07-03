@@ -51,9 +51,9 @@
 	                                    </td>
 	                                    <td class="shoping__cart__quantity">
 										    <div class="quantity">
-										    	<button type="button" ng-click="item.qty = item.qty - 1">-</button>
+										    	<button type="button" ng-click="decreaseQuantity(item)">-</button>
 												  <input type="text" min="1" ng-change="cart.saveToLocalStorage() " ng-keydown="preventEmptyInput($event)" ng-model="item.qty" />
-												  <button type="button" ng-click="item.qty = item.qty + 1">+</button>
+												  <button type="button" ng-click="increaseQuantity(item)">+</button>
 										    </div>
 										</td>
 
@@ -76,8 +76,8 @@
 	                <div class="col-lg-12">
 	                    <div class="shoping__cart__btns">
 	                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-	                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-	                            Upadate Cart</a>
+	                        <a ng-click="cart.clear()" class="primary-btn cart-btn cart-btn-right">
+	                            Clear Cart</a>
 	                    </div>
 	                </div>
 	                <div class="col-lg-6">
@@ -98,10 +98,28 @@
 	                            <li>Subtotal <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 	                            <li>Total <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 	                        </ul>
-	                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+	                        <a type="button" class="primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">PROCEED TO CHECKOUT</a>
 	                    </div>
 	                </div>
 	            </div>
+	            <!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" style="max-width: 900px;">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Hóa Đơn</h5>
+				        <span data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"><i class="fas fa-times"></i></span>
+				      </div>
+				      <div class="modal-body">
+				        <div th:insert="/user/order/checkout.html"></div>
+				      </div>
+				      <!-- <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div> -->
+				    </div>
+				  </div>
+				</div>
 	        </div>
 	    </section>
 	    <!-- Shoping Cart Section End -->
