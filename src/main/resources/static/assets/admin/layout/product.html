@@ -8,7 +8,9 @@
 				<div class="card-body row">
 					<div class="form-group col-md-6">
 						<label for="title">Category id</label>
-						<input ng-model="form.category.id" class="form-control">
+						<select ng-model="form.category.id" class="form-control">
+			                <option ng-repeat="x in categories" ng-value="x.id">{{x.id}}</option>
+			            </select>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="title">Product id</label>
@@ -27,13 +29,7 @@
 						<input ng-model="form.productQuantity" class="form-control">
 					</div>
 					
-					<div class="form-group col-md-6">
-						<label for="title">Product image</label>
-						<div class="custom-file mb-4">
-	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
-	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
-	                    </div>						
-					</div>
+					
 					
 					<div class="form-group col-md-6">
 						<label for="title">Available</label>
@@ -45,6 +41,13 @@
 						<input ng-model="form.status" class="form-control">
 					</div>
 
+						<div class="form-group col-md-6">
+						<label for="title">Product image</label>
+						<div class="custom-file mb-4">
+	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
+	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
+	                    </div>						
+					</div>
 
 					<div class="form-group col-md-6">
 						<label for="title">Description</label>
@@ -52,7 +55,7 @@
 					</div>
 					<div class="form-group col-md-6 text-center" style="align-items: center; display: flex;">
 						<label for="image" style="margin: 0;">
-							<img ng-src="{{'/folder/images/' + form.image}}" style="width: 50%;" />
+							<img ng-src="{{'/folder/images/' + form.image}}" style="width: 50%;height:50%" />
 						</label>
 					</div>
 				</div>

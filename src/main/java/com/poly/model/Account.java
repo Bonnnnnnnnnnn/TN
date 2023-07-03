@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +45,6 @@ public class Account implements Serializable{
 	private String auth_provider;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "account")
+	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
 	List<Authority> authorities;
 }
