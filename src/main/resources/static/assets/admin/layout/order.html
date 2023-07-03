@@ -8,7 +8,7 @@
 				<div class="card-body row">
 					<div class="form-group col-md-6">
 						<label for="title">Order date</label>
-						<input ng-model="selectedCreatedDate" class="form-control" type="date" name="CreatedDate">
+						<input ng-model="selectedCreateDate" class="form-control" type="date" name="CreateDate">
 						<button ng-click="handleChange()" class="btn btn-success btn-sm mt-3">Check</button>
 					</div>
 				</div>					
@@ -28,14 +28,16 @@
 						<th>Username</td>
 						<th>Created Date</th>
 						<th>Address</th>
+						<th>Discount</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in items">
-						<td style="width: 25%">{{item.orderId}}</td>
+						<td style="width: 25%">{{item.id}}</td>
 						<td style="width: 25%">{{item.account.username}}</td>
-						<td style="width: 25%">{{item.createdDate}}</td>
+						<td style="width: 25%">{{item.createDate}}</td>
 						<td style="width: 25%">{{item.address}}</td>
+						<td style="width: 25%">{{item.discountId}}</td>
 					</tr>
 				</tbody>
 			</table>
