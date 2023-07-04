@@ -39,7 +39,7 @@ public class ProductAdminRestController {
 	}
 
 	@GetMapping("/rest/product/{id}")
-	public ResponseEntity<Product> findOne(@PathVariable("id") Integer id) {
+	public ResponseEntity<Product> findOne(@PathVariable("id") String id) {
 		Product product = productService.findById(id);
 		if (product != null) {
 			return ResponseEntity.ok(product);
@@ -53,7 +53,7 @@ public class ProductAdminRestController {
 		return ResponseEntity.ok(createdProduct);
 	}
 	@PutMapping("/rest/product/{id}")
-	public ResponseEntity<Product> put(@PathVariable("id") Integer id, @RequestBody Product product) {
+	public ResponseEntity<Product> put(@PathVariable("id") String id, @RequestBody Product product) {
 		Product existingProduct = productService.findById(id);
 		if (existingProduct != null) {
 			product.setProductId(id);
@@ -63,11 +63,11 @@ public class ProductAdminRestController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@DeleteMapping("/rest/product/{productId}")
-	public ResponseEntity<Void> delete(@PathVariable("productId") Integer productId) {
-		Product existingProduct = productService.findById(productId);
+	@DeleteMapping("/rest/product/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("productId") String id) {
+		Product existingProduct = productService.findById(id);
 		if (existingProduct != null) {
-			productService.delete(productId);
+			productService.delete(id);
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();

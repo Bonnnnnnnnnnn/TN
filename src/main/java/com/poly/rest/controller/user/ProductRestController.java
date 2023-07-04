@@ -22,7 +22,7 @@ public class ProductRestController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Product> getOne(@PathVariable("id") Integer id) {
+	public ResponseEntity<Product> getOne(@PathVariable("id") String id) {
 		Product product = productService.findById(id);
 		if (product != null) {
 			return ResponseEntity.ok(product);
@@ -51,7 +51,7 @@ public class ProductRestController {
 	}
 
 	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> put(@PathVariable("id") Integer id, @RequestBody Product product) {
+	public ResponseEntity<Product> put(@PathVariable("id") String id, @RequestBody Product product) {
 		Product existingProduct = productService.findById(id);
 		if (existingProduct != null) {
 			productService.update(product);
@@ -61,8 +61,8 @@ public class ProductRestController {
 		}
 	}
 
-	@DeleteMapping("/product/{productId}")
-	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+	@DeleteMapping("/product/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("id") String id) {
 		Product existingProduct = productService.findById(id);
 		if (existingProduct != null) {
 			productService.delete(id);

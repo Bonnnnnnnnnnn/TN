@@ -11,7 +11,7 @@ public interface CategoryService {
 	
 	List<Category> findAll();
 	
-	Category findById(Integer id);
+	Category findById(String id);
 	
 	List<Category> findByTop4Categoy();
 	
@@ -19,5 +19,5 @@ public interface CategoryService {
 	
 	Category update(Category category);
 	
-	public void delete(Integer id);
+	public void delete(String id);
 }

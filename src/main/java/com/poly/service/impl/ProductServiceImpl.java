@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product findById(Integer id) {
+	public Product findById(String id) {
 		return productDAO.findById(id).get();
 	}
 
@@ -41,13 +41,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(String id) {
 		productDAO.deleteById(id);		
 	}
 	
 	@Override
-	public boolean existsById(Integer productId) {
-		if(productDAO.existsById(productId))
+	public boolean existsById(String id) {
+		if(productDAO.existsById(id))
 			return true;
 		return false;
 	}
@@ -55,6 +55,18 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Product> findByProductNew() {
 		return productDAO.getByProductNew();
+	}
+
+	@Override
+	public List<Product> searchByProductNameOrId(String productName, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllProductCustomerLike(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

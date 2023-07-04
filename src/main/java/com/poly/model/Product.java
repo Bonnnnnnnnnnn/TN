@@ -1,8 +1,12 @@
 package com.poly.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Products")
 public class Product {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private String id;
 	private String name;
 	private String image;
 	private Double price;
@@ -37,7 +40,11 @@ public class Product {
 	@JoinColumn(name = "Categoryid")
 	private Category category;
 
-	public void setProductId(Integer id) {
+	public void setProductId(String id) {
 		this.id = id;
 	}
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "product")
+	List<Favourite> favourites;
 }
