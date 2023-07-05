@@ -15,60 +15,29 @@ import com.poly.service.ProductService;
 public class ProductRestController {
 	@Autowired
 	ProductService productService;
-
-	@GetMapping("/rest/product")
+	
+	@GetMapping("")
 	public List<Product> getAll() {
 		return productService.findAll();
 	}
-
+	
 	@GetMapping("{id}")
-	public ResponseEntity<Product> getOne(@PathVariable("id") String id) {
-		Product product = productService.findById(id);
-		if (product != null) {
-			return ResponseEntity.ok(product);
-		} else {
-			return ResponseEntity.notFound().build(); // 404 not found
-		}
+	public Product getOne(@PathVariable("id")String id) {
+		return productService.findById(id);
 	}
-
-	@GetMapping("/product-quantity/{id}")
-	public ResponseEntity<List<Product>> getQuantitiesByProduct(@PathVariable("id") String id) {
-		List<Product> products = productService.findByCategoryId(id);
-		if (products != null) {
-			return ResponseEntity.ok(products);
-		} else {
-			return ResponseEntity.notFound().build(); // 404 not found
-		}
-	}
-
-	@PostMapping("/product")
-	public ResponseEntity<Product> post(@RequestBody Product product) {
-		if (productService.existsById(product.getId())) {
-			return ResponseEntity.badRequest().build(); // 400 bad request
-		}
-		productService.create(product);
-		return ResponseEntity.ok(product);
-	}
-
-	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> put(@PathVariable("id") String id, @RequestBody Product product) {
-		Product existingProduct = productService.findById(id);
-		if (existingProduct != null) {
-			productService.update(product);
-			return ResponseEntity.ok(product);
-		} else {
-			return ResponseEntity.notFound().build(); // 404 not found
-		}
-	}
-
-	@DeleteMapping("/product/{id}")
-	public ResponseEntity<Void> delete(@PathVariable("id") String id) {
-		Product existingProduct = productService.findById(id);
-		if (existingProduct != null) {
-			productService.delete(id);
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.notFound().build(); // 404 not found
-		}
-	}
+	
+//	@PostMapping
+//	public Product create(@RequestBody Product product ) {
+//		return productService.create(product);
+//	}
+//	
+//	@PutMapping("{id}")
+//	public Product update(@PathVariable("id")String id,@RequestBody Product product ) {
+//		return productService.update(product); 
+//	}
+//	
+//	@DeleteMapping("{id}")
+//	public void delete(@PathVariable("id")String id) {
+//		productService.delete(id); 
+//	}
 }

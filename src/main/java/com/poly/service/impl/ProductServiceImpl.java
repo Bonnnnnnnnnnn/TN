@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,10 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product findById(String id) {
-		return productDAO.findById(id).get();
+	    Optional<Product> optionalProduct = productDAO.findById(id);
+	    return optionalProduct.orElse(null);
 	}
+
 
 	@Override
 	public List<Product> findByCategoryId(String cid) {
