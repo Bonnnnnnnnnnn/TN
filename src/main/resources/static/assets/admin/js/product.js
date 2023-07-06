@@ -118,12 +118,11 @@ app.controller("ctrl-product", function($scope, $http) {
 				document.querySelector(".errdescription").style.display = 'none';
 				check = false;
 			}
+
 			if (!item.category || !item.category.id) {
-				
+				showError(".errcategory", "Vui Lòng Chọn ID Sản Phẩm");
+				check = true;		
 			}
-
-
-
 
 
 
