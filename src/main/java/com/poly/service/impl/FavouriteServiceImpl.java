@@ -1,53 +1,65 @@
 package com.poly.service.impl;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poly.dao.FavouriteDAO;
+import com.poly.dao.ProductDAO;
 import com.poly.model.Account;
 import com.poly.model.Favourite;
 import com.poly.model.Product;
 import com.poly.service.FavouriteService;
 
+
+
 @Service
-public class FavouriteServiceImpl implements FavouriteService {
+public class FavouriteServiceImpl implements FavouriteService{
 
 	@Autowired
 	FavouriteDAO dao;
-
+	
+	@Autowired
+	ProductDAO productDao;
+	
 	@Override
-	public Favourite findByUsernameAndProductId(String username, String productId) {
-		return dao.findByUsernameAndProductId(username, productId);
+	public Favourite findByUsernameAndProductId(String username, String id) {
+		return dao.findByUsernameAndProductId(username, id);
 	}
 
 	@Override
 	public void delete(Favourite favourite) {
 		dao.delete(favourite);
 	}
-
+	
 	@Override
 	public Favourite create(Account account, Product product) {
-		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), product.getId().toString());
-		if (existFavourite == null) {
+		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), product.getId());
+		if(existFavourite == null) {
 			existFavourite = new Favourite();
 			existFavourite.setAccount(account);
 			existFavourite.setProduct(product);
+			existFavourite.setIsLiked(false);
 			return dao.save(existFavourite);
 		}
 		return existFavourite;
 	}
 
 	@Override
-	public Favourite updateLikeOrUnlike(Account account, String productId) {
-		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), productId);
-		if (existFavourite != null) {
-			return dao.save(existFavourite);
+	public Favourite updateLikeOrUnlike(Account account, String id) {
+		Product product = productDao.findById(id).get();
+		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), product.getId());
+		if(existFavourite.getIsLiked() == false) {
+			existFavourite.setIsLiked(true);
+		}else {
+			existFavourite.setIsLiked(false);
 		}
-		return null;
+		Favourite updateFavourite = dao.save(existFavourite);
+		return updateFavourite;
 	}
-
 
 	@Override
 	public List<Object[]> getTotalLikesOfProduct() {
@@ -58,4 +70,5 @@ public class FavouriteServiceImpl implements FavouriteService {
 	public List<Object[]> getUserInfoWithProductIsLikedByUsers(String productId) {
 		return dao.getUserInfoWithProductIsLikedByUsers(productId);
 	}
+
 }
