@@ -45,19 +45,9 @@ app.controller("ctrl-product", function($scope, $http) {
 
 	$scope.create = function() {
 		var item = angular.copy($scope.form);
-		var url = `${pathProduct}/product`;
-
 		let check = false;
-
-
 		console.log(item)
-		if (!item) {
-
-			console.log("No item data provided");
-			alert('Nhập Đầy Đủ Thông Tin')
-			return;
-		} else {
-
+		if ($scope.myForm.$valid) {
 			function showError(elementSelector, errorMessage) {
 				var errorElement = document.querySelector(elementSelector);
 				errorElement.innerText = errorMessage;
@@ -79,24 +69,36 @@ app.controller("ctrl-product", function($scope, $http) {
 			if (item.price == '' || !item.price) {
 				showError(".errPrice", "Chưa Điền Giá");
 				check = true;
+			} else if (!/^\d+$/.test(item.price) || item.price < 0) {
+				showError(".errPrice", "Giá phải là số dương");
+				check = true;
 			} else {
-				document.querySelector(".errPrice").style.display = 'none';
+				angular.element(document.querySelector(".errPrice")).css('display', 'none');
 				check = false;
 			}
+
 			if (item.productQuantity == '' || !item.productQuantity) {
 				showError(".errproductQuantity", "Chưa Điền Số Lượng");
 				check = true;
+			} else if (!/^\d+$/.test(item.productQuantity) || item.productQuantity < 0) {
+				showError(".errproductQuantity", "Số Lượng phải là số dương");
+				check = true;
 			} else {
-				document.querySelector(".errproductQuantity").style.display = 'none';
+				angular.element(document.querySelector(".errproductQuantity")).css('display', 'none');
 				check = false;
 			}
+
 			if (item.id == '' || !item.id) {
 				showError(".erridProduct", "Chưa Điền ID Sản Phẩm");
 				check = true;
+			} else if (!/^\d+$/.test(item.id) || item.id < 0) {
+				showError(".erridProduct", "ID Sản Phẩm phải là số dương");
+				check = true;
 			} else {
-				document.querySelector(".erridProduct").style.display = 'none';
+				angular.element(document.querySelector(".erridProduct")).css('display', 'none');
 				check = false;
 			}
+
 			if (item.available == '' || !item.available) {
 				showError(".erravailable", "Chưa Điền Available");
 				check = true;
@@ -121,8 +123,9 @@ app.controller("ctrl-product", function($scope, $http) {
 
 			if (!item.category || !item.category.id) {
 				showError(".errcategory", "Vui Lòng Chọn ID Sản Phẩm");
-				check = true;		
+				check = true;
 			}
+
 
 
 
@@ -131,6 +134,8 @@ app.controller("ctrl-product", function($scope, $http) {
 				console.log('Vẫn còn Lỗi')
 				return
 			} else {
+
+				var url = `${pathProduct}/product`;
 				console.log('Bắt đầu gửi dữ liệu')
 				$http.post(url, item).then(resp => {
 					$scope.items.push(item);
@@ -141,6 +146,7 @@ app.controller("ctrl-product", function($scope, $http) {
 					console.log("Error", error);
 				});
 			}
+
 		}
 	}
 
@@ -178,7 +184,7 @@ app.controller("ctrl-product", function($scope, $http) {
 		$scope.form = {
 			productImage: 'cloud-upload.jpg',
 		};
-		$scope.form = false
+		
 	}
 
 	$scope.load_all();

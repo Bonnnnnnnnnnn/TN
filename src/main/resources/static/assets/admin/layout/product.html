@@ -5,7 +5,9 @@
 				<div class="card-header">
 					<h3 class="m-0 font-weight-bold text-primary">Product Management</h3>
 				</div>
+				<form name="myForm">
 				<div class="card-body row">
+				
 					<div class="form-group col-md-6">
 						<label for="title">Category id</label>
 						<select ng-model="form.category.id" class="form-control">
@@ -74,7 +76,9 @@
 					<button ng-click="delete(form.productId)" class="btn btn-danger btn-sm">Delete</button>
 					<button ng-click="reset()" class="btn btn-primary btn-sm">Reset</button>
 				</div>
+				
 			</div>
+			</form>
 		</div>
 	</div>
 	
