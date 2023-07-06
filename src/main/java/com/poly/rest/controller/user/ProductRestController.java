@@ -1,4 +1,4 @@
-package com.poly.rest.controller;
+package com.poly.rest.controller.user;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ProductRestController {
 	}
 	
 	@GetMapping("{id}")
-	public Product getOne(@PathVariable("id")Integer id) {
+	public Product getOne(@PathVariable("id")String id) {
 		return productService.findById(id);
 	}
 	

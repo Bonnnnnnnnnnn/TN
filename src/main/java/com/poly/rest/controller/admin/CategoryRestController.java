@@ -1,4 +1,4 @@
-package com.poly.rest.controller;
+package com.poly.rest.controller.admin;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class CategoryRestController {
 
     // Get one category by id
     @GetMapping("/rest/category/{id}")
-    public ResponseEntity<Category> findOne(@PathVariable("id") Integer id) {
+    public ResponseEntity<Category> findOne(@PathVariable("id") String id) {
         Category category = categoryService.findById(id);
         if (category != null) {
             return ResponseEntity.ok(category);
@@ -52,7 +52,7 @@ public class CategoryRestController {
 
     // Update a category
     @PutMapping("/rest/category/{id}")
-    public ResponseEntity<Category> put(@PathVariable("id") Integer id, @RequestBody Category category) {
+    public ResponseEntity<Category> put(@PathVariable("id") String id, @RequestBody Category category) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory != null) {
             category.setId(id);
@@ -64,7 +64,7 @@ public class CategoryRestController {
 
     // Delete category
     @DeleteMapping("/rest/category/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         Category existingCategory = categoryService.findById(id);
         if (existingCategory != null) {
             categoryService.delete(id);
