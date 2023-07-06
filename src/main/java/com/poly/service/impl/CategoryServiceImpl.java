@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Category findById(Integer id) {
+	public Category findById(String id) {
 		return categoryDAO.findById(id).get();
 	}
 
@@ -36,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(String id) {
 		categoryDAO.deleteById(id);
 	}
 

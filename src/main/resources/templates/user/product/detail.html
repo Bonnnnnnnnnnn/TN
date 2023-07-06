@@ -49,16 +49,17 @@
 							    var formattedPrice = price.toLocaleString('VN');
 							    document.write(formattedPrice);
 							  </script>
+							  
 							  &nbsp<span style="text-decoration: underline;">đ</span>
 							</div>
 
 
 	                        <p>[[*{description}]]</p>
 	                        <div class="product__details__quantity">
-	                            <div class="quantity">
-	                                <div class="pro-qty">
-	                                    <input id="quantityInput" type="text" value="1" >
-	                                </div>
+	                            <div class="quantity" >
+	                               <div class="pro-qty">	                                	
+	                                    <input id="quantityInput"  type="text" value="1" >
+	                                </div> 
 	                            </div>
 	                        </div>
 	                        <a th:attr="ng-click=@{|cart.add2(*{id})|}" class="primary-btn" style="color: #ffffff">ADD TO CARD</a>

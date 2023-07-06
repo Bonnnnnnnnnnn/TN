@@ -13,8 +13,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-				<li><a th:href="@{/cart/view}" aria-current="true"> <span>{{cart.count}}
-							items x ${{cart.amount|number:2}}</span> <i
+				<li><a th:href="@{/cart/view}" aria-current="true"> <span>{{cart.count}}</span> <i
 						class="fa-solid fa-cart-shopping"></i>
 				</a></li>
 				<!-- <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> -->
@@ -126,7 +125,7 @@
 						                    	<th:block th:if="${#request.remoteUser}">			
 							                        <li><a href="#">Giỏ Hàng Của Tôi</a></li>
 							                        <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
-							                        	<a href="#">Trang Quản Trị</a>
+							                        	<a th:href="@{/admin/index}">Trang Quản Trị</a>
 							                        </li>
 							                        <li><a  th:href="@{/security/logoff}">Đăng Xuất</a></li>
 						                    	</th:block>
@@ -161,14 +160,52 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a th:href="@{/cart/view}"
-								aria-current="true"> <span>{{cart.count}} items x
-									${{cart.amount|number:2}}</span> <i class="fa-solid fa-cart-shopping"></i>
-							</a>
+                            <li>
+	                            <a aria-current="true" onclick="toggleMiniCart()"> <span>{{cart.count}}</span> <i class="fa-solid fa-cart-shopping"></i>
+								</a>
 							</li>
                             <!-- <li><a href="shoping-cart.html"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li> -->
                         </ul>
+                        <div class="mini-cart">
+						  <div class="mini-cart__header">
+						    <h3>Your Cart</h3>
+						    <button class="mini-cart__close" onclick="closeMiniCart()"><i class="fa-solid fa-xmark"></i></button>
+						  </div>
+						  <div class="mini-cart__list">
+						    <!-- Các mục giỏ hàng sẽ được thêm vào đây -->
+						    <div ng-if="cart.items.length > 0">
+						      <div class="product-widget" ng-repeat="item in cart.items">
+						        <div class="product-img">
+						          <img src="/assets/img/product/{{item.image}}" alt="">
+						          <button class="remove-product" ng-click="cart.remove(item.id)">
+						            <i class="fas fa-times"></i>
+						          </button>
+						        </div>
+						        <div class="product-body">
+						          <h3 class="product-name">
+						            <a href="#">{{item.name}}</a>
+						          </h3>
+						          <h5 class="product-price">
+						            <span class="qty">{{item.qty}} x </span>{{item.price|number}}&nbsp;<span style="text-decoration: underline;">đ</span>
+						          </h5>
+						        </div>
+						      </div>
+						    </div>
+						    <div ng-if="cart.items.length === 0" class="empty-cart-message">
+						      Chưa có sản phẩm nào trong giỏ hàng  <i class="fas fa-exclamation-circle"></i>
+						    </div>
+						  </div>
+						  <div ng-if="cart.items.length > 0" class="cart-summary">
+						    <h5>Subtotal: {{getSubtotal()|number}}&nbsp;<span style="text-decoration: underline;">đ</span></h5>
+						  </div>
+						  <div ng-if="cart.items.length > 0" class="mini-cart__footer">
+						    <a th:href="@{/cart/view}" class="mini-cart__btn-view">View Cart</a>
+						    <a href="/checkout" class="mini-cart__btn-checkout">Checkout</a>
+						  </div>
+						</div>
+
                     </div>
+                    
                 </div>
             </div>
             <div class="humberger__open">

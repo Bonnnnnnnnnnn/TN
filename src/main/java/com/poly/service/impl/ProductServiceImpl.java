@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,14 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product findById(Integer id) {
-		return productDAO.findById(id).get();
+	public Product findById(String id) {
+	    Optional<Product> optionalProduct = productDAO.findById(id);
+	    return optionalProduct.orElse(null);
 	}
 
+
 	@Override
-	public List<Product> findByCategoryId(Integer cid) {
+	public List<Product> findByCategoryId(String cid) {
 		return productDAO.getByCategoryId(cid);
 	}
 
@@ -41,13 +44,32 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(String id) {
 		productDAO.deleteById(id);		
+	}
+	
+	@Override
+	public boolean existsById(String id) {
+		if(productDAO.existsById(id))
+			return true;
+		return false;
 	}
 
 	@Override
 	public List<Product> findByProductNew() {
 		return productDAO.getByProductNew();
+	}
+
+	@Override
+	public List<Product> searchByProductNameOrId(String productName, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findAllProductCustomerLike(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

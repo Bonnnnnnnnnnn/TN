@@ -12,14 +12,14 @@
 <body>
     <div th:class="'container ' + ${regisActive}" id="container">
         <div class="form-container register-container">
-            <form action="#">
-            	<a style="margin-bottom: -10px" th:href="@{/home/index}"><img alt="" src="/assets/img/logo.png"></a>
+            <form action="@{/security/register}" method="post">
+                <a style="margin-bottom: -10px" th:href="@{/home/index}"><img alt="" src="/assets/img/logo.png"></a>
                 <h1>Register</h1>
-                <input type="text" placeholder="Name">
-                <input type="text" placeholder="Email" id="register-email">
-                <input type="password" placeholder="Password">
-                <input type="password" placeholder="Confirm Password">
-                <button>Register</button>
+                <input type="text" placeholder="Name" name="username">
+                <input type="text" placeholder="Email" id="register-email" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="password" placeholder="Confirm Password" name="confirmPassword">
+                <button type="submit">Register</button>
                 <span>or use your account</span>
                 <div class="social-container">
                     <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
@@ -54,7 +54,7 @@
                     <a href="#" class="social"><i class="lni lni-twitter-original"></i></a>
                 </div>
                 <div id="error-message">
-                	<i th:text="${message}"></i>
+                    <i th:text="${message}"></i>
                 </div>
             </form>
         </div>
@@ -77,9 +77,8 @@
                 </div>
             </div>
         </div>
-        
     </div>
     
-<script src="/assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
 </body>
 </html>

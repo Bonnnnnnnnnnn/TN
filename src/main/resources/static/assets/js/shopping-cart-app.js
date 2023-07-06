@@ -8,7 +8,26 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 	    }
 	};
   
-  
+  	// Thêm sự kiện tăng giảm số lượng
+	$scope.increaseQuantity = function(item) {
+		// Kiểm tra số lượng trong kho
+		if (item.qty < item.productQuantity) {
+			// Nếu số lượng của item chưa vượt quá số lượng trong kho
+			// thì tăng số lượng của item lên 1
+			item.qty += 1;
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
+		$scope.cart.saveToLocalStorage();
+	};
+
+	$scope.decreaseQuantity = function(item) {
+		if (item.qty > 1) {
+			item.qty -= 1;
+			$scope.cart.saveToLocalStorage();
+		}
+	};
+  	
   // Trong controller hoặc script tương ứng
 	$scope.getSubtotal = function() {
 	    var subtotal = 0;
@@ -24,8 +43,13 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     add(id) {
       var item = this.items.find((item) => item.id == id);
       if (item) {
-        item.qty++;
-        this.saveToLocalStorage();
+		if(item.qty < item.productQuantity){
+			// Kiểm tra số lượng sản phẩm trong giỏ hàng với số lượng sản phẩm trong kho
+			item.qty++;
+        	this.saveToLocalStorage();
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
       } else {
         $http.get(`/rest/products/${id}`).then((resp) => {
           resp.data.qty = 1;
@@ -40,8 +64,12 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       var quantityValue = parseInt(quantityInput.value);
       var item = this.items.find((item) => item.id == id);
       if (item) {
-        item.qty += quantityValue;
-        this.saveToLocalStorage();
+		if(item.qty < item.productQuantity){
+			item.qty += quantityValue;
+        	this.saveToLocalStorage();
+		}else{
+			alert("Số lượng sản phẩm vượt quá số lượng trong kho!");
+		}
       } else {
         $http.get(`/rest/products/${id}`).then((resp) => {
           resp.data.qty = quantityValue;
@@ -52,9 +80,16 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       alert("Thêm vào giỏ thành công!");
     },
     remove(id) {
-      var index = this.items.findIndex((item) => item.id == id);
-      this.items.splice(index, 1);
-      this.saveToLocalStorage();
+	  var xacNhan = confirm("Bạn có muốn xóa không?");
+	  if(xacNhan) {
+		  var index = this.items.findIndex((item) => item.id == id);
+	      this.items.splice(index, 1);
+	      this.saveToLocalStorage();
+	  } else {
+		  // Người dùng chọn "Cancel", không thực hiện xóa
+		  console.log("Xóa bị hủy");
+	  }
+      
     },
     clear() {
       this.items = [];
@@ -96,6 +131,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     },
     purchase() {
       var order = angular.copy(this);
+      // thực hiện đặt hàng, orders này là giá trị truyền vào JsonNode orderData bên Controller
       $http.post("/rest/orders", order).then((resp) => {
         alert("Đặt hàng thành công!");
         $scope.cart.clear();

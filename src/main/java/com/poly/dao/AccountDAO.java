@@ -8,16 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import com.poly.model.Account;
 
 public interface AccountDAO extends JpaRepository<Account, String>{
-
-	
 	// Lấy tất cả account có vai trò DIRE và Staf
 	@Query("select distinct ar.account from Authority ar where ar.role.id in ('DIRE', 'STAF')")
 	List<Account> getAdministrators();
-
 	
 	@Query(value = "select * from Accounts where UserEmail = ?1", nativeQuery = true)
 	Account findByEmail(String email);
-	
 }
-
-

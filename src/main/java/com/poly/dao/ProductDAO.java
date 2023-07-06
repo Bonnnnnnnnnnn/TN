@@ -8,10 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ProductDAO extends JpaRepository<Product, Integer> {
+public interface ProductDAO extends JpaRepository<Product, String> {
     @Query("SELECT p FROM Product p WHERE p.category.id=?1")
-    List<Product> getByCategoryId(Integer cid);
+    List<Product> getByCategoryId(String cid);
     
-    @Query(value="SELECT * FROM Products WHERE Status = 1", nativeQuery = true)
+    @Query(value="SELECT * FROM Products WHERE status = 1", nativeQuery = true)
     List<Product> getByProductNew();
+    
+//    @Query("SELECT distinct p FROM Products p WHERE p.name LIKE %?1% OR p.id LIKE %?2%")
+//    List<Product> searchByProductNameOrId(String productName, String id);
+//    
+//    @Query(value = "SELECT * FROM Products p INNER JOIN favourites f ON p.id = f.productId WHERE username = ?1 AND is_liked = 1", nativeQuery = true)
+//    List<Product> findAllProductCustomerLike(String username);
 }
