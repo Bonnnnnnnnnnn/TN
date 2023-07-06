@@ -15,9 +15,9 @@
             <form action="@{/security/register}" method="post">
                 <a style="margin-bottom: -10px" th:href="@{/home/index}"><img alt="" src="/assets/img/logo.png"></a>
                 <h1>Register</h1>
-                <input type="text" placeholder="Name" name="username">
-                <input type="text" placeholder="Email" id="register-email" name="email">
-                <input type="password" placeholder="Password" name="password">
+                <input type="text" placeholder="Username" name="username" id="username" name="username">
+                <input type="text" placeholder="Email" id="register-email" name="email" id="userEmail" name="userEmail" >
+                <input type="password" placeholder="Password" name="password" id="password" name="password">
                 <input type="password" placeholder="Confirm Password" name="confirmPassword">
                 <button type="submit">Register</button>
                 <span>or use your account</span>

@@ -27,18 +27,20 @@ public class AccountController {
 	@GetMapping("/account/register")
 	public String register(Model model) {
 		model.addAttribute("account", new Account());
-		return "web/security/register";
+		return "security/login_register.html";
 	}
 	
     @RequestMapping("/account/register")
     public String registerUser(@ModelAttribute Account account) {
         accountService.create(account);     
-        return "web/security/register";
+        return "security/login_register.html";
     }
     
-    @GetMapping("/account/forgot-pass")
-    public String forgotPass() {
-    	return "web/security/forgot-pass";
-    }}
+ //   @GetMapping("/account/forgot-pass")
+ //   public String forgotPass() {
+ //   	return "web/security/forgot-pass";
+ //   }
+    }
+    
     
    
