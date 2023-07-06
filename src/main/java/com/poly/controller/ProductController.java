@@ -23,7 +23,7 @@ public class ProductController {
 	CategoryService categoryService;
 	
 	@RequestMapping("/product/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") String id) {
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         
