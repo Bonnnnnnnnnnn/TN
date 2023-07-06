@@ -14,7 +14,7 @@ import com.poly.model.Favourite;
 public interface FavouriteDAO extends JpaRepository<Favourite, String>{
 	
 	@Query(value = "select * from Favourites where Username = ?1 and Id = ?2", nativeQuery = true)
-	Favourite findByUsernameAndProductId(String username, String id);
+	Favourite findByUsernameAndProductId(String username, Integer id);
 
 	/*		Chức năng:
 	 * 					Thống kê sản phẩm được bao nhiêu lượt like
@@ -31,5 +31,5 @@ public interface FavouriteDAO extends JpaRepository<Favourite, String>{
 	@Query(value = "select ac.UserFullname, ac.UserEmail from Accounts ac inner join Favourites f on ac.Username = f.Username"
 			+ " inner join Products p on f.ProductId = p.Id"
 			+ " where p.Id = ?1 and f.IsLiked = 1", nativeQuery = true)
-	List<Object[]> getUserInfoWithProductIsLikedByUsers(String id);
+	List<Object[]> getUserInfoWithProductIsLikedByUsers(Integer productId);
 }

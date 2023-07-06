@@ -45,7 +45,7 @@ public class FavouriteAdminRestController {
 	
 	// Hiển thị thông tin những người đã like sp theo mã sản phẩm
 	@GetMapping("/rest/user-info-by-productId/{id}")
-	public ResponseEntity<?> getUserInfoWithProductIsLikedByUsers(@PathVariable("id") String id){
+	public ResponseEntity<?> getUserInfoWithProductIsLikedByUsers(@PathVariable("id") Integer id){
 		List<Object[]> result = favouriteService.getUserInfoWithProductIsLikedByUsers(id);
 		List<Map<String, Object>> response = new ArrayList<>();
 		for (Object[] row : result) {

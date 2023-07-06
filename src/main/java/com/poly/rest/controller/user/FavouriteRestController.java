@@ -27,7 +27,7 @@ public class FavouriteRestController {
 	AccountService accountService;
 	
 	@GetMapping("/{id}")
-	public Favourite check(HttpServletRequest request, @PathVariable("id") String id) {
+	public Favourite check(HttpServletRequest request, @PathVariable("id") Integer id) {
 		//Kiểm tra Favourite có tồn tại hay không
 		String username = request.getRemoteUser();
 		Favourite favourite = favouriteService.findByUsernameAndProductId(username, id);
@@ -35,7 +35,7 @@ public class FavouriteRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public Favourite update(HttpServletRequest request, @PathVariable("id") String id) {
+	public Favourite update(HttpServletRequest request, @PathVariable("id") Integer id) {
 		// có 2 cách
 		// HttpServletRequest
 		Account account = accountService.findById(request.getRemoteUser());
