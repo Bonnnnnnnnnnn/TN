@@ -19,7 +19,6 @@ import com.poly.service.AccountService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/account")
 public class AccountRestController {
 	@Autowired
 	AccountService accountService;
@@ -30,5 +29,5 @@ public class AccountRestController {
 	    return ResponseEntity.ok(createdAccount);
 	}
 
-	}
+}
 

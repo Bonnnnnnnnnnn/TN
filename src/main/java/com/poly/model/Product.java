@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Products")
 public class Product {
 	@Id
-	private String id;
+	private Integer id;
 	private String name;
 	private String image;
 	private Double price;
@@ -40,7 +40,7 @@ public class Product {
 	@JoinColumn(name = "Categoryid")
 	private Category category;
 
-	public void setProductId(String id) {
+	public void setProductId(Integer id) {
 		this.id = id;
 	}
 	
