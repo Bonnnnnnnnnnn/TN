@@ -1,4 +1,4 @@
-package com.poly.rest.controller.user;
+package com.poly.rest.controller.admin;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +27,14 @@ public class AccountRestController {
 	public ResponseEntity<Account> post(@RequestBody Account account) {
 	    Account createdAccount = accountService.create(account);
 	    return ResponseEntity.ok(createdAccount);
+	}
+	
+	@GetMapping("/rest/accounts")
+	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin){
+		if(admin.orElse(false)) {
+			return accountService.getAdministrators();
+		}
+		return accountService.findAll();
 	}
 
 }
