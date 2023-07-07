@@ -58,16 +58,4 @@ public class SecurityController {
 		model.addAttribute("regisActive", "right-panel-active");
 		return "/user/security/login_register";
 	}
-	
-	@GetMapping("/security/register")
-	public String register(Model model) {
-		model.addAttribute("account", new Account());
-		return "/user/security/login_register";
-	}
-	
-    @PostMapping("/security/register")
-    public String registerUser(@ModelAttribute Account account) {
-        accountService.create(account);    
-        return "/user/security/login_register";
-    }
 }

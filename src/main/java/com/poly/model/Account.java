@@ -36,7 +36,7 @@ public class Account implements Serializable{
 	private String fullname;
 	
 	@Column(name = "Email")
-	private String Email;
+	private String email;
 	
 	@Column(name = "Photo")
 	private String photo;

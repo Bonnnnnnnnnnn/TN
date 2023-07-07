@@ -29,7 +29,7 @@ public class ProductRestController {
 	}
 	
 	@GetMapping("{id}")
-	public Product getOne(@PathVariable("id")String id) {
+	public Product getOne(@PathVariable("id")Integer id) {
 		return productService.findById(id);
 	}
 	

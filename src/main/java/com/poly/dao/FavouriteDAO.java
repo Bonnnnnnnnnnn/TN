@@ -11,10 +11,10 @@ import com.poly.model.Favourite;
 
 
 @Repository
-public interface FavouriteDAO extends JpaRepository<Favourite, Integer>{
+public interface FavouriteDAO extends JpaRepository<Favourite, String>{
 	
-	@Query(value = "select * from Favourites where Username = ?1 and ProductId = ?2", nativeQuery = true)
-	Favourite findByUsernameAndProductId(String username, String productId);
+	@Query(value = "select * from Favourites where Username = ?1 and Id = ?2", nativeQuery = true)
+	Favourite findByUsernameAndProductId(String username, Integer id);
 
 	/*		Chức năng:
 	 * 					Thống kê sản phẩm được bao nhiêu lượt like
@@ -23,13 +23,13 @@ public interface FavouriteDAO extends JpaRepository<Favourite, Integer>{
 	 * 					nên là sử dụng kiểu dữ liệu Object[] để chứa kết quả trả về.
 	 * 
 	 */
-	@Query(value = "select p.CategoryId , p.ProductId, p.ProductName, p.ProductImage, sum(cast(f.IsLiked as int)) as [Total like] from Favourites f inner join Products p on f.ProductId = p.ProductId"
-			+ " group by p.CategoryId, p.ProductId, p.ProductName, p.ProductImage, f.IsLiked order by sum(cast(f.IsLiked as int)) desc", nativeQuery = true)
+	@Query(value = "select p.CategoryId , p.Id, p.Name, p.Image, sum(cast(f.IsLiked as int)) as [Total like] from Favourites f inner join Products p on f.ProductId = p.Id"
+			+ " group by p.CategoryId, p.Id, p.Name, p.Image, f.IsLiked order by sum(cast(f.IsLiked as int)) desc", nativeQuery = true)
 	List<Object[]> getTotalLikesOfProduct();
 	
 	// Hiển thị thông tin những người đã like sp theo mã sản phẩm
 	@Query(value = "select ac.UserFullname, ac.UserEmail from Accounts ac inner join Favourites f on ac.Username = f.Username"
-			+ " inner join Products p on f.ProductId = p.ProductId"
-			+ " where p.ProductId = ?1 and f.IsLiked = 1", nativeQuery = true)
-	List<Object[]> getUserInfoWithProductIsLikedByUsers(String productId);
+			+ " inner join Products p on f.ProductId = p.Id"
+			+ " where p.Id = ?1 and f.IsLiked = 1", nativeQuery = true)
+	List<Object[]> getUserInfoWithProductIsLikedByUsers(Integer productId);
 }

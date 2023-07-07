@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product findById(String id) {
+	public Product findById(Integer id) {
 	    Optional<Product> optionalProduct = productDAO.findById(id);
 	    return optionalProduct.orElse(null);
 	}
@@ -44,12 +44,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Integer id) {
 		productDAO.deleteById(id);		
 	}
 	
 	@Override
-	public boolean existsById(String id) {
+	public boolean existsById(Integer id) {
 		if(productDAO.existsById(id))
 			return true;
 		return false;

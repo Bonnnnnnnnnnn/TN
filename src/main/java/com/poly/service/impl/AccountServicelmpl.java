@@ -10,7 +10,7 @@ import com.poly.model.Account;
 import com.poly.service.AccountService;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServicelmpl implements AccountService{
 
 	@Autowired 
 	AccountDAO dao;
@@ -48,4 +48,3 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 }
-

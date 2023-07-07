@@ -11,7 +11,6 @@ import java.util.List;
 public interface ProductService {
 	List<Product> findAll();
 	
-	Product findById(String id);
 	
 	List<Product> findByCategoryId(String id);
 	
@@ -20,12 +19,14 @@ public interface ProductService {
 	Product create(Product product);
 	
 	Product update(Product product);
-	boolean existsById(String id);
+	boolean existsById(Integer id);
 	
-	public void delete(String id);
+	public void delete(Integer id);
 	
 	// Search product name or product id
 	List<Product> searchByProductNameOrId(String productName, String id);
 	
 	List<Product> findAllProductCustomerLike(String username);
+
+	Product findById(Integer id);
 }
