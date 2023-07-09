@@ -39,7 +39,6 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	private Account account;
-	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
 }

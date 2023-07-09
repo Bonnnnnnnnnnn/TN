@@ -132,15 +132,29 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     purchase() {
       var order = angular.copy(this);
       // thực hiện đặt hàng, orders này là giá trị truyền vào JsonNode orderData bên Controller
-      $http.post("/rest/orders", order).then((resp) => {
-        alert("Đặt hàng thành công!");
-        $scope.cart.clear();
-        console.log(resp.data);
-        location.href = "/order/detail/" + resp.data.id;
-      }).catch(error=>{
-        alert("Đặt hàng lỗi!");
-        console.log(error);
-      });
+
+      var isPaypal = document.getElementById("paypal");
+      if (isPaypal.checked == true) {
+        alert ("OK");
+        $http.post("/rest/checkout", order).then((resp) => {
+          window.open(resp.data.url);
+        }).catch(error=>{
+          alert("Đặt hàng lỗi!");
+        });
+      } else {
+        $http.post("/rest/orders", order).then((resp) => {
+          alert("Đặt hàng thành công!");
+          $scope.cart.clear();
+          console.log(resp.data);
+          location.href = "/order/detail/" + resp.data.id;
+        }).catch(error=>{
+          alert("Đặt hàng lỗi!");
+          console.log(error);
+        });
+      }
     },
+    redirectPaypal() {
+      alert("OKKKK");
+    }
   };
 });
