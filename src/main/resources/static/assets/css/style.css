@@ -3819,4 +3819,20 @@ ol {
   cursor: pointer;
 }
 
-
+.viewMore {
+	margin: 0 auto;
+	background-color: #7fad39;
+	color: #ffffff;
+	font-size: 18px;
+}
+.viewMore:hover {
+	background-color: #62862d;
+	color: #ffffff;
+	font-size: 18px;
+}
+.search {
+	color: #7fad39;
+}
+.search:hover {
+	color: #537126;
+}

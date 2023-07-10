@@ -44,7 +44,7 @@
 									<li><a th:href="@{/security/register/form}">Đăng Ký</a></li>
 								</th:block>
 								<th:block th:if="${#request.remoteUser}">
-									<li><a href="#">Giỏ Hàng Của Tôi</a></li>
+									<li><a th:href="@{/order/list}">Giỏ Hàng Của Tôi</a></li>
 									<li
 										th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
 										<a href="#">Trang Quản Trị</a>
@@ -123,7 +123,7 @@
 						                    		<li><a th:href="@{/security/register/form}">Đăng Ký</a></li>
 						                    	</th:block>	
 						                    	<th:block th:if="${#request.remoteUser}">			
-							                        <li><a href="#">Giỏ Hàng Của Tôi</a></li>
+							                        <li><a th:href="@{/order/list}">Giỏ Hàng Của Tôi</a></li>
 							                        <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
 							                        	<a th:href="@{/admin/index}">Trang Quản Trị</a>
 							                        </li>
