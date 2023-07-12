@@ -36,7 +36,11 @@ public class OrderController {
 			discount = new Discount();
 			discount.setPrice(0.0);
 		}
-
+		double total = order.getOrderDetails().stream()
+                .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
+                .sum();
+		System.out.println("total : "+total);
+		model.addAttribute("total", total);
 		model.addAttribute("order", order);
 		model.addAttribute("discount", discount);
 		return "user/order/detail";
@@ -56,7 +60,12 @@ public class OrderController {
 			discount = new Discount();
 			discount.setPrice(0.0);
 		}
+		double total = out.getOrderDetails().stream()
+                .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
+                .sum();
+		System.out.println("total : "+total);
 		model.addAttribute("order", out);
+		model.addAttribute("total", total);
 		model.addAttribute("discount", discount);
 		return "user/order/detail";
 	}

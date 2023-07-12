@@ -148,6 +148,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       var isPaypal = document.getElementById("paypal");
       if (isPaypal.checked == true) {
       console.log(isPaypal.checked);
+        alert("Đặt!");
         $http.post("/rest/checkout", order).then((resp) => {
             $scope.cart.clear();
            location.href = resp.data.url;

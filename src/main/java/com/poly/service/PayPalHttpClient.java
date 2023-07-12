@@ -65,7 +65,7 @@ public class PayPalHttpClient {
 
     public AccessTokenResponseDTO getAccessToken() throws Exception {
         var request = HttpRequest.newBuilder()
-                .uri(URI.create(createUrl(paypalConfig.getBaseUrl(), GET_ACCESS_TOKEN)))
+                .uri(URI.create(createUrl("https://api-m.sandbox.paypal.com", GET_ACCESS_TOKEN)))
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .header(HttpHeaders.AUTHORIZATION, encodeBasicCredentials())
                 .header(HttpHeaders.ACCEPT_LANGUAGE, "en_US")
@@ -78,7 +78,7 @@ public class PayPalHttpClient {
     }
 
     private String encodeBasicCredentials() {
-        var str = paypalConfig.getClientId() + ":" + paypalConfig.getSecret();
+        var str = "AYQzwXi9KRhdMKBbSK3iOrxpcDPi7Mt-N5sbSyuUXKt8qaNhWCbUDkT0V7V5WBC49Bhdi8kfQ-l4VMuQ" + ":" + "EA7LiNyFJ4IxS8tziSUXcYe1MXE5YiOKy79ckIt74YEGD87F8QvyvRKBYxTrlZL6j1pOcE0LlQwMkucT";
         return "Basic " + Base64.getEncoder().encodeToString(str.getBytes());
     }
 }
