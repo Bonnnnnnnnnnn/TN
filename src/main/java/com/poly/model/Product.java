@@ -37,7 +37,8 @@ public class Product {
 	private Date createDate = new Date();
 	private Boolean available;
 	private Boolean status;
-
+	private Integer star;
+	
 	@ManyToOne
 	@JoinColumn(name = "Categoryid")
 	private Category category;

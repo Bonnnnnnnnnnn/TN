@@ -26,14 +26,28 @@ public class HomeController{
 	
 	@RequestMapping(value = {"/","/home/index"})
 	public String home(Model model) {
+		////Load danh mục
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         
         List<Category> top4Category = categoryService.findByTop4Categoy();
         model.addAttribute("top4Category", top4Category);
         
+        //Load tất cả sản phẩm 
         List<Product> products = productService.findAll();
         model.addAttribute("products", products);
+        
+        //Load sản phẩm mới
+        List<Product> list;
+		
+		list = productService.findByProductNew();
+		model.addAttribute("productsNew", list);
+		
+		//Load sản phẩm top 5 sao
+		List<Product> productTop;
+		
+		productTop = productService.findByProductTop();
+		model.addAttribute("productsTop", productTop);
         
 		return "/user/home/home";
 	}

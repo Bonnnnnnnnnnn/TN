@@ -16,6 +16,8 @@ public interface ProductService {
 	
 	List<Product> findByProductNew();
 	
+	List<Product> findByProductTop();
+	
 	Product create(Product product);
 	
 	Product update(Product product);

@@ -15,6 +15,9 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Query(value="SELECT * FROM Products WHERE status = 1", nativeQuery = true)
     List<Product> getByProductNew();
     
+    @Query(value="SELECT * FROM Products WHERE star= 5", nativeQuery = true)
+    List<Product> getByProductTop();
+    
 //    @Query("SELECT distinct p FROM Products p WHERE p.name LIKE %?1% OR p.id LIKE %?2%")
 //    List<Product> searchByProductNameOrId(String productName, String id);
 //    
