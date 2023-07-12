@@ -8,4 +8,7 @@ public interface DiscountDAO extends JpaRepository<Discount, Integer> {
 
     @Query("SELECT d FROM Discount d WHERE d.code=:code")
     Discount findByCode(String code);
+
+    @Query("SELECT d FROM Discount d WHERE d.id=:id")
+    Discount findById(Long id);
 }

@@ -129,4 +129,9 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findAll();
 	}
 
+	@Override
+	public void update(Order order) {
+		dao.save(order);
+	}
+
 }

@@ -1,9 +1,6 @@
 package com.poly.service;
 
-import java.util.Date;
 import java.util.List;
-
-import org.springframework.data.jpa.repository.Query;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,4 +20,6 @@ public interface OrderService {
 	List<Order> getOrderByDay(String day);
 	
 	List<Order> findAll();
+
+	void update(Order order);
 }

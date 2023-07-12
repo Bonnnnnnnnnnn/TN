@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface DiscountService {
 
     Discount findByCode(String code);
+
+    Discount findById(Long id);
 }

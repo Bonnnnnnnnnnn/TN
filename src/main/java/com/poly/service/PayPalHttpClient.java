@@ -38,7 +38,7 @@ public class PayPalHttpClient {
         var accessTokenDto = getAccessToken();
 
         var appContext = new PayPalAppContextDTO();
-        appContext.setReturnUrl("http://localhost:8080/user/order/detail");
+        appContext.setReturnUrl("http://localhost:8080/order/checkout/success/" + order.getId());
         appContext.setBrandName("My brand");
         appContext.setLandingPage(PaymentLandingPage.BILLING);
 

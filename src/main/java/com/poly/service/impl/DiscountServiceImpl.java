@@ -15,4 +15,9 @@ public class DiscountServiceImpl implements DiscountService {
     public Discount findByCode(String code) {
         return discountDAO.findByCode(code);
     }
+
+    @Override
+    public Discount findById(Long id) {
+        return discountDAO.findById(id);
+    }
 }

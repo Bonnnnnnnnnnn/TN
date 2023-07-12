@@ -38,10 +38,10 @@
 								<li>{{item.name}}<span>{{item.price*item.qty|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 							</ul>
 							<div class="checkout__order__subtotal">
-								Tổng Tiền Hàng <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span>
+								Discount <span th:text="${discount.price}"><span style="text-decoration: underline;">đ</span></span>
 							</div>
 							<div class="checkout__order__total">
-								Tổng Thanh Toán <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span>
+								Tổng Thanh Toán <span>{{getTotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span>
 							</div>
 							<div class="checkout__input__checkbox">
 								<label for="payment"> Check Payment <input

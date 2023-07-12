@@ -2,6 +2,7 @@ package com.poly.rest.controller.user;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.poly.service.OrderService;
 import com.poly.service.PayPalHttpClient;
 import com.poly.model.paypal.PayPalResponse;
 import com.poly.model.Order;
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CheckoutRestController {
 
     private final PayPalHttpClient payPalHttpClient;
+
+    @Autowired
+    OrderService orderService;
+
     @Autowired
     public CheckoutRestController(PayPalHttpClient payPalHttpClient) {
         this.payPalHttpClient = payPalHttpClient;
@@ -24,14 +29,14 @@ public class CheckoutRestController {
     @PostMapping("/rest/checkout")
     public ResponseEntity<PayPalResponse> create(@RequestBody JsonNode orderData) {
         try {
-            var order = new ObjectMapper().treeToValue(orderData, Order.class);
+            var order = orderService.create(orderData);
             var orderResponse = payPalHttpClient.createOrder(order);
-            System.out.println("Response " + orderResponse);
-            var test = new PayPalResponse();
-            test.setUrl(orderResponse);
-            return ResponseEntity.ok(test);
+            var payPalResponse = new PayPalResponse();
+            payPalResponse.setUrl(orderResponse);
+            return ResponseEntity.ok(payPalResponse);
         } catch (Exception e) {
             return null;
         }
     }
+
 }
