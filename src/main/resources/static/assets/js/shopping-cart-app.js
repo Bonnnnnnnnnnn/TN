@@ -30,22 +30,14 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
   	
   // Trong controller hoặc script tương ứng
 	$scope.getSubtotal = function() {
-    	    var subtotal = 0;
-    	    for (var i = 0; i < $scope.cart.items.length; i++) {
-    	        var item = $scope.cart.items[i];
-    	        subtotal += item.price * item.qty;
-    	    }
-    	    return subtotal;
-    };
-    $scope.getTotal = function() {
-    	var discount = document.getElementById('discount').innerText;
-    	    var subtotal = 0;
-    	    for (var i = 0; i < $scope.cart.items.length; i++) {
-    	        var item = $scope.cart.items[i];
-    	        subtotal += item.price * item.qty;
-    	    }
-    	    return subtotal - discount;
-    	};
+	    var subtotal = 0;
+	    for (var i = 0; i < $scope.cart.items.length; i++) {
+	        var item = $scope.cart.items[i];
+	        subtotal += item.price * item.qty;
+	    }
+	    return subtotal;
+	};
+  
   $scope.cart = {
     items: [],
     add(id) {
@@ -138,32 +130,17 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       });
     },
     purchase() {
-      var discountId = document.getElementById('discountId').value;
       var order = angular.copy(this);
-      if (discountId) {
-      order.discountId = discountId;
-      }
       // thực hiện đặt hàng, orders này là giá trị truyền vào JsonNode orderData bên Controller
-
-      var isPaypal = document.getElementById("paypal");
-      if (isPaypal.checked == true) {
-      console.log(isPaypal.checked);
-        alert("Đặt!");
-        $http.post("/rest/checkout", order).then((resp) => {
-            $scope.cart.clear();
-           location.href = resp.data.url;
-        }).catch(error=>{
-          alert("Đặt hàng lỗi!");
-        });
-      } else {
-        $http.post("/rest/orders", order).then((resp) => {
-          alert("Đặt hàng thành công!");
-          $scope.cart.clear();
-          location.href = "/order/detail/" + resp.data.id;
-        }).catch(error=>{
-          alert("Đặt hàng lỗi!!");
-        });
-      }
-    }
+      $http.post("/rest/orders", order).then((resp) => {    
+        alert("Đặt hàng thành công!");
+        $scope.cart.clear();
+        console.log(resp.data);
+        location.href = "/order/detail/" + resp.data.id;
+      }).catch(error=>{
+        alert("Đặt hàng lỗi!");
+        console.log(error);
+      });
+    },
   };
 });

@@ -84,12 +84,10 @@
 	                    <div class="shoping__continue">
 	                        <div class="shoping__discount">
 	                            <h5>Discount Codes</h5>
-								<form th:action="@{/cart/view/discount}" method="POST">
-									<input type="text" name="code" placeholder="Enter your coupon code" th:value="${discount.code}">
-									<input th:value="${discount.id}" id="discountId" style="display: none;">
-									<button type="submit" class="site-btn">APPLY COUPON</button>
-								</form>
-								<p th:text="${error}" style="color: red"></p>
+	                            <form action="#">
+	                                <input type="text" placeholder="Enter your coupon code">
+	                                <button type="submit" class="site-btn">APPLY COUPON</button>
+	                            </form>
 	                        </div>
 	                    </div>
 	                </div>
@@ -97,8 +95,8 @@
 	                    <div class="shoping__checkout">
 	                        <h5>Cart Total</h5>
 	                        <ul>
-								<li>Discount <span th:text="${discount.price}" id="discount"><span style="text-decoration: underline;">đ</span></span></li>
-	                            <li>Total <span>{{getTotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
+	                            <li>Subtotal <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
+	                            <li>Total <span>{{getSubtotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 	                        </ul>
 	                        <a type="button" class="primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">PROCEED TO CHECKOUT</a>
 	                    </div>

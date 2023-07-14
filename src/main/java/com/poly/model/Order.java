@@ -36,15 +36,10 @@ public class Order implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
 	private Date createDate= new Date();
-	@Column(name = "Discountid")
-	private Long discountId;
-	@Column(name = "Paypalorderid")
-	private String paypalOrderId;
-	@Column(name = "Paypalorderstatus")
-	private String paypalOrderStatus;
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	private Account account;
+	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
 }
