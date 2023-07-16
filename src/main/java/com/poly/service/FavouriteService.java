@@ -14,7 +14,7 @@ public interface FavouriteService {
 	
 	void delete(Favourite favourite);
 
-	Favourite create(Account account, Product product);
+	Favourite create(Account account, Product item);
 	
 	Favourite updateLikeOrUnlike(Account account,Integer id);
 

@@ -68,8 +68,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<Product> findAllProductCustomerLike(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.findAllProductCustomerLike(username);
 	}
 
 	@Override
