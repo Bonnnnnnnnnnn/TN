@@ -12,7 +12,7 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.category.id=?1")
     List<Product> getByCategoryId(String cid);
     
-    @Query(value="SELECT * FROM Products WHERE status = 1", nativeQuery = true)
+    @Query(value="SELECT TOP 10 * FROM Products ORDER BY CreateDate DESC", nativeQuery = true)
     List<Product> getByProductNew();
     
     @Query(value="SELECT * FROM Products WHERE star= 5", nativeQuery = true)
