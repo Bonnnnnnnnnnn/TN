@@ -31,7 +31,7 @@ public class FavouriteController {
 			model.addAttribute("favourite", list);
 			model.addAttribute("currentPage", page);
 			model.addAttribute("maxPages", maxPages);
-			return "web/favourite/view";
+			return "user/favourite/view";
 		}
 
 		for(int i = 0; i < list.size(); ++i) {
@@ -70,6 +70,6 @@ public class FavouriteController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("maxPages", maxPages);
 
-		return "web/favourite/view";
+		return "user/favourite/view";
 	}
 }

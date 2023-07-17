@@ -1,6 +1,34 @@
 const app = angular.module("shopping-cart", []);
 
 app.controller("shopping-cart-ctrl", function ($scope, $http) {
+  // Quản lý sản phẩm được yêu thích
+	var $like = $scope.like = {
+	//	items: [],
+		change(id){
+			$http.get(`/rest/favourite/${id}`).then(resp => {
+				$scope.favourite = resp.data;
+				if($scope.favourite.isLiked){
+					// Đang ở trạng thái like. User unlike => cập nhật isLike = 0
+					$http.put(`/rest/favourite/${id}`).then(resp =>{
+						console.log("Success", resp);
+						location.href = "/product/detail/" + id  ;
+					}).catch(error => {
+						console.log("Error", error);
+					})
+				}else{
+					// Đang ở trạng thái unlike. User like => cập nhật isLike = 1
+					$http.put(`/rest/favourite/${id}`).then(resp =>{
+						console.log("Success", resp);
+						location.href = "/product/detail/" + id  ;
+					}).catch(error => {
+						console.log("Error", error);
+					})
+				}
+				
+			})
+		},
+	};
+  
   // Trong AngularJS controller
 	$scope.preventEmptyInput = function(event) {
 	    if (event.keyCode === 8 || event.keyCode === 46) { // Kiểm tra phím backspace và phím delete

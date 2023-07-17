@@ -36,7 +36,6 @@ public class Product {
 	@Column(name = "Createdate")
 	private Date createDate = new Date();
 	private Boolean available;
-	private Boolean status;
 	private Integer star;
 	
 	@ManyToOne
