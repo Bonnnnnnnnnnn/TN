@@ -1,15 +1,13 @@
 package com.poly.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.TotalProductsUtil;
 import com.poly.model.Category;
 import com.poly.model.Product;
 import com.poly.service.CategoryService;
@@ -45,6 +43,10 @@ public class HomeController{
 		
 		//Load sản phẩm top 5 sao
 		List<Product> productTop;
+		
+		//Hiển thị số lượng yêu thích
+  		int totalProducts = TotalProductsUtil.getTotalProducts();
+  		model.addAttribute("totalProducts", totalProducts);
 		
 		productTop = productService.findByProductTop();
 		model.addAttribute("productsTop", productTop);

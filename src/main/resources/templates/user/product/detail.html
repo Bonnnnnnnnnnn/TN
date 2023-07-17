@@ -71,12 +71,12 @@
 		                    		-->
 		                    		<th:block th:if="!${flagLikedBtn}">
 			                    		<a th:attr="ng-click=@{|like.change(*{id})|}" class="heart-icon">
-			                    			<span class="icon_heart_alt"></span>
+			                    			<i class="far fa-heart"></i>
 			                    		</a>	                    		
 		                    		</th:block>
 		                    		<th:block th:unless="!${flagLikedBtn}">
-			                    		<a th:attr="ng-click=@{|like.change('*{id})|}" class="heart-icon text-danger">
-			                    			<span class="icon_heart_alt text-danger"></span>
+			                    		<a th:attr="ng-click=@{|like.change(*{id})|}" class="heart-icon text-danger">
+			                    			<i class="fas fa-heart text-danger"></i>
 			                    		</a>	                    		
 		                    		</th:block>
 		                    	</div>

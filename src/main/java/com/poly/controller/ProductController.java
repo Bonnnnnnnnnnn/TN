@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.TotalProductsUtil;
 import com.poly.model.Account;
 import com.poly.model.Category;
 import com.poly.model.Favourite;
@@ -41,6 +42,10 @@ public class ProductController {
 		Product item = productService.findById(id);
 		model.addAttribute("item", item);
 		
+		//Hiển thị số lượng yêu thích
+  		int totalProducts = TotalProductsUtil.getTotalProducts();
+  		model.addAttribute("totalProducts", totalProducts);
+		
 		@SuppressWarnings("unchecked")
 		Map<String, Object> authentication = (Map<String, Object>) session.getAttribute("authentication");
 		if(authentication != null) {
@@ -55,6 +60,10 @@ public class ProductController {
 	public String list(Model model, HttpServletRequest request, @RequestParam("cid")Optional<String> cid, @RequestParam(defaultValue = "1") int page) {
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories); 
+        
+        //Hiển thị số lượng yêu thích
+  		int totalProducts = TotalProductsUtil.getTotalProducts();
+  		model.addAttribute("totalProducts", totalProducts);
         
 		List<Product> list;
 		
