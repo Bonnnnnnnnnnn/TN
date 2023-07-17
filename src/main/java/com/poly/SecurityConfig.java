@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	// Cung cấp nguồn dữ liệu đăng nhập
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		 auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
 		auth.userDetailsService(username -> {
 			try {
 				Account user = accountService.findById(username);
@@ -105,11 +106,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.baseUri("/oauth2/authorization");
 	}
 	
-	// Cơ chế mã hóa mật khẩu
-	@Bean
-	public BCryptPasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 	
 	// Cho phép truy xuất REST API từ bên ngoài (domain khác)
 	@Override

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +23,18 @@ import com.poly.service.AccountService;
 public class AccountRestController {
 	@Autowired
 	AccountService accountService;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/rest/account")
-	public ResponseEntity<Account> post(@RequestBody Account account) {
-	    Account createdAccount = accountService.create(account);
-	    return ResponseEntity.ok(createdAccount);
-	}
+    public ResponseEntity<Account> post(@RequestBody Account account) {
+        // Mã hóa mật khẩu
+        String encodedPassword = passwordEncoder.encode(account.getPassword());
+        account.setPassword(encodedPassword);
+        
+        Account createdAccount = accountService.create(account);
+        return ResponseEntity.ok(createdAccount);
+    }
 	
 	@GetMapping("/rest/accounts")
 	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin){
