@@ -1024,6 +1024,9 @@ ol {
 	height: 270px;
 	position: relative;
 }
+.categories__item:hover {
+	transform:scale(1.1);
+}
 
 .categories__item h5 {
 	position: absolute;
@@ -3863,6 +3866,7 @@ ol {
 }
 .back-to-top.show:hover {
     color: #fff;
+    transform: scale(1.1);
 }
 .back-to-top {
     position: fixed;
