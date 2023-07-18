@@ -75,5 +75,10 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> findByProductTop() {
 		return productDAO.getByProductTop();
 	}
+
+	@Override
+	public List<Product> findByProductRandom() {
+		return productDAO.getByProductRandom();
+	}
 	
 }

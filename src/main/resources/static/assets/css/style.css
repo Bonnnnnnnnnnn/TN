@@ -1213,6 +1213,22 @@ ol {
 	text-decoration: underline;
 }
 
+.btn-view-more {
+  display: inline-block;
+  padding: 20px 80px;
+  background-color: #7fad39; /* Màu nền cho nút */
+  color: #FFFFFF; /* Màu chữ cho nút */
+  text-decoration: none;
+  border-radius: 5px; /* Bo góc cho nút */
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+  font-size: 20px;
+}
+
+.btn-view-more:hover {
+  background-color: #678c2f; /* Màu nền khi rê chuột vào nút */
+  transform:scale(1.1);
+}
+
 /*---------------------
   Latest Product
 -----------------------*/

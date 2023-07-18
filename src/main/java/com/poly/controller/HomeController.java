@@ -32,7 +32,7 @@ public class HomeController{
         model.addAttribute("top4Category", top4Category);
         
         //Load tất cả sản phẩm 
-        List<Product> products = productService.findAll();
+        List<Product> products = productService.findByProductRandom();
         model.addAttribute("products", products);
         
         //Load sản phẩm mới
