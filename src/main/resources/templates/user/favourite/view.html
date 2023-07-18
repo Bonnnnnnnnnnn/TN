@@ -7,10 +7,10 @@
 	            <div class="row">
 	                <div class="col-lg-12 text-center">
 	                    <div class="breadcrumb__text">
-	                        <h2>Your Favourite Products</h2>
+	                        <h2>Your Favorite</h2>
 	                        <div class="breadcrumb__option">
 	                            <a th:href="@{/home/index}">Home</a>
-	                            <span>Your Favourite Products</span>
+	                            <span>Your Favorite</span>
 	                        </div>
 	                    </div>
 	                </div>
@@ -55,35 +55,35 @@
 	    <div class="col-12 mb-5">
     		<ul class="pagination justify-content-center">
 				<th:block th:if="${currentPage == 1}">
-					<li class="page-item" style="cursor: pointer;">
+					<li class="page-item" style="cursor: pointer;color: #007bff;">
 	            		<a class="page-link" disabled>Previous</a>
 	        		</li>
 				</th:block>
 				<th:block th:if="${currentPage > 1}">
 	        		<!-- Prev -->
-	        		<li class="page-item">
+	        		<li class="page-item" style="cursor: pointer;">
 	            		<a class="page-link" th:href="@{/favourite/view(page=${currentPage - 1})}">Previous</a>
 	        		</li>	
 				</th:block>
 
 				<th:block th:if="${maxPages == 0}">
-					<li class="page-item" style="cursor: pointer;">
+					<li class="page-item" style="cursor: pointer;color: #007bff;">
             			<a class="page-link">1</a>
 	        		</li>
 				</th:block>
 				<th:block th:if="${maxPages > 0}">
-	        		<li class="page-item" th:each="pageNum : ${#numbers.sequence(1, maxPages)}">
+	        		<li class="page-item" style="cursor: pointer;" th:each="pageNum : ${#numbers.sequence(1, maxPages)}">
 	            		<a class="page-link" th:href="@{/favourite/view(page=${pageNum})}" th:classappend="${pageNum == currentPage} ? 'active'">[[${pageNum}]]</a>
 	        		</li>	
 				</th:block>
 
 				<th:block th:if="${currentPage < maxPages}">
 	        		<li class="page-item">
-	            		<a class="page-link" th:href="@{/favourite/view(page=${currentPage + 1})}">Next</a>
+	            		<a class="page-link" style="cursor: pointer;" th:href="@{/favourite/view(page=${currentPage + 1})}">Next</a>
 	        		</li>
         		</th:block>
         		<th:block th:unless="${currentPage < maxPages}">
-	        		<li class="page-item" style="cursor: pointer;">
+	        		<li class="page-item" style="cursor: pointer;color: #007bff;">
 	            		<a class="page-link" disabled>Next</a>
 	        		</li>
         		</th:block>
