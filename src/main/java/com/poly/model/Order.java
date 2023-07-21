@@ -38,6 +38,8 @@ public class Order implements Serializable{
 	private Date createDate= new Date();
 	@Column(name = "Discountid")
 	private Long discountId;
+	@Column(name = "Status")
+	private String status = "Đợi xác nhận";
 	@Column(name = "Paypalorderid")
 	private String paypalOrderId;
 	@Column(name = "Paypalorderstatus")

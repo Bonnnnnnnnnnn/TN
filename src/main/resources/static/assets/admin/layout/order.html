@@ -19,6 +19,7 @@
 	<div class="card shadow mt-3">
 		<div class="card-header" style="display: flex; justify-content: space-between">
 			<h3 class="m-0 font-weight-bold text-primary">List Orders</h3>
+			<h6>{{currentPage}} of {{totalPages()}}</h6>
 		</div>
 		<div class="card-body">
 			<table id="example1" class="table table-bordered table-striped text-center">
@@ -29,6 +30,7 @@
 						<th>Created Date</th>
 						<th>Address</th>
 						<th>Discount</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,6 +40,7 @@
 						<td style="width: 25%">{{item.createDate}}</td>
 						<td style="width: 25%">{{item.address}}</td>
 						<td style="width: 25%">{{item.discountId}}</td>
+						<td style="width: 25%">{{item.status}}</td>
 					</tr>
 				</tbody>
 			</table>

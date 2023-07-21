@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.model.Order;
+import com.poly.model.Product;
 import com.poly.service.OrderService;
 import com.poly.service.impl.OrderServiceImpl;
 
@@ -30,5 +31,12 @@ public class OrderAdminRestController {
 	public ResponseEntity<List<Order>> getQuantitiesByProduct(@PathVariable("day") String day){
 		return ResponseEntity.ok(orderService.getOrderByDay(day));
 	}
+	
+	@GetMapping("/rest/order")
+	public ResponseEntity<List<Order>> getAll() {
+		List<Order> order = orderService.findAll();
+		return ResponseEntity.ok(order);
+	}
 
+	
 }
