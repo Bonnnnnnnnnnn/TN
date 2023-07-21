@@ -20,6 +20,9 @@ app.config(function($routeProvider){
 	.when("/order", {
 		templateUrl: "/assets/admin/layout/order.html"
 	})
+	.when("/waitingForShipping", {
+		templateUrl: "/assets/admin/layout/waitingForShipping.html"
+	})
 	.otherwise({
 		redirectTo: ""
 	});

@@ -31,6 +31,7 @@ import lombok.NoArgsConstructor;
 public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
 	private Long id;
 	private String address;
 	@Temporal(TemporalType.DATE)
@@ -44,7 +45,6 @@ public class Order implements Serializable{
 	private String paypalOrderId;
 	@Column(name = "Paypalorderstatus")
 	private String paypalOrderStatus;
-
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	private Account account;
