@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductService {
 	List<Product> findAll();
 	
+	List<Product> findByProductRandom();
 	
 	List<Product> findByCategoryId(String id);
 	

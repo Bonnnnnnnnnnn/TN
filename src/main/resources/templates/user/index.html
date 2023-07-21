@@ -44,7 +44,9 @@
     <div>
     	<div th:insert="/user/layout/footer.html"></div>
     </div>
-    
+    <a class="back-to-top show" id="backto-top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
 	
 	<!-- Footer Section Begin -->
 	
@@ -74,6 +76,22 @@
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
   
+  <script>
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        if ($(this).scrollTop()) {
+          $('#backto-top').fadeIn();
+        } else {
+          $('#backto-top').fadeOut();
+        }
+      });
+      $('#backto-top').click(function () {
+        $('html, body').animate({
+          scrollTop: 0
+        }, 700);
+      });
+    });
+  </script>
 </body>
 
 </html>

@@ -257,35 +257,35 @@
 				    		<ul class="pagination justify-content-center">
 								<th:block th:if="${currentPage == 1}">
 									<li class="page-item">
-					            		<a class="page-link" disabled>Previous</a>
+					            		<a class="page-link" style="cursor: pointer;color: #007bff;" disabled>Previous</a>
 					        		</li>
 								</th:block>
 								<th:block th:if="${currentPage > 1}">
 					        		<!-- Prev -->
 					        		<li class="page-item">
-					            		<a class="page-link" th:href="@{/product/list(page=${currentPage - 1})}">Previous</a>
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${currentPage - 1})}">Previous</a>
 					        		</li>	
 								</th:block>
 				
 								<th:block th:if="${maxPages == 0}">
 									<li class="page-item">
-				            			<a class="page-link">1</a>
+				            			<a class="page-link" style="cursor: pointer;color: #007bff;">1</a>
 					        		</li>
 								</th:block>
 								<th:block th:if="${maxPages > 0}">
 					        		<li class="page-item" th:each="pageNum : ${#numbers.sequence(1, maxPages)}">
-					            		<a class="page-link" th:href="@{/product/list(page=${pageNum})}" th:classappend="${pageNum == currentPage} ? 'active'">[[${pageNum}]]</a>
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${pageNum})}" th:classappend="${pageNum == currentPage} ? 'active'">[[${pageNum}]]</a>
 					        		</li>	
 								</th:block>
 				
 								<th:block th:if="${currentPage < maxPages}">
 					        		<li class="page-item">
-					            		<a class="page-link" th:href="@{/product/list(page=${currentPage + 1})}">Next</a>
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${currentPage + 1})}">Next</a>
 					        		</li>
 				        		</th:block>
 				        		<th:block th:unless="${currentPage < maxPages}">
 					        		<li class="page-item">
-					            		<a class="page-link" disabled>Next</a>
+					            		<a class="page-link" style="cursor: pointer;color: #007bff;" disabled>Next</a>
 					        		</li>
 				        		</th:block>
 				    		</ul>
