@@ -44,9 +44,11 @@ public class Order implements Serializable{
 	private String paypalOrderId;
 	@Column(name = "Paypalorderstatus")
 	private String paypalOrderStatus;
+
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	private Account account;
+	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
 }

@@ -8,8 +8,8 @@
 				<div class="card-body row">
 					<div class="form-group col-md-6">
 						<label for="title">Order date</label>
-						<input ng-model="selectedCreateDate" class="form-control" type="date" name="CreateDate">
-						<button ng-click="handleChange()" class="btn btn-success btn-sm mt-3">Check</button>
+						<input class="form-control" type="date" name="CreateDate">
+						<button class="btn btn-success btn-sm mt-3">Check</button>
 					</div>
 				</div>					
 			</div>
@@ -19,7 +19,6 @@
 	<div class="card shadow mt-3">
 		<div class="card-header" style="display: flex; justify-content: space-between">
 			<h3 class="m-0 font-weight-bold text-primary">List Orders</h3>
-			<h6>{{currentPage}} of {{totalPages()}}</h6>
 		</div>
 		<div class="card-body">
 			<table id="example1" class="table table-bordered table-striped text-center">
@@ -30,6 +29,8 @@
 						<th>Created Date</th>
 						<th>Address</th>
 						<th>Discount</th>
+						<th>Paypal Order Id</th>
+						<th>Paypal Order Status</th>
 						<th>Status</th>
 					</tr>
 				</thead>
@@ -40,27 +41,12 @@
 						<td style="width: 25%">{{item.createDate}}</td>
 						<td style="width: 25%">{{item.address}}</td>
 						<td style="width: 25%">{{item.discountId}}</td>
+						<td style="width: 25%">{{item.paypalOrderId}}</td>
+						<td style="width: 25%">{{item.paypalOrderStatus}}</td>
 						<td style="width: 25%">{{item.status}}</td>
 					</tr>
 				</tbody>
-			</table>
-			
-			<div class="col-12">
-				<div class="col-12">
-					<nav aria-label="..." class="mt-4 d-flex justify-content-center">
-	                	<ul class="pagination">
-	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPageFirst()">First</a></li>
-	
-	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage - 1)">Previous</a></li>
-	                            
-	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage + 1)">Next</a></li>
-	
-	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPageLast()">Last</a></li>
-	                	</ul>
-	                </nav>
-				</div>		
-			</div>
-			
+			</table>	
 		</div>
 	</div>
 </div>
