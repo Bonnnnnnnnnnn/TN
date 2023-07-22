@@ -22,9 +22,17 @@ public interface OrderService {
 	
 	List<Order> findAll();
 	
+	//Admin: Hiển thị ds order đợi xác nhận
 	List<Order> findByWaitConfirm();
-
+	
+	//Admin: Hiển thị ds order đang giao
 	List<Order> findByWaitingForShipping();
+	
+	//Admin: Hiển thị ds order đã giao
+	List<Order> findByDelivered();
+	
+	//Admin: Hiển thị ds order đã hủy
+	List<Order> findByCancelled();
 	
 	Order update(Order order);
 }

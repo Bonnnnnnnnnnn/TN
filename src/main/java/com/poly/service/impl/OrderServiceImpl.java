@@ -145,4 +145,14 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findByWaitingForShipping() {
 		return dao.findByWaitingForShipping();
 	}
+
+	@Override
+	public List<Order> findByDelivered() {
+		return dao.findByDelivered();
+	}
+
+	@Override
+	public List<Order> findByCancelled() {
+		return dao.findByCancelled();
+	}
 }

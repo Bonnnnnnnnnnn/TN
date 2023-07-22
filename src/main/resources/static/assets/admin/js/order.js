@@ -25,27 +25,63 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 	};
 	
 	$scope.update = function(id) {
-		// Find the order in $scope.items by its ID
-        const orderToUpdate = $scope.items.find(item => item.id === id);
-        if (!orderToUpdate) {
-            console.error('Order not found.');
-            return;
-        }
-
-        // Set the new status
-        orderToUpdate.status = 'Đang giao';
-
-        // Send the updated order to the server
-        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
-            .then(function(response) {
-                console.log('Order updated successfully:', response.data);
-                alert("Duyệt thành công!");
-                $scope.load_orderConfirm();
-            })
-            .catch(function(error) {
-                console.error('Error updating order:', error);
-                alert("Duyệt thất bại!");
-            });
+		var xacNhan = confirm("Bạn có muốn xác nhận không?");
+		if (xacNhan) {
+			// Find the order in $scope.items by its ID
+	        const orderToUpdate = $scope.items.find(item => item.id === id);
+	        if (!orderToUpdate) {
+	            console.error('Order not found.');
+	            return;
+	        }
+	
+	        // Set the new status
+	        orderToUpdate.status = 'Đang giao';
+	
+	        // Send the updated order to the server
+	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
+	            .then(function(response) {
+	                console.log('Order updated successfully:', response.data);
+	                alert("Duyệt thành công!");
+	                $scope.load_orderConfirm();
+	            })
+	            .catch(function(error) {
+	                console.error('Error updating order:', error);
+	                alert("Duyệt thất bại!");
+	            });
+	    }else{
+			// Người dùng chọn "Cancel", không thực hiện xóa
+			console.log("Cancel");
+		}
+	};
+	
+	$scope.cancel = function(id) {
+		var xacNhan = confirm("Bạn có muốn huỷ không?");
+		if (xacNhan) {
+			// Find the order in $scope.items by its ID
+	        const orderToUpdate = $scope.items.find(item => item.id === id);
+	        if (!orderToUpdate) {
+	            console.error('Order not found.');
+	            return;
+	        }
+	
+	        // Set the new status
+	        orderToUpdate.status = 'Đã hủy';
+	
+	        // Send the updated order to the server
+	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
+	            .then(function(response) {
+	                console.log('Order updated successfully:', response.data);
+	                alert("Hủy thành công!");
+	                $scope.load_orderConfirm();
+	            })
+	            .catch(function(error) {
+	                console.error('Error updating order:', error);
+	                alert("Hủy thất bại!");
+	            });
+	    }else{
+			// Người dùng chọn "Cancel", không thực hiện xóa
+			console.log("Cancel");
+		}
 	};
 	
 	$scope.load_orderConfirm();

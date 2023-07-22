@@ -24,6 +24,15 @@ public interface OrderDAO extends JpaRepository<Order, Long>{
 	@Query(value = "select * from Orders where Status = N'Đợi xác nhận' ", nativeQuery = true)
 	List<Order> findByWaitConfirm();
 	
+	//Admin: Hiển thị ds order đang giao
 	@Query(value = "select * from Orders where Status = N'Đang giao' ", nativeQuery = true)
 	List<Order> findByWaitingForShipping();
+	
+	//Admin: Hiển thị ds order đã giao
+	@Query(value = "select * from Orders where Status = N'Đã giao' ", nativeQuery = true)
+	List<Order> findByDelivered();
+	
+	//Admin: Hiển thị ds order đã hủy
+	@Query(value = "select * from Orders where Status = N'Đã hủy' ", nativeQuery = true)
+	List<Order> findByCancelled();
 }

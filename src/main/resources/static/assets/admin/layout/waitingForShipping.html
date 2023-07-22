@@ -45,19 +45,19 @@
 						<td>{{item.discountId}}</td>
 						<td>{{item.paypalOrderId}}</td>
 						<td>{{item.paypalOrderStatus}}</td>
-						<td>{{item.status}}</td>
+						<td><span class="status-waiting">{{item.status}}</span></td>
 						<td>
-							<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
+							<button ng-click="update(item.id)" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
 								title="Duyệt">
 								<i class="fa-sharp fa-solid fa-circle-check"></i>
-							</a> 
+							</button> 
 							<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
 								title="Xem chi tiết"> 
 								<i class="fa-sharp fa-solid fa-circle-info"></i>
 							</a> 
-							<a class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row" title="Hủy">
+							<button ng-click="cancel(item.id)" class="btn btn-sm btn-icon btn-pure btn-default on-default remove-row" title="Hủy">
 								<i class="fa-sharp fa-solid fa-circle-xmark"></i>
-							</a>
+							</button>
 						</td>
 					</tr>
 				</tbody>

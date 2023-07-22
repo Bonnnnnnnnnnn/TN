@@ -53,8 +53,35 @@ public class OrderAdminRestController {
         return ResponseEntity.ok(orders);
     }
     
+    // Get all delivered
+    @GetMapping("/rest/delivered")
+    public ResponseEntity<List<Order>> getDelivered() {
+        List<Order> orders = orderService.findByDelivered();
+        return ResponseEntity.ok(orders);
+    }
+    
+    // Get all cancelled
+    @GetMapping("/rest/cancelled")
+    public ResponseEntity<List<Order>> getCancelled() {
+        List<Order> orders = orderService.findByCancelled();
+        return ResponseEntity.ok(orders);
+    }
+    
+    //Xác nhận đơn hàng
     @PutMapping("/rest/orderConfirm/{id}")
 	public ResponseEntity<Order> put(@PathVariable("id") Long id, @RequestBody Order order) {
+		Order existingOrder = orderService.findById(id);
+		if (existingOrder != null) {
+			order.setId(id);
+			Order updatedOrder = orderService.update(order);
+			return ResponseEntity.ok(updatedOrder);
+		}
+		return ResponseEntity.notFound().build();
+	}
+    
+    //Hoàn thành đơn hàng
+    @PutMapping("/rest/waitingForShipping/{id}")
+	public ResponseEntity<Order> put2(@PathVariable("id") Long id, @RequestBody Order order) {
 		Order existingOrder = orderService.findById(id);
 		if (existingOrder != null) {
 			order.setId(id);
