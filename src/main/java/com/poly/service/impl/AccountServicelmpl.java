@@ -3,6 +3,7 @@ package com.poly.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.poly.dao.AccountDAO;
@@ -14,6 +15,10 @@ public class AccountServicelmpl implements AccountService{
 
 	@Autowired 
 	AccountDAO dao;
+	
+	  @Autowired
+	  PasswordEncoder passwordEncoder; // Tiêm bộ mã hóa mật khẩu vào
+	
 	
 	@Override
 	public Account findById(String username) {		
@@ -36,15 +41,21 @@ public class AccountServicelmpl implements AccountService{
 	}
 	
 	@Override
-	public Account resetPassword(String email) {
-		Account existAccount = dao.findByEmail(email);
-		if(existAccount != null) {
-			// random 4 số | 1000 - 9999 | công thức: (Math.random()) * ((max - min) + 1)) + min
-			String newPass = String.valueOf((int)(Math.random() * ((9999 - 1000) + 1)) + 1000);
-			existAccount.setPassword(newPass); // set password cho user
-			return dao.save(existAccount); // gọi xuống dao
-		}
-		return null;
-	}
+    public Account updatePassword(Account account, String newPassword) {
+        account.setPassword(passwordEncoder.encode(newPassword)); // Hash the new password before saving
+        return dao.save(account);
+    }
+	
+	@Override
+    public Account resetPassword(String email) {
+        Account existAccount = dao.findByEmail(email);
+        if (existAccount != null) {
+            String newPass = String.valueOf((int) (Math.random() * ((9999 - 1000) + 1)) + 1000);
+            String encodedPassword = passwordEncoder.encode(newPass); // Mã hoá mật khẩu mới trước khi lưu
+            existAccount.setPassword(encodedPassword);
+            return dao.save(existAccount); // Lưu thông tin người dùng với mật khẩu đã mã hoá
+        }
+        return null;
+    }
 
 }
