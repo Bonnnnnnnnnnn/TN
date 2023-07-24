@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.dao.OrderDetailDAO;
 import com.poly.model.Category;
 import com.poly.model.Order;
+import com.poly.model.OrderDetail;
 import com.poly.model.Product;
 import com.poly.service.CategoryService;
 import com.poly.service.OrderService;
 import com.poly.service.impl.OrderServiceImpl;
+
 
 
 
@@ -29,6 +32,9 @@ public class OrderAdminRestController {
 	
 	@Autowired
 	private final OrderService orderService;
+	
+	@Autowired
+	OrderDetailDAO orderDetailDao;
 	
 	// Admin: hiển thị các hóa đơn theo ngày chỉ định
 	@GetMapping("/rest/order-by-day/{day}")
@@ -89,5 +95,17 @@ public class OrderAdminRestController {
 			return ResponseEntity.ok(updatedOrder);
 		}
 		return ResponseEntity.notFound().build();
+	}
+    
+    //Hóa đơn chi tiết order Confirm
+   
+    @GetMapping("/rest/orderConfirm/detail/{id}")
+	public Order getDetail(@PathVariable("id")Long id){
+		return orderService.findById(id);
+	}
+    
+    @GetMapping("/rest/orderConfirm/listDetail/{id}")
+	public List<OrderDetail> getOrderDetail(@PathVariable("id")Long id){
+		return orderDetailDao.findByOrder(id);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.model.Order;
+import com.poly.model.OrderDetail;
 import com.poly.model.Product;
 
 public interface OrderService {
@@ -35,4 +36,5 @@ public interface OrderService {
 	List<Order> findByCancelled();
 	
 	Order update(Order order);
+
 }

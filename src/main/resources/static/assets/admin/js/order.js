@@ -126,4 +126,33 @@ app.controller("ctrl-order", function($scope, $http, $filter){
   		$scope.currentPage = $scope.totalPages();
 	};
 	
+	//Chi tiết hóa đơn
+	$scope.load_orderDetail = function(id) {
+        var url = `${pathOrder}/orderConfirm/detail/${id}`;
+        $scope.load_list_orderDetail(id);
+        $http.get(url).then(resp => {
+            $scope.order = resp.data;
+            console.log("Order Sucess", resp);
+        }).catch(error => {
+            console.log("Order Error", error);
+        });
+    }
+    
+    $scope.load_list_orderDetail = function(id) {
+        var url = `${pathOrder}/orderConfirm/listDetail/${id}`;
+        $http.get(url).then(resp => {
+            $scope.orderTotalPrice(resp.data);
+            $scope.list_orderDetail = resp.data;
+            console.log("List OrderDetail Sucess", resp);
+        }).catch(error => {
+            console.log("List OrderDetail Error", error);
+        });
+    };
+    
+     $scope.orderTotalPrice = function(data) {
+        $scope.totalPrice = 0;
+        data.forEach(element => {
+            $scope.totalPrice += (element.price * element.quantity);
+        });
+    };
 });
