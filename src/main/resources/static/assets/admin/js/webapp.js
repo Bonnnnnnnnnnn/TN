@@ -20,6 +20,15 @@ app.config(function($routeProvider){
 	.when("/order", {
 		templateUrl: "/assets/admin/layout/order.html"
 	})
+	.when("/waitingForShipping", {
+		templateUrl: "/assets/admin/layout/waitingForShipping.html"
+	})
+	.when("/delivered", {
+		templateUrl: "/assets/admin/layout/delivered.html"
+	})
+	.when("/cancelled", {
+		templateUrl: "/assets/admin/layout/cancelled.html"
+	})
 	.otherwise({
 		redirectTo: ""
 	});

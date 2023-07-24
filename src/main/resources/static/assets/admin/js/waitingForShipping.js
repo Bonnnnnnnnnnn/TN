@@ -1,5 +1,5 @@
-let pathOrder = "http://localhost:8080/rest";
-app.controller("ctrl-order", function($scope, $http, $filter){
+let pathWaitingForShipping = "http://localhost:8080/rest";
+app.controller("ctrl-waitingForShipping", function($scope, $http, $filter){
 	$scope.items = [];
 	$scope.form = {};
     $scope.selectedCreatedDate = '';
@@ -13,17 +13,17 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 		});	
     };
     
-    // Hiển thị danh sách order đợi xác nhận
-	$scope.load_orderConfirm = function() {
-		var url = `${pathOrder}/orderConfirm`;
+    // Hiển thị danh sách order đang giao
+	$scope.load_waitingForShipping = function() {
+		var url = `${pathWaitingForShipping}/waitingForShipping`;
 		$http.get(url).then(resp => {
 			$scope.items = resp.data;
 			console.log("Success", resp)
 		}).catch(errors => {
 			console.log("Error", errors)
 		});
-	};
-	
+	}
+
 	$scope.update = function(id) {
 		var xacNhan = confirm("Bạn có muốn xác nhận không?");
 		if (xacNhan) {
@@ -35,20 +35,20 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 	        }
 	
 	        // Set the new status
-	        orderToUpdate.status = 'Đang giao';
+	        orderToUpdate.status = 'Đã giao';
 	
 	        // Send the updated order to the server
-	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
+	        $http.put(`/rest/waitingForShipping/${id}`, orderToUpdate)
 	            .then(function(response) {
 	                console.log('Order updated successfully:', response.data);
 	                alert("Duyệt thành công!");
-	                $scope.load_orderConfirm();
+	                $scope.load_waitingForShipping();
 	            })
 	            .catch(function(error) {
 	                console.error('Error updating order:', error);
 	                alert("Duyệt thất bại!");
 	            });
-	    }else{
+	   	}else{
 			// Người dùng chọn "Cancel", không thực hiện xóa
 			console.log("Cancel");
 		}
@@ -68,11 +68,11 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 	        orderToUpdate.status = 'Đã hủy';
 	
 	        // Send the updated order to the server
-	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
+	        $http.put(`/rest/waitingForShipping/${id}`, orderToUpdate)
 	            .then(function(response) {
 	                console.log('Order updated successfully:', response.data);
 	                alert("Hủy thành công!");
-	                $scope.load_orderConfirm();
+	                $scope.load_waitingForShipping();
 	            })
 	            .catch(function(error) {
 	                console.error('Error updating order:', error);
@@ -84,8 +84,8 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 		}
 	};
 	
-	$scope.load_orderConfirm();
-	
+	$scope.load_waitingForShipping();
+
 	// Pagination
     $scope.currentPage = 1; // Khởi tạo trang hiện tại là trang 1
     $scope.itemsPerPage = 5; // Thiết lập số sản phẩm hiển thị trên mỗi trang

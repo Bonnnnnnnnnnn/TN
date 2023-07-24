@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.poly.TotalProductsUtil;
 import com.poly.model.Category;
 import com.poly.model.Discount;
 import com.poly.service.CategoryService;
@@ -35,6 +36,11 @@ public class OrderController {
         
 		String username = request.getRemoteUser();
 		model.addAttribute("orders", orderService.findByUsername(username));
+		
+		//Hiển thị số lượng yêu thích
+  		int totalProducts = TotalProductsUtil.getTotalProducts();
+  		model.addAttribute("totalProducts", totalProducts);
+		
 		return "user/order/list";
 	}
 	
@@ -42,6 +48,10 @@ public class OrderController {
 	public String detail(@PathVariable("id") long id, Model model) {
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
+        
+        //Hiển thị số lượng yêu thích
+  		int totalProducts = TotalProductsUtil.getTotalProducts();
+  		model.addAttribute("totalProducts", totalProducts);
         
 		var order = orderService.findById(id);
 		Discount discount;
@@ -65,6 +75,10 @@ public class OrderController {
 	public String paymentSuccess(@PathVariable("id") long id, HttpServletRequest request, Model model) {
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
+        
+        //Hiển thị số lượng yêu thích
+        int totalProducts = TotalProductsUtil.getTotalProducts();
+		model.addAttribute("totalProducts", totalProducts);
         
 		var paypalOrderId = request.getParameter("token");
 		var out = orderService.findById(id);

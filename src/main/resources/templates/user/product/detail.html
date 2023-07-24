@@ -65,18 +65,18 @@
 	                        <a th:attr="ng-click=@{|cart.add2(*{id})|}" class="primary-btn" style="color: #ffffff">ADD TO CARD</a>
 							
 							<th:block th:if="${#request.remoteUser}">
-		                    	<div class="d-inline-flex">
+		                    	<div class="d-inline-flex" style="cursor: pointer;">
 		                    		<!-- Chưa like thì : isliked = 0 
 		                    		     0 mang giá trị false => phủ định lại sẽ là true, hiển thị tim rỗng
 		                    		-->
 		                    		<th:block th:if="!${flagLikedBtn}">
 			                    		<a th:attr="ng-click=@{|like.change(*{id})|}" class="heart-icon">
-			                    			<span class="icon_heart_alt"></span>
+			                    			<i class="far fa-heart"></i>
 			                    		</a>	                    		
 		                    		</th:block>
 		                    		<th:block th:unless="!${flagLikedBtn}">
-			                    		<a th:attr="ng-click=@{|like.change('*{id})|}" class="heart-icon text-danger">
-			                    			<span class="icon_heart_alt text-danger"></span>
+			                    		<a th:attr="ng-click=@{|like.change(*{id})|}" class="heart-icon text-danger">
+			                    			<i class="fas fa-heart text-danger"></i>
 			                    		</a>	                    		
 		                    		</th:block>
 		                    	</div>

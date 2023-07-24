@@ -1,4 +1,4 @@
-<div ng-controller="ctrl-order">
+<div ng-controller="ctrl-waitingForShipping">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card card-primary shadow">
@@ -45,7 +45,7 @@
 						<td>{{item.discountId}}</td>
 						<td>{{item.paypalOrderId}}</td>
 						<td>{{item.paypalOrderStatus}}</td>
-						<td><span class="status-confirm">{{item.status}}</span></td>
+						<td><span class="status-waiting">{{item.status}}</span></td>
 						<td>
 							<button ng-click="update(item.id)" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
 								title="Duyệt">
