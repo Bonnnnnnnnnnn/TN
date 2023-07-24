@@ -8,12 +8,6 @@ app.config(function($routeProvider){
 	.when("/product", {
 		templateUrl: "/assets/admin/layout/product.html"
 	})
-	.when("/discount", {
-		templateUrl: "/assets/admin/layout/discount.html"
-	})
-	.when("/report", {
-		templateUrl: "/assets/admin/layout/report.html"
-	})
 	.when("/authority", {
 		templateUrl: "/assets/admin/layout/authority.html"
 	})
