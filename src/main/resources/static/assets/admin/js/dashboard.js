@@ -41,6 +41,7 @@ app.controller("ctrl-dashboard", function($scope, $http, $filter){
 	// Hàm để thay đổi giá trị trong thẻ h3 (totalprice)
         function updateTotalPriceOrder(totalPriceOrder) {
             const h3Element = document.getElementById('totalPriceOrder');
+            
             h3Element.textContent = totalPriceOrder;
         }
 
@@ -66,24 +67,38 @@ fetch('/viewVistor') // Đảm bảo rằng đường dẫn '/viewVistor' phù h
 	
 	
 	
-	function updateTotalPriceOrder(totalPriceOrder) {
+
+
+
+
+// Hàm để thay đổi giá trị trong thẻ h3 (totalprice)
+function updateTotalPriceOrder(totalPriceOrder) {
     const h3Element = document.getElementById('totalPriceOrder');
-    
-    // Chuyển đổi totalPriceOrder thành số
-    const totalPrice = parseFloat(totalPriceOrder);
-    
-    // Kiểm tra nếu totalPrice là một số hợp lệ
-    if (!isNaN(totalPrice)) {
-        // Định dạng số và chia thành phần nghìn bằng dấu '.'
-        const formattedPrice = totalPrice.toLocaleString('vi-VN');
-        
-        // Cập nhật giá trị trong thẻ h3
-        h3Element.textContent = formattedPrice + " đ";
+
+    // Kiểm tra nếu totalPriceOrder là null hoặc không có giá trị
+    if (totalPriceOrder === null || totalPriceOrder === '') {
+        h3Element.textContent = '0';
     } else {
-        // Nếu totalPrice không hợp lệ, hiển thị thông báo lỗi
-        h3Element.textContent = 'Error: Invalid total price';
+        // Chuyển đổi totalPriceOrder thành số
+        const totalPrice = parseFloat(totalPriceOrder);
+
+        // Kiểm tra nếu totalPrice là một số hợp lệ
+        if (!isNaN(totalPrice)) {
+            // Định dạng số và chia thành phần nghìn bằng dấu '.'
+            const formattedPrice = totalPrice.toLocaleString('vi-VN');
+
+            // Cập nhật giá trị trong thẻ h3
+            h3Element.textContent = formattedPrice + " đ";
+        } else {
+            // Nếu totalPrice không hợp lệ, hiển thị số 0
+            h3Element.textContent = '0 đ';
+        }
     }
 }
+
+
+
+
 
 // Gọi API để lấy tổng số lượng đơn hàng và cập nhật giá trị trong thẻ h3
 fetch('/totalPriceOrder') // Đảm bảo rằng đường dẫn '/totalPriceOrder' phù hợp với API của bạn
