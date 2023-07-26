@@ -29,9 +29,6 @@ app.config(function($routeProvider){
 	.when("/cancelled", {
 		templateUrl: "/assets/admin/layout/cancelled.html"
 	})
-	.when("/dashboard", {
-		templateUrl: "/assets/admin/layout/dashboard.html"
-	})
 	.otherwise({
 		redirectTo: ""
 	});
