@@ -590,3 +590,32 @@ NAVBAR */ */
 		min-width: 420px;
 	}
 }
+
+.status-confirm{
+	background: linear-gradient(45deg, #808080, #555555);
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	display: inline-block;
+}
+.status-waiting{
+	background: linear-gradient(to right, #fbc02d, #f57c00);
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 5px;
+	display: inline-block;
+}
+.status-success{
+	background: linear-gradient(to right, #4caf50, #009688);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.status-cancel{
+	background: linear-gradient(to right, #e57373, #c62828);
+ 	color: #fff;
+ 	padding: 5px 10px;
+ 	border-radius: 5px;
+ 	display: inline-block;
+}

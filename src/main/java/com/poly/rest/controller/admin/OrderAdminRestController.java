@@ -67,6 +67,13 @@ public class OrderAdminRestController {
         return ResponseEntity.ok(orders);
     }
     
+ // Get all order All
+    @GetMapping("/rest/orderAll")
+    public ResponseEntity<List<Order>> getOrderAll() {
+        List<Order> orders = orderService.findAll();
+        return ResponseEntity.ok(orders);
+    }
+    
     //Xác nhận đơn hàng
     @PutMapping("/rest/orderConfirm/{id}")
 	public ResponseEntity<Order> put(@PathVariable("id") Long id, @RequestBody Order order) {
@@ -90,4 +97,19 @@ public class OrderAdminRestController {
 		}
 		return ResponseEntity.notFound().build();
 	}
+    
+    @GetMapping("totalOrder")
+    public long getTotalOrder() {
+    	return orderService.getTotalOrder();
+    }
+    
+    @GetMapping("totalPriceOrder")
+    public float getTotaPricelOrder() {
+    	return orderService.getTotalPriceOrder();
+    }
+    
+    @GetMapping("viewVistor")
+    public float getViewVistor() {
+    	return orderService.getViewVisitor();
+    }
 }

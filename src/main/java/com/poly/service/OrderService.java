@@ -34,5 +34,11 @@ public interface OrderService {
 	//Admin: Hiển thị ds order đã hủy
 	List<Order> findByCancelled();
 	
+	long getTotalOrder();
+	
 	Order update(Order order);
+	
+	float getTotalPriceOrder();
+	
+	Integer getViewVisitor();
 }
