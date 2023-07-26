@@ -41,8 +41,6 @@ public class Account implements Serializable{
 	@Column(name = "Photo")
 	private String photo;
 	
-	@Column(name = "auth_provider")
-	private String auth_provider;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
