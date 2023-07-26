@@ -155,5 +155,4 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findByCancelled() {
 		return dao.findByCancelled();
 	}
-
 }

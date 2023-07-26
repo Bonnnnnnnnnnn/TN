@@ -40,8 +40,6 @@ public class OrderController {
 		//Hiển thị số lượng yêu thích
   		int totalProducts = TotalProductsUtil.getTotalProducts();
   		model.addAttribute("totalProducts", totalProducts);
-  		
-  		
 		
 		return "user/order/list";
 	}

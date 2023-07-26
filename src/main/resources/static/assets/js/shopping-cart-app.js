@@ -1,27 +1,6 @@
 const app = angular.module("shopping-cart", []);
 
 app.controller("shopping-cart-ctrl", function ($scope, $http) {
-	
-
-	 // Function to update the views in the Visitor table
-    $scope.updateViews = function () {
-        // Get the current visitor ID from some source (e.g., session or cookies)
-        // Replace 'YOUR_VISITOR_ID' with the actual way of getting the visitor ID.
-        var visitorId = '1';
-
-        // Send a PUT request to update the views
-        $http.put(`/rest/visitor/${visitorId}`, { views: 1 })
-            .then(function (response) {
-                console.log("Views updated successfully");
-            })
-            .catch(function (error) {
-                console.error("Error updating views", error);
-            });
-    };
-
-    // Call the updateViews function when the page loads
-    $scope.updateViews();
-	
   // Quản lý sản phẩm được yêu thích
 	var $like = $scope.like = {
 	//	items: [],
@@ -56,10 +35,6 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 	        event.preventDefault();
 	    }
 	};
-	
-	
-	
-	
   
   	// Thêm sự kiện tăng giảm số lượng
 	$scope.increaseQuantity = function(item) {

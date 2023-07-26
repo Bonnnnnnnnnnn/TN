@@ -29,9 +29,6 @@ app.config(function($routeProvider){
 	.when("/order_Cancel", {
 		templateUrl: "/assets/admin/layout/order_Cancel.html"
 	})
-	.when("/dashboard", {
-		templateUrl: "/assets/admin/layout/dashboard.html"
-	})
 	.otherwise({
 		redirectTo: ""
 	});

@@ -108,4 +108,5 @@ public class OrderAdminRestController {
 	public List<OrderDetail> getOrderDetail(@PathVariable("id")Long id){
 		return orderDetailDao.findByOrder(id);
 	}
+
 }
