@@ -2,6 +2,9 @@ let pathOrder = "http://localhost:8080/rest";
 app.controller("ctrl-order", function($scope, $http, $filter){
 	$scope.items = [];
 	$scope.form = {};
+	$scope.order = {};
+	$scope.orderTotalPrice = {};
+	
     $scope.selectedCreatedDate = '';
 	
 	// Hàm xử lý sự kiện khi giá trị của trường input thay đổi
@@ -126,4 +129,38 @@ app.controller("ctrl-order", function($scope, $http, $filter){
   		$scope.currentPage = $scope.totalPages();
 	};
 	
+	$scope.order = null;
+	//Chi tiết hóa đơn
+	$scope.load_orderDetail = function(id) {
+		if ($scope.order) {
+            $scope.order = null;
+        }
+        var url = `${pathOrder}/order/detail/${id}`;
+        $scope.load_list_orderDetail(id);
+        $http.get(url).then(resp => {
+            $scope.order = resp.data;
+            console.log($scope.order);
+            console.log("Order Sucess", resp);
+        }).catch(error => {
+            console.log("Order Error", error);
+        });
+    }
+    
+    $scope.load_list_orderDetail = function(id) {
+        var url = `${pathOrder}/order/listDetail/${id}`;
+        $http.get(url).then(resp => {
+            $scope.orderTotalPrice(resp.data);
+            $scope.list_orderDetail = resp.data;
+            console.log("List OrderDetail Sucess", resp);
+        }).catch(error => {
+            console.log("List OrderDetail Error", error);
+        });
+    };
+    
+     $scope.orderTotalPrice = function(data) {
+        $scope.totalPrice = 0;
+        data.forEach(element => {
+            $scope.totalPrice += (element.price * element.quantity);
+        });
+    };
 });
