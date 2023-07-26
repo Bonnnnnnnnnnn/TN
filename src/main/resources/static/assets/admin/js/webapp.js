@@ -33,7 +33,7 @@ app.config(function($routeProvider){
 		templateUrl: "/assets/admin/layout/dashboard.html"
 	})
 	.otherwise({
-		redirectTo: ""
+		redirectTo: "/dashboard"
 	});
 });
 

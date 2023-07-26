@@ -36,5 +36,11 @@ public interface OrderService {
 	List<Order> findByCancelled();
 	
 	Order update(Order order);
+	
+	long getTotalOrder();
+	
+	float getTotalPriceOrder();
+	
+	Integer getViewVisitor();
 
 }
