@@ -51,7 +51,7 @@
 								title="Duyệt">
 								<i class="fa-sharp fa-solid fa-circle-check"></i>
 							</button> 
-							<a ng-click="load_orderDetail(item.id)" href="#scrollspyHeading1" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
+							<a ng-click="load_orderDetail(item.id)" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
 								title="Xem chi tiết"> 
 								<i class="fa-sharp fa-solid fa-circle-info"></i>
 							</a> 
@@ -81,7 +81,7 @@
 	</div>
 	
 	<br id="scrollspyHeading1" data-bs-spy="scroll">
-	<div class="mt-30px bg-light pt-1" ng-show="order != null">
+	<div class="mt-30px bg-light pt-1" ng-show="order">
         <div class="mb-3 mt-20px pl-35px">
             <h3>Chi Tiết Đơn Hàng Số {{order.id}}</h3>
         </div>
@@ -117,7 +117,7 @@
                         <table>
                             <tbody>
                                 <tr ng-repeat="ord in list_orderDetail">
-                                    <td><img src="assets/img/product/{{ord.product.image}}" alt="{{ord.product.name}}" width="107" height="107" style="border:0; object-fit: contain;"></td>
+                                    <td><img src="/assets/img/product/{{ord.product.image}}" width="107" height="107" style="border:0; object-fit: contain;"></td>
                                     <td>{{ord.product.name}}</td>
                                     <td>
                                         <code>Số Lượng: </code><span class="text-success">{{ord.quantity}}
