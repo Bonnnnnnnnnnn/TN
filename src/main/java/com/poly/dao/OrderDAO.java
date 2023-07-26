@@ -35,4 +35,16 @@ public interface OrderDAO extends JpaRepository<Order, Long>{
 	//Admin: Hiển thị ds order đã hủy
 	@Query(value = "select * from Orders where Status = N'Đã hủy' ", nativeQuery = true)
 	List<Order> findByCancelled();
+	
+	@Query(value = "SELECT COUNT(*) AS TotalOrders FROM Orders; ", nativeQuery = true)
+	long getTotalOrder();
+	
+	@Query(value = "SELECT SUM(od.Price) as totalPriceOrder \r\n"
+			+ "FROM Orders o \r\n"
+			+ "INNER JOIN OrderDetails od ON o.Id = od.OrderId \r\n"
+			+ "WHERE o.Status = N'Đã giao';", nativeQuery = true)
+	float getTotalPriceOrder();
+	
+	@Query(value = "SELECT views FROM Visitors; ", nativeQuery = true)
+	Integer getViewVisitor();
 }
