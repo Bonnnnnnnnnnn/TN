@@ -99,12 +99,12 @@ public class OrderAdminRestController {
     
     //Hóa đơn chi tiết order Confirm
    
-    @GetMapping("/rest/orderConfirm/detail/{id}")
+    @GetMapping("/rest/order/detail/{id}")
 	public Order getDetail(@PathVariable("id")Long id){
 		return orderService.findById(id);
 	}
     
-    @GetMapping("/rest/orderConfirm/listDetail/{id}")
+    @GetMapping("/rest/order/listDetail/{id}")
 	public List<OrderDetail> getOrderDetail(@PathVariable("id")Long id){
 		return orderDetailDao.findByOrder(id);
 	}

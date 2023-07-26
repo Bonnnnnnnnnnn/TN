@@ -1,10 +1,7 @@
-let pathOrder = "http://localhost:8080/rest";
-app.controller("ctrl-order", function($scope, $http, $filter){
+let pathDelivered = "http://localhost:8080/rest";
+app.controller("ctrl-delivered", function($scope, $http, $filter){
 	$scope.items = [];
 	$scope.form = {};
-	$scope.order = {};
-	$scope.orderTotalPrice = {};
-	
     $scope.selectedCreatedDate = '';
 	
 	// Hàm xử lý sự kiện khi giá trị của trường input thay đổi
@@ -16,79 +13,31 @@ app.controller("ctrl-order", function($scope, $http, $filter){
 		});	
     };
     
-    // Hiển thị danh sách order đợi xác nhận
-	$scope.load_orderConfirm = function() {
-		var url = `${pathOrder}/orderConfirm`;
+    // Hiển thị danh sách order đang giao
+	$scope.load_delivered = function() {
+		var url = `${pathDelivered}/delivered`;
 		$http.get(url).then(resp => {
 			$scope.items = resp.data;
 			console.log("Success", resp)
 		}).catch(errors => {
 			console.log("Error", errors)
 		});
-	};
+	}
+
+	$scope.update = function() {
+		var item = angular.copy($scope.form);
+		var url = `${pathOrder}/order/${$scope.form.id}`;
+		$http.put(url, item).then(resp => {
+			var index = $scope.items.findIndex(item => item.id == $scope.form.id);
+			$scope.items[index] = resp.data;
+			console.log("Success", resp);
+		}).catch(error => {
+			console.log("Error", error);
+		});
+	}
 	
-	$scope.update = function(id) {
-		var xacNhan = confirm("Bạn có muốn xác nhận không?");
-		if (xacNhan) {
-			// Find the order in $scope.items by its ID
-	        const orderToUpdate = $scope.items.find(item => item.id === id);
-	        if (!orderToUpdate) {
-	            console.error('Order not found.');
-	            return;
-	        }
-	
-	        // Set the new status
-	        orderToUpdate.status = 'Đang giao';
-	
-	        // Send the updated order to the server
-	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
-	            .then(function(response) {
-	                console.log('Order updated successfully:', response.data);
-	                alert("Duyệt thành công!");
-	                $scope.load_orderConfirm();
-	            })
-	            .catch(function(error) {
-	                console.error('Error updating order:', error);
-	                alert("Duyệt thất bại!");
-	            });
-	    }else{
-			// Người dùng chọn "Cancel", không thực hiện xóa
-			console.log("Cancel");
-		}
-	};
-	
-	$scope.cancel = function(id) {
-		var xacNhan = confirm("Bạn có muốn huỷ không?");
-		if (xacNhan) {
-			// Find the order in $scope.items by its ID
-	        const orderToUpdate = $scope.items.find(item => item.id === id);
-	        if (!orderToUpdate) {
-	            console.error('Order not found.');
-	            return;
-	        }
-	
-	        // Set the new status
-	        orderToUpdate.status = 'Đã hủy';
-	
-	        // Send the updated order to the server
-	        $http.put(`/rest/orderConfirm/${id}`, orderToUpdate)
-	            .then(function(response) {
-	                console.log('Order updated successfully:', response.data);
-	                alert("Hủy thành công!");
-	                $scope.load_orderConfirm();
-	            })
-	            .catch(function(error) {
-	                console.error('Error updating order:', error);
-	                alert("Hủy thất bại!");
-	            });
-	    }else{
-			// Người dùng chọn "Cancel", không thực hiện xóa
-			console.log("Cancel");
-		}
-	};
-	
-	$scope.load_orderConfirm();
-	
+	$scope.load_delivered();
+
 	// Pagination
     $scope.currentPage = 1; // Khởi tạo trang hiện tại là trang 1
     $scope.itemsPerPage = 5; // Thiết lập số sản phẩm hiển thị trên mỗi trang
@@ -129,13 +78,14 @@ app.controller("ctrl-order", function($scope, $http, $filter){
   		$scope.currentPage = $scope.totalPages();
 	};
 	
+	
 	$scope.order = null;
 	//Chi tiết hóa đơn
 	$scope.load_orderDetail = function(id) {
 		if ($scope.order) {
             $scope.order = null;
         }
-        var url = `${pathOrder}/orderConfirm/detail/${id}`;
+        var url = `${pathDelivered}/order/detail/${id}`;
         $scope.load_list_orderDetail(id);
         $http.get(url).then(resp => {
             $scope.order = resp.data;
@@ -147,7 +97,7 @@ app.controller("ctrl-order", function($scope, $http, $filter){
     }
     
     $scope.load_list_orderDetail = function(id) {
-        var url = `${pathOrder}/orderConfirm/listDetail/${id}`;
+        var url = `${pathDelivered}/order/listDetail/${id}`;
         $http.get(url).then(resp => {
             $scope.orderTotalPrice(resp.data);
             $scope.list_orderDetail = resp.data;
