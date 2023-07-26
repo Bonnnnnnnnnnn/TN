@@ -156,4 +156,19 @@ public class OrderServiceImpl implements OrderService{
 		return dao.findByCancelled();
 	}
 
+	@Override
+	public long getTotalOrder() {
+		return dao.getTotalOrder();
+	}
+
+	@Override
+	public float getTotalPriceOrder() {
+		// TODO Auto-generated method stub
+		return dao.getTotalPriceOrder();
+	}
+
+	@Override
+	public Integer getViewVisitor() {
+		return dao.getViewVisitor();
+	}
 }
