@@ -12,8 +12,7 @@
 	<title>AdminHub</title>
 </head>
 <body>
-	<div  ng-controller="ctrl-order">
-	
+
 		<!-- MAIN -->
 		<main>
 			<div class="head-title">
@@ -46,7 +45,7 @@
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						 <h3 id="visitorCount">0</h3>
+						<h3>2834</h3>
 						<p>Visitors</p>
 					</span>
 				</li>
@@ -76,31 +75,46 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="item in getCurrentItems()" >
+							<tr>
 								<td>
 									<img src="/assets/admin/img/people.png">
-									<p>{{item.account.username}}</p>
+									<p>John Doe</p>
 								</td>
-								<td>{{item.createDate}}</td>
-								<td><span class="status completed">{{item.status}}</span></td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
 							</tr>
-							<tr ng-repeat="item in getCurrentItems()">
+							<tr>
 								<td>
 									<img src="/assets/admin/img/people.png">
-									<p>{{item.account.username}}</p>
+									<p>John Doe</p>
 								</td>
-								<td>{{item.createDate}}</td>
-								<td><span class="status pending">{{item.status}}</span></td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
 							</tr>
-							<tr ng-repeat="item in getCurrentItems()">
+							<tr>
 								<td>
 									<img src="/assets/admin/img/people.png">
-									<p>{{item.account.username}}</p>
+									<p>John Doe</p>
 								</td>
-								<td>{{item.createDate}}</td>
-								<td><span class="status process">{{item.status}}</span></td>
+								<td>01-10-2021</td>
+								<td><span class="status process">Process</span></td>
 							</tr>
-
+							<tr>
+								<td>
+									<img src="/assets/admin/img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="/assets/admin/img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -135,11 +149,11 @@
 				</div>
 			</div>
 		</main>
-		</div>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
 	
 
+	<script src="dashboard.js"></script>
 </body>
 </html>
