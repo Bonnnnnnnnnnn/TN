@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.poly.dao.AccountDAO;
 import com.poly.model.Account;
-import com.poly.repository.AccountRepository;
+
 import com.poly.service.AccountService;
 
 @Controller
@@ -23,7 +24,7 @@ public class SecurityController {
 	AccountService accountService;
 	
 	@Autowired
-	private AccountRepository accountRepository; // Ghi chú: AccountRepository là một interface để tương tác với bảng "account" trong cơ sở dữ liệu
+	private AccountDAO accountDao; // Ghi chú: AccountRepository là một interface để tương tác với bảng "account" trong cơ sở dữ liệu
 
 	
 	@RequestMapping("/security/login/form")
