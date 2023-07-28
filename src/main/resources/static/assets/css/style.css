@@ -188,66 +188,52 @@ ol {
 /* Preloder */
 
 #preloder {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	z-index: 999999;
-	background: #000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  background: #000;
 }
 
 .loader {
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -13px;
-	margin-left: -13px;
-	border-radius: 60px;
-	animation: loader 0.8s linear infinite;
-	-webkit-animation: loader 0.8s linear infinite;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px; /* Adjusted for better centering */
+  margin-left: -20px; /* Adjusted for better centering */
+  border-radius: 50%; /* Use 50% for a circle */
+  border: 4px solid transparent; /* Remove initial border color */
+  border-top-color: #f44336; /* Set initial border color */
+  animation: loader 1.2s linear infinite; /* Increased animation time */
 }
 
 @keyframes loader {
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-	50% {
-		-webkit-transform: rotate(180deg);
-		transform: rotate(180deg);
-		border: 4px solid #673ab7;
-		border-left-color: transparent;
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
+  0% {
+    transform: rotate(0deg);
+    border-top-color: #f44336;
+  }
+  25% {
+    transform: rotate(90deg); /* Changed keyframe positions */
+    border-top-color: #673ab7;
+  }
+  50% {
+    transform: rotate(180deg);
+    border-top-color: #f44336;
+  }
+  75% {
+    transform: rotate(270deg); /* Changed keyframe positions */
+    border-top-color: #673ab7;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-top-color: #f44336;
+  }
 }
 
-@-webkit-keyframes loader {
-	0% {
-		-webkit-transform: rotate(0deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-	50% {
-		-webkit-transform: rotate(180deg);
-		border: 4px solid #673ab7;
-		border-left-color: transparent;
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-		border: 4px solid #f44336;
-		border-left-color: transparent;
-	}
-}
 
 /*---------------------
   Header
