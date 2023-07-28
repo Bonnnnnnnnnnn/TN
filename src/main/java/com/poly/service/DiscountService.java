@@ -8,5 +8,5 @@ public interface DiscountService {
 
     Discount findByCode(String code);
 
-    Discount findById(Long id);
+    Discount findById(Integer id);
 }

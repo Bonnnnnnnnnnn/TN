@@ -100,7 +100,7 @@ CREATE TABLE [dbo].[Discount](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Code] [varchar](10) NOT NULL,
-	[Price] [int] NOT NULL,
+	[Price] [float] NOT NULL,
 	[Quality] [int] NOT NULL,
 	[ApplyDay] [date] NOT NULL,
 	[Expiration] [date] NOT NULL,

@@ -37,8 +37,9 @@ public class Order implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
 	private Date createDate= new Date();
-	@Column(name = "Discountid")
-	private Long discountId;
+	@ManyToOne
+	@JoinColumn(name = "Discountid")
+	private Discount discountId;
 	@Column(name = "Status")
 	private String status = "Đợi xác nhận";
 	@Column(name = "Paypalorderid")
