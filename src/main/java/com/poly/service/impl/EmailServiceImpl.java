@@ -7,15 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import com.poly.model.Account;
 import com.poly.model.MailInfo;
 import com.poly.service.EmailService;
 
 @Service
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 	
 	@Autowired
-	JavaMailSender sender;
+	private JavaMailSender sender;
+	
+	
 
 	@Override
 	public void send(MailInfo mail) throws MessagingException {
@@ -26,7 +31,7 @@ public class EmailServiceImpl implements EmailService{
 		helper.setSubject(mail.getSubject());
 		helper.setText(mail.getBody(), true);
 		
-		// gửi message đến SMTP server
+		// Gửi message đến SMTP server
 		sender.send(message);
 	}
 
@@ -34,5 +39,6 @@ public class EmailServiceImpl implements EmailService{
 	public void send(String to, String subject, String body) throws MessagingException {
 		this.send(new MailInfo(to, subject, body));
 	}
+	
 
 }

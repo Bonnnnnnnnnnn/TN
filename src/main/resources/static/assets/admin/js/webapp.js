@@ -32,6 +32,9 @@ app.config(function($routeProvider){
 	.when("/dashboard", {
 		templateUrl: "/assets/admin/layout/dashboard.html"
 	})
+	.when("/discount", {
+		templateUrl: "/assets/admin/layout/discount.html"
+	})
 	.otherwise({
 		redirectTo: "/dashboard"
 	});

@@ -15,7 +15,7 @@ import java.util.Date;
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private String name;
     private String code;
     private Double price;
