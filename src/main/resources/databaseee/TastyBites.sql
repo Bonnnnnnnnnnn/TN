@@ -553,18 +553,5 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
-SELECT COUNT(*) AS TotalOrders
-    FROM dbo.Orders;
-
-CREATE PROCEDURE CountTotalOrders
-AS
-BEGIN
-    SELECT COUNT(*) AS TotalOrders
-    FROM dbo.Orders;
-END
 
 
-SELECT SUM(od.Price) as totalPriceOrder 
-FROM Orders o 
-INNER JOIN OrderDetails od ON o.Id = od.OrderId 
-WHERE o.Status = N'Đã giao';

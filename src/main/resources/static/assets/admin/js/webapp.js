@@ -17,23 +17,23 @@ app.config(function($routeProvider){
 	.when("/inventory-management", {
 		templateUrl: "/assets/admin/layout/inventory-management.html"
 	})
-	.when("/order", {
-		templateUrl: "/assets/admin/layout/order.html"
+	.when("/order_Confirm", {
+		templateUrl: "/assets/admin/layout/order_Confirm.html"
 	})
-	.when("/waitingForShipping", {
-		templateUrl: "/assets/admin/layout/waitingForShipping.html"
+	.when("/order_Shipping", {
+		templateUrl: "/assets/admin/layout/order_Shipping.html"
 	})
-	.when("/delivered", {
-		templateUrl: "/assets/admin/layout/delivered.html"
+	.when("/order_Success", {
+		templateUrl: "/assets/admin/layout/order_Success.html"
 	})
-	.when("/cancelled", {
-		templateUrl: "/assets/admin/layout/cancelled.html"
+	.when("/order_Cancel", {
+		templateUrl: "/assets/admin/layout/order_Cancel.html"
 	})
 	.when("/dashboard", {
 		templateUrl: "/assets/admin/layout/dashboard.html"
 	})
 	.otherwise({
-		redirectTo: ""
+		redirectTo: "/dashboard"
 	});
 });
 

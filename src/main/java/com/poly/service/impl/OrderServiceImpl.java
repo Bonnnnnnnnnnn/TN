@@ -155,7 +155,7 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> findByCancelled() {
 		return dao.findByCancelled();
 	}
-
+	
 	@Override
 	public long getTotalOrder() {
 		return dao.getTotalOrder();
@@ -171,4 +171,5 @@ public class OrderServiceImpl implements OrderService{
 	public Integer getViewVisitor() {
 		return dao.getViewVisitor();
 	}
+
 }
