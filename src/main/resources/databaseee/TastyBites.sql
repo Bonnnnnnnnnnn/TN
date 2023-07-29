@@ -555,3 +555,6 @@ ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
 
 
+SELECT * FROM Products p INNER JOIN Favourites f ON p.Id = f.ProductId WHERE Username = ?1 AND IsLiked = 1
+
+SELECT p FROM Products p WHERE p.Name like %?1% or p.Id like %?2%

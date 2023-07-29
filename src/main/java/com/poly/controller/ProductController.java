@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -122,5 +123,30 @@ public class ProductController {
 	 		
 		return "user/product/list";
 	}
+	
+	
+	// Search by ProductName or productId
+		@RequestMapping("/product/list/search")
+		public String searchProductByNameOrId(@RequestParam("keyword") String kw, @RequestParam("keyword") String kw1, Model model) {
+			List<Product> products = productService.searchByProductNameOrId(kw, kw1);
+			for(int i = 0; i < products.size(); ++i) {
+				if(products.get(i).getProductQuantity() == 0) {
+					products.remove(products.get(i));
+				}
+			}
+			if(kw.equals("")) {
+				model.addAttribute("message", "Please input keyword to find product");
+				model.addAttribute("items", productService.findAll());
+				return "user/product/list";
+			}else if(products.isEmpty()) {
+				model.addAttribute("message", "The product not found");
+				model.addAttribute("items", productService.findAll());
+				return "user/product/list";
+			}
+			model.addAttribute("items", products);
+			return "user/product/list";
+		}
 
+		
+		
 }

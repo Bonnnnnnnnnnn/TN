@@ -61,9 +61,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> searchByProductNameOrId(String productName, String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> searchByProductNameOrId(String name, String id) {
+		return productDAO.searchByProductNameOrId(name, id);
 	}
 
 	@Override

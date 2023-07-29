@@ -104,6 +104,14 @@ public class OrderAdminRestController {
 		return ResponseEntity.notFound().build();
 	}
     
+    @GetMapping("/rest/orders-by-month/{year}/{month}")
+    public ResponseEntity<List<Order>> getOrdersByMonth(@PathVariable("year") int year, @PathVariable("month") int month) {
+        List<Order> orders = orderService.getOrdersByMonth(year, month);
+        return ResponseEntity.ok(orders);
+    }
+    
+    
+    
     //Hóa đơn chi tiết order Confirm
    
     @GetMapping("/rest/order/detail/{id}")

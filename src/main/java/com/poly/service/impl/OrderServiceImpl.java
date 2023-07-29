@@ -172,4 +172,9 @@ public class OrderServiceImpl implements OrderService{
 		return dao.getViewVisitor();
 	}
 
+	@Override
+	public List<Order> getOrdersByMonth(int year, int month) {
+	    return dao.getOrdersByMonth(year, month);
+	}
+
 }

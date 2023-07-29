@@ -42,5 +42,7 @@ public interface OrderService {
 	float getTotalPriceOrder();
 	
 	Integer getViewVisitor();
+	
+	List<Order> getOrdersByMonth(int year, int month);
 
 }

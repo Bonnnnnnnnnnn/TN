@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.poly.model.Order;
 
@@ -47,4 +48,13 @@ public interface OrderDAO extends JpaRepository<Order, Long>{
 	
 	@Query(value = "SELECT views FROM Visitors; ", nativeQuery = true)
 	Integer getViewVisitor();
+	
+	
+	// Truy vấn để lấy danh sách các đơn hàng trong một tháng cụ thể
+    @Query(value = "SELECT * FROM Orders WHERE YEAR(CreateDate) = :year AND MONTH(CreateDate) = :month", nativeQuery = true)
+    List<Order> getOrdersByMonth(@Param("year") int year, @Param("month") int month);
+
+	
+	
+	
 }

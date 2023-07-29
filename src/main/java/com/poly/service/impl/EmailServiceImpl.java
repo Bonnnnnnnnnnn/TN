@@ -39,6 +39,12 @@ public class EmailServiceImpl implements EmailService {
 	public void send(String to, String subject, String body) throws MessagingException {
 		this.send(new MailInfo(to, subject, body));
 	}
+
+	@Override
+	public void sendResetPasswordEmail(Account account) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
