@@ -45,7 +45,7 @@
 			                <td class="align-middle">[[${order.address}]]</td>      
 			                <td class="align-middle">[[${order.paypalOrderId}]]</td>
 			                <td class="align-middle">[[${order.paypalOrderStatus}]]</td>
-			                <td class="align-middle">[[${order.discountId}]]</td>
+			                <td class="align-middle">[[${order.discountId?.id}]]</td>
 			                <td class="align-middle">
 				                <!-- Use Thymeleaf's conditional expression to set the appropriate CSS class -->
 				                <span th:class="${order.status == 'Đợi xác nhận' ? 'status-confirm'

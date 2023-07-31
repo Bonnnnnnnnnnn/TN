@@ -193,6 +193,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     purchase() {
       var discountId = document.getElementById('discountId').value;
       var order = angular.copy(this);
+      console.log(order);
       if (discountId) {
       order.discountId = discountId;
       }
@@ -203,7 +204,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       console.log(isPaypal.checked);
         alert("Đặt!");
         $http.post("/rest/checkout", order).then((resp) => {
-            $scope.cart.clear();
+           $scope.cart.clear();
            location.href = resp.data.url;
         }).catch(error=>{
           alert("Đặt hàng lỗi!");

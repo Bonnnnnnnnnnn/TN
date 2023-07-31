@@ -48,31 +48,40 @@ public class OrderController {
 	
 	@RequestMapping("/order/detail/{id}")
 	public String detail(@PathVariable("id") long id, Model model) {
-		List<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
-        
-        //Hiển thị số lượng yêu thích
-  		int totalProducts = TotalProductsUtil.getTotalProducts();
-  		model.addAttribute("totalProducts", totalProducts);
-        
-		var order = orderService.findById(id);
-		Discount discount;
-		if (order.getDiscountId() != null) {
-			discount = discountService.findById(order.getDiscountId());
-		} else {
-			discount = new Discount();
-			discount.setPrice(0.0);
-		}
-		double total = order.getOrderDetails().stream()
-                .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
-                .sum();
-		System.out.println("total : "+total);
-		model.addAttribute("total", total);
-		model.addAttribute("order", order);
-		model.addAttribute("discount", discount);
-		return "user/order/detail";
+	    List<Category> categories = categoryService.findAll();
+	    model.addAttribute("categories", categories);
+
+	    // Hiển thị số lượng yêu thích
+	    int totalProducts = TotalProductsUtil.getTotalProducts();
+	    model.addAttribute("totalProducts", totalProducts);
+
+	    var order = orderService.findById(id);
+	    Discount discount = order.getDiscountId();
+
+	    if (discount == null || discount.getId() == null) {
+	        discount = new Discount();
+	        discount.setPrice(0.0);
+	        discount.setCode("Chưa Áp Dụng Mã !");
+	    }
+	    
+//	    discount = discountService.findById(order.getDiscountId().getId());
+	    double total = order.getOrderDetails().stream()
+	            .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
+	            .sum();
+	    System.out.println("total : " + total);
+	    model.addAttribute("total", total);
+	    
+	    double totalWithShippingFee = total += 15000;
+	    
+	    double newDiscountPrice = (discount.getId() != null) ? totalWithShippingFee - discount.getPrice() : totalWithShippingFee;
+	    model.addAttribute("newDiscountPrice", newDiscountPrice);
+
+	    model.addAttribute("order", order);
+	    model.addAttribute("discount", discount);
+	    return "user/order/detail";
 	}
 
+	
 	@RequestMapping("/order/checkout/success/{id}")
 	public String paymentSuccess(@PathVariable("id") long id, HttpServletRequest request, Model model) {
 		List<Category> categories = categoryService.findAll();
@@ -89,7 +98,7 @@ public class OrderController {
 		orderService.update(out);
 		Discount discount;
 		if (out.getDiscountId() != null) {
-			discount = discountService.findById(out.getDiscountId());
+			discount = discountService.findById(out.getDiscountId().getId());
 		} else {
 			discount = new Discount();
 			discount.setPrice(0.0);
