@@ -30,7 +30,11 @@
                 <div id="error-message-register" class="error-message-register"></div>
                 <div id="success-message-register" class="success-message"></div>
             </form>
+            <div class="loading-overlay" ng-show="loading">
+            <div class="loading-spinner"></div>
         </div>
+        </div>
+        
 
         <div class="form-container login-container">
             <form name="frmtk" id="login-form" th:action="@{/security/login}" method="post">
