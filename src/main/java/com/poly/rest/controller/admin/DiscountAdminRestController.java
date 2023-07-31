@@ -24,7 +24,7 @@ public class DiscountAdminRestController {
     }
 
     @GetMapping("/rest/discount/{id}")
-    public ResponseEntity<Discount> getDiscountById(@PathVariable("id") Long id) {
+    public ResponseEntity<Discount> getDiscountById(@PathVariable("id") Integer id) {
         Discount discount = discountService.findById(id);
         if (discount != null) {
             return ResponseEntity.ok(discount);
@@ -39,7 +39,7 @@ public class DiscountAdminRestController {
     }
 
     @PutMapping("/rest/discount/{id}")
-    public ResponseEntity<Discount> updateDiscount(@PathVariable("id") Long id, @RequestBody Discount discount) {
+    public ResponseEntity<Discount> updateDiscount(@PathVariable("id") Integer id, @RequestBody Discount discount) {
         Discount existingDiscount = discountService.findById(id);
         if (existingDiscount != null) {
             discount.setId(id);
@@ -51,7 +51,7 @@ public class DiscountAdminRestController {
 
     @Transactional
     @DeleteMapping("/rest/discount/{id}")
-    public ResponseEntity<Void> deleteDiscount(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteDiscount(@PathVariable("id") Integer id) {
         Discount existingDiscount = discountService.findById(id);
         if (existingDiscount != null) {
             discountService.deleteDiscount(id);

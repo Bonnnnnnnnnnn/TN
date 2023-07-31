@@ -11,7 +11,7 @@ public interface DiscountService {
 
     Discount findByCode(String code);
 
-    Discount findById(Long id);
+    Discount findById(Integer id);
 
 	List<Discount> getAllDiscounts();
 
@@ -19,5 +19,5 @@ public interface DiscountService {
 
 	Discount updateDiscount(Discount discount);
 
-	void deleteDiscount(Long id);
+	void deleteDiscount(Integer id);
 }
