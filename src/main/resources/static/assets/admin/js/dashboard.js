@@ -4,6 +4,14 @@ app.controller("ctrl-dashboard", function($scope, $http, $filter){
 	$scope.form = {};
     $scope.selectedCreatedDate = '';
 	
+	// Add a variable to track the number of visible rows
+    $scope.visibleRows = 4;
+
+    // Function to show more rows when the "Xem thêm" button is clicked
+    $scope.showMoreRows = function() {
+        $scope.visibleRows = $scope.items.length;
+    };
+	
 	// Hàm xử lý sự kiện khi giá trị của trường input thay đổi
     $scope.handleChange = function() {
         // Định dạng giá trị của $scope.selectedCreatedDate thành yyyy-MM-dd
@@ -52,61 +60,50 @@ app.controller("ctrl-dashboard", function($scope, $http, $filter){
             .catch(error => console.error('Error fetching data:', error));
 	
 	// Hàm để thay đổi giá trị trong thẻ h3 (visitor)
-function updateViewVistor(viewVistor) {
-    const h3Element = document.getElementById('viewVistor');
-    const intValue = parseInt(viewVistor);
-    h3Element.textContent = intValue.toString();
-}
+	function updateViewVistor(viewVistor) {
+	    const h3Element = document.getElementById('viewVistor');
+	    const intValue = parseInt(viewVistor);
+	    h3Element.textContent = intValue.toString();
+	}
 
       // Gọi API để lấy tổng số lượng đơn hàng và cập nhật giá trị trong thẻ h3
-fetch('/viewVistor') // Đảm bảo rằng đường dẫn '/viewVistor' phù hợp với API của bạn
-    .then(response => response.text())
-    .then(data => updateViewVistor(data))
-    .catch(error => console.error('Error fetching data:', error));
+	fetch('/viewVistor') // Đảm bảo rằng đường dẫn '/viewVistor' phù hợp với API của bạn
+	    .then(response => response.text())
+	    .then(data => updateViewVistor(data))
+	    .catch(error => console.error('Error fetching data:', error));
+
+	// Hàm để thay đổi giá trị trong thẻ h3 (totalprice)
+	function updateTotalPriceOrder(totalPriceOrder) {
+	    const h3Element = document.getElementById('totalPriceOrder');
 	
+	    // Kiểm tra nếu totalPriceOrder là null hoặc không có giá trị
+	    if (totalPriceOrder === null || totalPriceOrder === '') {
+	        h3Element.textContent = '0';
+	    } else {
+	        // Chuyển đổi totalPriceOrder thành số
+	        const totalPrice = parseFloat(totalPriceOrder);
 	
+	        // Kiểm tra nếu totalPrice là một số hợp lệ
+	        if (!isNaN(totalPrice)) {
+	            // Định dạng số và chia thành phần nghìn bằng dấu '.'
+	            const formattedPrice = totalPrice.toLocaleString('vi-VN');
 	
+	            // Cập nhật giá trị trong thẻ h3
+	            h3Element.textContent = formattedPrice + " đ";
+	        } else {
+	            // Nếu totalPrice không hợp lệ, hiển thị số 0
+	            h3Element.textContent = '0 đ';
+	        }
+	    }
+	}
 
-
-
-
-
-// Hàm để thay đổi giá trị trong thẻ h3 (totalprice)
-function updateTotalPriceOrder(totalPriceOrder) {
-    const h3Element = document.getElementById('totalPriceOrder');
-
-    // Kiểm tra nếu totalPriceOrder là null hoặc không có giá trị
-    if (totalPriceOrder === null || totalPriceOrder === '') {
-        h3Element.textContent = '0';
-    } else {
-        // Chuyển đổi totalPriceOrder thành số
-        const totalPrice = parseFloat(totalPriceOrder);
-
-        // Kiểm tra nếu totalPrice là một số hợp lệ
-        if (!isNaN(totalPrice)) {
-            // Định dạng số và chia thành phần nghìn bằng dấu '.'
-            const formattedPrice = totalPrice.toLocaleString('vi-VN');
-
-            // Cập nhật giá trị trong thẻ h3
-            h3Element.textContent = formattedPrice + " đ";
-        } else {
-            // Nếu totalPrice không hợp lệ, hiển thị số 0
-            h3Element.textContent = '0 đ';
-        }
-    }
-}
-
-
-
-
-
-// Gọi API để lấy tổng số lượng đơn hàng và cập nhật giá trị trong thẻ h3
-fetch('/totalPriceOrder') // Đảm bảo rằng đường dẫn '/totalPriceOrder' phù hợp với API của bạn
-    .then(response => response.text())
-    .then(data => updateTotalPriceOrder(data))
-    .catch(error => console.error('Error fetching data:', error));
-
+	// Gọi API để lấy tổng số lượng đơn hàng và cập nhật giá trị trong thẻ h3
+	fetch('/totalPriceOrder') // Đảm bảo rằng đường dẫn '/totalPriceOrder' phù hợp với API của bạn
+	    .then(response => response.text())
+	    .then(data => updateTotalPriceOrder(data))
+	    .catch(error => console.error('Error fetching data:', error));
 	
+		
 	
 	 // Function để tăng số lượt truy cập và hiển thị nó trong thẻ có id là "visitorCount"
     
@@ -127,104 +124,74 @@ fetch('/totalPriceOrder') // Đảm bảo rằng đường dẫn '/totalPriceOrd
 	
 	
 	
-		// APEXCHART
-var options = {
-  series: [{
-  name: 'series1',
-  data: [31, 40, 28, 51, 42, 109, 100]
-}, {
-  name: 'series2',
-  data: [11, 32, 45, 32, 34, 52, 41]
-}],
-  chart: {
-  height: 350,
-  type: 'area'
-},
-dataLabels: {
-  enabled: false
-},
-stroke: {
-  curve: 'smooth'
-},
-xaxis: {
-  type: 'datetime',
-  categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-},
-tooltip: {
-  x: {
-    format: 'dd/MM/yy HH:mm'
-  },
-},
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
-
-
-
-// MENU
-const allMenu = document.querySelectorAll('main .content-data .head .menu');
-
-allMenu.forEach(item=> {
-	const icon = item.querySelector('.icon');
-	const menuLink = item.querySelector('.menu-link');
-
-	icon.addEventListener('click', function () {
-		menuLink.classList.toggle('show');
-	})
-})
-
-
-
-window.addEventListener('click', function (e) {
-	if(e.target !== imgProfile) {
-		if(e.target !== dropdownProfile) {
-			if(dropdownProfile.classList.contains('show')) {
-				dropdownProfile.classList.remove('show');
-			}
-		}
-	}
-
+	// APEXCHART
+	var options = {
+	  series: [{
+	  name: 'series1',
+	  data: [31, 40, 28, 51, 42, 109, 100]
+	}, {
+	  name: 'series2',
+	  data: [11, 32, 45, 32, 34, 52, 41]
+	}],
+	  chart: {
+	  height: 350,
+	  type: 'area'
+	},
+	dataLabels: {
+	  enabled: false
+	},
+	stroke: {
+	  curve: 'smooth'
+	},
+	xaxis: {
+	  type: 'datetime',
+	  categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+	},
+	tooltip: {
+	  x: {
+	    format: 'dd/MM/yy HH:mm'
+	  },
+	},
+	};
+	
+	var chart = new ApexCharts(document.querySelector("#chart"), options);
+	chart.render();
+	
+	
+	
+	// MENU
+	const allMenu = document.querySelectorAll('main .content-data .head .menu');
+	
 	allMenu.forEach(item=> {
 		const icon = item.querySelector('.icon');
 		const menuLink = item.querySelector('.menu-link');
+	
+		icon.addEventListener('click', function () {
+			menuLink.classList.toggle('show');
+		})
+	})
 
-		if(e.target !== icon) {
-			if(e.target !== menuLink) {
-				if (menuLink.classList.contains('show')) {
-					menuLink.classList.remove('show')
+	window.addEventListener('click', function (e) {
+		if(e.target !== imgProfile) {
+			if(e.target !== dropdownProfile) {
+				if(dropdownProfile.classList.contains('show')) {
+					dropdownProfile.classList.remove('show');
 				}
 			}
 		}
+	
+		allMenu.forEach(item=> {
+			const icon = item.querySelector('.icon');
+			const menuLink = item.querySelector('.menu-link');
+	
+			if(e.target !== icon) {
+				if(e.target !== menuLink) {
+					if (menuLink.classList.contains('show')) {
+						menuLink.classList.remove('show')
+					}
+				}
+			}
+		})
 	})
-})
-
-
-	
-	// begin <=> currentPage
-	$scope.prev = function(){
-		if($scope.currentPage > 0){
-			$scope.currentPage -= itemsPerPage;
-		}
-	}
-	$scope.setPage = function(pageNum) {
-        $scope.currentPage = pageNum;
-    };
-    
-    
-    // Lấy các sản phẩm của trang hiện tại
-    $scope.getCurrentItems = function() {
-        var startIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
-        var endIndex = startIndex + $scope.itemsPerPage;
-        return $scope.items.slice(startIndex, endIndex);
-    };
-	
-	$scope.setPageFirst = function() {
-  		$scope.currentPage = 1;
-	};
-
-	$scope.setPageLast = function() {
-  		$scope.currentPage = $scope.totalPages();
-	};
 	
 });

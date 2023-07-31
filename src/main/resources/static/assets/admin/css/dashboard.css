@@ -47,7 +47,17 @@ body {
 }
 
 
-
+.viewMore {
+	margin: 0 auto;
+	background-color: #1cc88a;
+	color: #ffffff;
+	font-size: 18px;
+}
+.viewMore:hover {
+	background-color: #1cc88a;
+	color: #ffffff;
+	font-size: 18px;
+}
 
 
 /* /* SIDEBAR
