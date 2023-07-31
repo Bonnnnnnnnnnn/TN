@@ -70,8 +70,10 @@ public class OrderController {
 	            .sum();
 	    System.out.println("total : " + total);
 	    model.addAttribute("total", total);
-
-	    double newDiscountPrice = (discount.getId() != null) ? total - discount.getPrice() : total;
+	    
+	    double totalWithShippingFee = total += 15000;
+	    
+	    double newDiscountPrice = (discount.getId() != null) ? totalWithShippingFee - discount.getPrice() : totalWithShippingFee;
 	    model.addAttribute("newDiscountPrice", newDiscountPrice);
 
 	    model.addAttribute("order", order);
