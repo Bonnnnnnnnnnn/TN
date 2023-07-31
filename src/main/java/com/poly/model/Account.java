@@ -38,6 +38,10 @@ public class Account implements Serializable{
 	@Column(name = "Email")
 	private String email;
 	
+	
+	@Column(name = "Phone")
+	private String phone;
+	
 	@Column(name = "Photo")
 	private String photo;
 	
