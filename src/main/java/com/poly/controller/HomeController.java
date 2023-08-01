@@ -43,13 +43,12 @@ public class HomeController{
 		
 		//Load sản phẩm top 5 sao
 		List<Product> productTop;
+		productTop = productService.findByProductTop();
+		model.addAttribute("productsTop", productTop);
 		
 		//Hiển thị số lượng yêu thích
   		int totalProducts = TotalProductsUtil.getTotalProducts();
   		model.addAttribute("totalProducts", totalProducts);
-		
-		productTop = productService.findByProductTop();
-		model.addAttribute("productsTop", productTop);
         
 		return "/user/home/home";
 	}

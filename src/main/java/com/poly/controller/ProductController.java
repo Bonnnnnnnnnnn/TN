@@ -62,6 +62,11 @@ public class ProductController {
 		List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories); 
         
+        //Load sản phẩm top 5 sao
+      	List<Product> productTop;
+      	productTop = productService.findByProductTop();
+		model.addAttribute("productsTop", productTop);
+		
         //Hiển thị số lượng yêu thích
   		int totalProducts = TotalProductsUtil.getTotalProducts();
   		model.addAttribute("totalProducts", totalProducts);

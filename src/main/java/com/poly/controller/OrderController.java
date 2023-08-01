@@ -96,19 +96,27 @@ public class OrderController {
 		out.setPaypalOrderId(paypalOrderId);
 		out.setPaypalOrderStatus("PAID");
 		orderService.update(out);
-		Discount discount;
-		if (out.getDiscountId() != null) {
-			discount = discountService.findById(out.getDiscountId().getId());
-		} else {
-			discount = new Discount();
-			discount.setPrice(0.0);
-		}
-		double total = out.getOrderDetails().stream()
-                .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
-                .sum();
-		System.out.println("total : "+total);
+		
+		 var order = orderService.findById(id);
+	    Discount discount = order.getDiscountId();
+
+	    if (discount == null || discount.getId() == null) {
+	        discount = new Discount();
+	        discount.setPrice(0.0);
+	        discount.setCode("Chưa Áp Dụng Mã !");
+	    }
+	    double total = order.getOrderDetails().stream()
+	            .mapToDouble(detail -> detail.getQuantity() * detail.getPrice())
+	            .sum();
+	    System.out.println("total : " + total);
+	    model.addAttribute("total", total);
+	    
+	    double totalWithShippingFee = total += 15000;
+	    
+	    double newDiscountPrice = (discount.getId() != null) ? totalWithShippingFee - discount.getPrice() : totalWithShippingFee;
+	    model.addAttribute("newDiscountPrice", newDiscountPrice);
+	    
 		model.addAttribute("order", out);
-		model.addAttribute("total", total);
 		model.addAttribute("discount", discount);
 		return "user/order/detail";
 	}
