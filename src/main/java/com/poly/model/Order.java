@@ -31,13 +31,17 @@ import lombok.NoArgsConstructor;
 public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
 	private Long id;
 	private String address;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Createdate")
 	private Date createDate= new Date();
-	@Column(name = "Discountid")
-	private Long discountId;
+	@ManyToOne
+	@JoinColumn(name = "Discountid")
+	private Discount discountId;
+	@Column(name = "Status")
+	private String status = "Đợi xác nhận";
 	@Column(name = "Paypalorderid")
 	private String paypalOrderId;
 	@Column(name = "Paypalorderstatus")
@@ -45,6 +49,7 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "Username")
 	private Account account;
+	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
 }

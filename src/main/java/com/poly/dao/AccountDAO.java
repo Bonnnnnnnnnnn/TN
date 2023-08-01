@@ -12,6 +12,6 @@ public interface AccountDAO extends JpaRepository<Account, String>{
 	@Query("select distinct ar.account from Authority ar where ar.role.id in ('DIRE', 'STAF')")
 	List<Account> getAdministrators();
 	
-	@Query(value = "select * from Accounts where UserEmail = ?1", nativeQuery = true)
+	@Query(value = "select * from Accounts where Email = ?1", nativeQuery = true)
 	Account findByEmail(String email);
 }

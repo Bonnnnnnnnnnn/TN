@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.poly.model.Order;
 
@@ -19,4 +20,41 @@ public interface OrderDAO extends JpaRepository<Order, Long>{
 	// Admin: hiển thị các hóa đơn theo ngày chỉ định
 	@Query(value = "select * from Orders where CreateDate = ?1", nativeQuery = true)
 	List<Order> getOrderByDay(String day);
+	
+	//Admin: Hiển thị ds order đợi xác nhận
+	@Query(value = "select * from Orders where Status = N'Đợi xác nhận' ", nativeQuery = true)
+	List<Order> findByWaitConfirm();
+	
+	//Admin: Hiển thị ds order đang giao
+	@Query(value = "select * from Orders where Status = N'Đang giao' ", nativeQuery = true)
+	List<Order> findByWaitingForShipping();
+	
+	//Admin: Hiển thị ds order đã giao
+	@Query(value = "select * from Orders where Status = N'Đã giao' ", nativeQuery = true)
+	List<Order> findByDelivered();
+	
+	//Admin: Hiển thị ds order đã hủy
+	@Query(value = "select * from Orders where Status = N'Đã hủy' ", nativeQuery = true)
+	List<Order> findByCancelled();
+	
+	@Query(value = "SELECT COUNT(*) AS TotalOrders FROM Orders; ", nativeQuery = true)
+	long getTotalOrder();
+	
+	@Query(value = "SELECT COALESCE(SUM(od.Price), 0.0) as totalPriceOrder "
+			+ "FROM Orders o "
+			+ "INNER JOIN OrderDetails od ON o.Id = od.OrderId "
+			+ "WHERE o.Status = N'Đã giao';", nativeQuery = true)
+		float getTotalPriceOrder();
+	
+	@Query(value = "SELECT views FROM Visitors; ", nativeQuery = true)
+	Integer getViewVisitor();
+	
+	
+	// Truy vấn để lấy danh sách các đơn hàng trong một tháng cụ thể
+    @Query(value = "SELECT * FROM Orders WHERE YEAR(CreateDate) = :year AND MONTH(CreateDate) = :month", nativeQuery = true)
+    List<Order> getOrdersByMonth(@Param("year") int year, @Param("month") int month);
+
+	
+	
+	
 }

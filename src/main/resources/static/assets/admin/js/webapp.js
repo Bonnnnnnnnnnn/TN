@@ -17,11 +17,26 @@ app.config(function($routeProvider){
 	.when("/inventory-management", {
 		templateUrl: "/assets/admin/layout/inventory-management.html"
 	})
-	.when("/order", {
-		templateUrl: "/assets/admin/layout/order.html"
+	.when("/order_Confirm", {
+		templateUrl: "/assets/admin/layout/order_Confirm.html"
+	})
+	.when("/order_Shipping", {
+		templateUrl: "/assets/admin/layout/order_Shipping.html"
+	})
+	.when("/order_Success", {
+		templateUrl: "/assets/admin/layout/order_Success.html"
+	})
+	.when("/order_Cancel", {
+		templateUrl: "/assets/admin/layout/order_Cancel.html"
+	})
+	.when("/dashboard", {
+		templateUrl: "/assets/admin/layout/dashboard.html"
+	})
+	.when("/discount", {
+		templateUrl: "/assets/admin/layout/discount.html"
 	})
 	.otherwise({
-		redirectTo: ""
+		redirectTo: "/dashboard"
 	});
 });
 

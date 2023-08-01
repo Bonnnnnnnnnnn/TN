@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.TotalProductsUtil;
+import com.poly.model.Category;
 import com.poly.model.Product;
+import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
 
 
@@ -21,8 +24,16 @@ public class FavouriteController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	CategoryService categoryService;
+	
 	@RequestMapping("/favourite/view")
 	public String view(Model model, HttpServletRequest request, @RequestParam(defaultValue = "1") int page) {
+		
+		////Load danh mục
+		List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+		
 		String username = request.getRemoteUser();
 		List<Product> list = productService.findAllProductCustomerLike(username);
 		
@@ -31,7 +42,7 @@ public class FavouriteController {
 			model.addAttribute("favourite", list);
 			model.addAttribute("currentPage", page);
 			model.addAttribute("maxPages", maxPages);
-			return "web/favourite/view";
+			return "user/favourite/view";
 		}
 
 		for(int i = 0; i < list.size(); ++i) {
@@ -69,7 +80,13 @@ public class FavouriteController {
 		model.addAttribute("favourite", productsOnPage);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("maxPages", maxPages);
+		
+		//Hiển thị số lượng yêu thích
+		
+		int totalProducts = list.size();
+		TotalProductsUtil.setTotalProducts(totalProducts);
+		model.addAttribute("totalProducts", totalProducts);
 
-		return "web/favourite/view";
+		return "user/favourite/view";
 	}
 }

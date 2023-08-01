@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +111,8 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Override
 	public Order findById(Long id) {
-		return dao.findById(id).get();
+		Optional<Order> optionalOrder = dao.findById(id);
+		return optionalOrder.orElse(null);
 	}
 	
 	// Cho khách xem lại danh sách đơn hàng của chính khách đặt
@@ -130,8 +132,49 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public void update(Order order) {
-		dao.save(order);
+	public Order update(Order order) {
+		return dao.save(order);
+	}
+
+	@Override
+	public List<Order> findByWaitConfirm() {
+		return dao.findByWaitConfirm();
+	}
+
+	@Override
+	public List<Order> findByWaitingForShipping() {
+		return dao.findByWaitingForShipping();
+	}
+
+	@Override
+	public List<Order> findByDelivered() {
+		return dao.findByDelivered();
+	}
+
+	@Override
+	public List<Order> findByCancelled() {
+		return dao.findByCancelled();
+	}
+	
+	@Override
+	public long getTotalOrder() {
+		return dao.getTotalOrder();
+	}
+
+	@Override
+	public float getTotalPriceOrder() {
+		// TODO Auto-generated method stub
+		return dao.getTotalPriceOrder();
+	}
+
+	@Override
+	public Integer getViewVisitor() {
+		return dao.getViewVisitor();
+	}
+
+	@Override
+	public List<Order> getOrdersByMonth(int year, int month) {
+	    return dao.getOrdersByMonth(year, month);
 	}
 
 }

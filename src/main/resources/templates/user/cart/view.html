@@ -97,7 +97,7 @@
 	                    <div class="shoping__checkout">
 	                        <h5>Cart Total</h5>
 	                        <ul>
-								<li>Discount <span th:text="${discount.price}" id="discount"><span style="text-decoration: underline;">đ</span></span></li>
+								<li>Discount <span style="text-decoration: underline;">đ</span> <span th:text="${#numbers.formatDecimal(discount.price, 0, 'POINT', 0, 'POINT')}" id="discount"></span></li>
 	                            <li>Total <span>{{getTotal()|number}}&nbsp<span style="text-decoration: underline;">đ</span></span></li>
 	                        </ul>
 	                        <a type="button" class="primary-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">PROCEED TO CHECKOUT</a>
@@ -106,7 +106,7 @@
 	            </div>
 	            <!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog" style="max-width: 900px;">
+				  <div class="modal-dialog" style="max-width: 1200px;">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Hóa Đơn</h5>

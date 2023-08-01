@@ -4,7 +4,7 @@ let pathAccount = "http://localhost:8080/rest";
 app.controller("ctrl-account", function($scope, $http){
 	$scope.form = {};
 	$scope.items = [];
-
+	$scope.loading = false;
 
 	
 	
@@ -40,22 +40,32 @@ app.controller("ctrl-account", function($scope, $http){
         });
     }
     
-   $scope.create = function() {
-    var item = angular.copy($scope.form);
+$scope.create = function () {
+                    // Bắt đầu hiệu ứng loading
+                    $scope.loading = true;
 
-    var url = `${pathAccount}/account`;
-    console.log(item);
-    $http.post(url, item)
-        .then(function(response) {
-            $scope.items.push(item);
-            alert("Đăng ký thành công");
-            console.log("Success", response);
-        })
-        .catch(function(error) {
-            console.log("Error", error);
-            alert("Error creating account. Please try again.");
-        });
-};
+                    var item = angular.copy($scope.form);
+                    var url = `${pathAccount}/account`;
+
+                    $http.post(url, item)
+                        .then(function (response) {
+                            // Xử lý kết quả trả về từ API hoặc backend
+                            $scope.items.push(item);
+                            alert("Đăng ký thành công");
+                            console.log("Success", response);
+
+                            // Dừng hiệu ứng loading sau khi xử lý thành công
+                            $scope.loading = false;
+                        })
+                        .catch(function (error) {
+                            // Xử lý lỗi nếu có
+                            console.error('Error:', error);
+                            alert("Error creating account. Please try again.");
+
+                            // Dừng hiệu ứng loading sau khi xử lý thất bại
+                            $scope.loading = false;
+                        });
+                };
 
     
     $scope.delete = function(username){

@@ -38,11 +38,13 @@ public class Account implements Serializable{
 	@Column(name = "Email")
 	private String email;
 	
+	
+	@Column(name = "Phone")
+	private String phone;
+	
 	@Column(name = "Photo")
 	private String photo;
 	
-	@Column(name = "auth_provider")
-	private String auth_provider;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)

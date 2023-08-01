@@ -150,7 +150,7 @@ app.controller("ctrl-product", function($scope, $http) {
 		}
 	}
 
-	$scope.delete = function(productId) {
+	$scope.delete = function(id) {
 		var url = `${pathProduct}/product/${id}`;
 		$http.delete(url).then(resp => {
 			// tìm ra phần tử tại vị trí sẽ xóa.
@@ -159,7 +159,7 @@ app.controller("ctrl-product", function($scope, $http) {
 			$scope.reset();
 			console.log("Success", resp);
 		}).catch(error => {
-			console.log("Error", error);
+			console.log("lỗi xoá", error);
 		});
 	}
 

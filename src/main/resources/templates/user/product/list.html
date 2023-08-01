@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/index :: dynamic(~{::main})}">
 <body>
 	<main>
@@ -111,68 +111,55 @@
 	                        </div>
 	                        <div class="sidebar__item">
 	                            <div class="latest-product__text">
-	                                <h4>Latest Products</h4>
-	                                <div class="latest-product__slider owl-carousel">
-	                                    <div class="latest-prdouct__slider__item">
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-1.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-2.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-3.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                    </div>
-	                                    <div class="latest-prdouct__slider__item">
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-1.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-2.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                        <a href="#" class="latest-product__item">
-	                                            <div class="latest-product__item__pic">
-	                                                <img src="img/latest-product/lp-3.jpg" alt="">
-	                                            </div>
-	                                            <div class="latest-product__item__text">
-	                                                <h6>Crab Pool Security</h6>
-	                                                <span>$30.00</span>
-	                                            </div>
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                            </div>
+			                        <h4>Đánh Giá Cao</h4>
+			                        <div class="latest-product__slider owl-carousel">
+			                            <div class="latest-prdouct__slider__item" th:each="product, iterStat : ${productsTop}" th:if="${iterStat.index % 3 == 0}">
+							                <div class="latest-product__item-group">
+							                    <a th:href="@{|/product/detail/${product.id}|}" class="latest-product__item">
+							                        <div class="latest-product__item__pic" style="width: 40%">
+							                            <img th:src="@{|/assets/img/product/${product.image}|}" alt="">
+							                        </div>
+							                        <div class="latest-product__item__text">
+							                            <h6 th:text="${product.name}"></h6>
+							                            <span th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')}">
+							                                &nbsp<span style="text-decoration: underline; color: #252525; font-weight: 700;">đ</span>
+							                            </span>
+							                        </div>
+							                    </a>
+							                </div>
+							                <th:block th:if="${iterStat.index + 1 &lt; productsTop.size()}">
+							                    <div class="latest-product__item-group">
+							                        <a th:href="@{|/product/detail/${productsTop[iterStat.index + 1].id}|}" class="latest-product__item">
+							                            <div class="latest-product__item__pic" style="width: 40%">
+							                                <img th:src="@{|/assets/img/product/${productsTop[iterStat.index + 1].image}|}" alt="">
+							                            </div>
+							                            <div class="latest-product__item__text">
+							                                <h6 th:text="${productsTop[iterStat.index + 1].name}"></h6>
+							                                <span th:text="${#numbers.formatDecimal(productsTop[iterStat.index + 1].price, 0, 'POINT', 0, 'POINT')}">
+							                                    &nbsp<span style="text-decoration: underline; color: #252525; font-weight: 700;">đ</span>
+							                                </span>
+							                            </div>
+							                        </a>
+							                    </div>
+							                </th:block>
+							                <th:block th:if="${iterStat.index + 2 &lt; productsTop.size()}">
+							                    <div class="latest-product__item-group">
+							                        <a th:href="@{|/product/detail/${productsTop[iterStat.index + 2].id}|}" class="latest-product__item">
+							                            <div class="latest-product__item__pic" style="width: 40%">
+							                                <img th:src="@{|/assets/img/product/${productsTop[iterStat.index + 2].image}|}" alt="">
+							                            </div>
+							                            <div class="latest-product__item__text">
+							                                <h6 th:text="${productsTop[iterStat.index + 2].name}"></h6>
+							                                <span th:text="${#numbers.formatDecimal(productsTop[iterStat.index + 2].price, 0, 'POINT', 0, 'POINT')}">
+							                                    &nbsp<span style="text-decoration: underline; color: #252525; font-weight: 700;">đ</span>
+							                                </span>
+							                            </div>
+							                        </a>
+							                    </div>
+							                </th:block>
+							            </div>    
+			                        </div>
+			                    </div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -252,12 +239,44 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <div class="product__pagination">
-	                        <a href="#">1</a>
-	                        <a href="#">2</a>
-	                        <a href="#">3</a>
-	                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-	                    </div>
+	                    
+	                    <div class="col-12">
+				    		<ul class="pagination justify-content-center">
+								<th:block th:if="${currentPage == 1}">
+									<li class="page-item">
+					            		<a class="page-link" style="cursor: pointer;color: #007bff;" disabled>Previous</a>
+					        		</li>
+								</th:block>
+								<th:block th:if="${currentPage > 1}">
+					        		<!-- Prev -->
+					        		<li class="page-item">
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${currentPage - 1})}">Previous</a>
+					        		</li>	
+								</th:block>
+				
+								<th:block th:if="${maxPages == 0}">
+									<li class="page-item">
+				            			<a class="page-link" style="cursor: pointer;color: #007bff;">1</a>
+					        		</li>
+								</th:block>
+								<th:block th:if="${maxPages > 0}">
+					        		<li class="page-item" th:each="pageNum : ${#numbers.sequence(1, maxPages)}">
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${pageNum})}" th:classappend="${pageNum == currentPage} ? 'active'">[[${pageNum}]]</a>
+					        		</li>	
+								</th:block>
+				
+								<th:block th:if="${currentPage < maxPages}">
+					        		<li class="page-item">
+					            		<a class="page-link" style="cursor: pointer;" th:href="@{/product/list(page=${currentPage + 1})}">Next</a>
+					        		</li>
+				        		</th:block>
+				        		<th:block th:unless="${currentPage < maxPages}">
+					        		<li class="page-item">
+					            		<a class="page-link" style="cursor: pointer;color: #007bff;" disabled>Next</a>
+					        		</li>
+				        		</th:block>
+				    		</ul>
+						</div>
 	                </div>
 	            </div>
 	        </div>

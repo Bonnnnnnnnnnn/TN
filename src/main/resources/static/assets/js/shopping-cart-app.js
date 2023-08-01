@@ -1,12 +1,65 @@
 const app = angular.module("shopping-cart", []);
 
 app.controller("shopping-cart-ctrl", function ($scope, $http) {
+	
+
+	 // Function to update the views in the Visitor table
+    $scope.updateViews = function () {
+        // Get the current visitor ID from some source (e.g., session or cookies)
+        // Replace 'YOUR_VISITOR_ID' with the actual way of getting the visitor ID.
+        var visitorId = '1';
+
+        // Send a PUT request to update the views
+        $http.put(`/rest/visitor/${visitorId}`, { views: 1 })
+            .then(function (response) {
+                console.log("Views updated successfully");
+            })
+            .catch(function (error) {
+                console.error("Error updating views", error);
+            });
+    };
+
+    // Call the updateViews function when the page loads
+    $scope.updateViews();
+	
+  // Quản lý sản phẩm được yêu thích
+	var $like = $scope.like = {
+	//	items: [],
+		change(id){
+			$http.get(`/rest/favourite/${id}`).then(resp => {
+				$scope.favourite = resp.data;
+				if($scope.favourite.isLiked){
+					// Đang ở trạng thái like. User unlike => cập nhật isLike = 0
+					$http.put(`/rest/favourite/${id}`).then(resp =>{
+						console.log("Success", resp);
+						location.href = "/product/detail/" + id  ;
+					}).catch(error => {
+						console.log("Error", error);
+					})
+				}else{
+					// Đang ở trạng thái unlike. User like => cập nhật isLike = 1
+					$http.put(`/rest/favourite/${id}`).then(resp =>{
+						console.log("Success", resp);
+						location.href = "/product/detail/" + id  ;
+					}).catch(error => {
+						console.log("Error", error);
+					})
+				}
+				
+			})
+		},
+	};
+  
   // Trong AngularJS controller
 	$scope.preventEmptyInput = function(event) {
 	    if (event.keyCode === 8 || event.keyCode === 46) { // Kiểm tra phím backspace và phím delete
 	        event.preventDefault();
 	    }
 	};
+	
+	
+	
+	
   
   	// Thêm sự kiện tăng giảm số lượng
 	$scope.increaseQuantity = function(item) {
@@ -140,6 +193,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     purchase() {
       var discountId = document.getElementById('discountId').value;
       var order = angular.copy(this);
+      console.log(order);
       if (discountId) {
       order.discountId = discountId;
       }
@@ -150,7 +204,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       console.log(isPaypal.checked);
         alert("Đặt!");
         $http.post("/rest/checkout", order).then((resp) => {
-            $scope.cart.clear();
+           $scope.cart.clear();
            location.href = resp.data.url;
         }).catch(error=>{
           alert("Đặt hàng lỗi!");

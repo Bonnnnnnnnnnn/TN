@@ -26,7 +26,7 @@ public class FavouriteServiceImpl implements FavouriteService{
 	ProductDAO productDao;
 	
 	@Override
-	public Favourite findByUsernameAndProductId(String username,Integer id) {
+	public Favourite findByUsernameAndProductId(String username, Integer id) {
 		return dao.findByUsernameAndProductId(username, id);
 	}
 
@@ -36,12 +36,12 @@ public class FavouriteServiceImpl implements FavouriteService{
 	}
 	
 	@Override
-	public Favourite create(Account account, Product product) {
-		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), product.getId());
+	public Favourite create(Account account, Product item) {
+		Favourite existFavourite = findByUsernameAndProductId(account.getUsername(), item.getId());
 		if(existFavourite == null) {
 			existFavourite = new Favourite();
 			existFavourite.setAccount(account);
-			existFavourite.setProduct(product);
+			existFavourite.setProduct(item);
 			existFavourite.setIsLiked(false);
 			return dao.save(existFavourite);
 		}
@@ -67,8 +67,8 @@ public class FavouriteServiceImpl implements FavouriteService{
 	}
 
 	@Override
-	public List<Object[]> getUserInfoWithProductIsLikedByUsers(Integer productId) {
-		return dao.getUserInfoWithProductIsLikedByUsers(productId);
+	public List<Object[]> getUserInfoWithProductIsLikedByUsers(Integer id) {
+		return dao.getUserInfoWithProductIsLikedByUsers(id);
 	}
 
 }

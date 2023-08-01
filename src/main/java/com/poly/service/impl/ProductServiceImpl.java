@@ -61,20 +61,23 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> searchByProductNameOrId(String productName, String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Product> searchByProductNameOrId(String name, String id) {
+		return productDAO.searchByProductNameOrId(name, id);
 	}
 
 	@Override
 	public List<Product> findAllProductCustomerLike(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return productDAO.findAllProductCustomerLike(username);
 	}
 
 	@Override
 	public List<Product> findByProductTop() {
 		return productDAO.getByProductTop();
+	}
+
+	@Override
+	public List<Product> findByProductRandom() {
+		return productDAO.getByProductRandom();
 	}
 	
 }
