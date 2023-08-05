@@ -3901,3 +3901,58 @@ ol {
  	border-radius: 5px;
  	display: inline-block;
 }
+
+.profile-button {
+    background: #7fad39;
+    box-shadow: none;
+    border: none;
+    font-size: 18px;
+}
+
+.profile-button:hover {
+    background: #62862d
+}
+
+.profile-button:focus {
+    background: #62862d;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #62862d;
+    box-shadow: none
+}
+
+.labels {
+    font-size: 14px
+}
+
+/* Custom styles for the file input button */
+input[type="file"] {
+    display: none;
+}
+
+label[for="profile-picture"] {
+    cursor: pointer;
+    margin-right: 15px;
+    width: 190px;
+    display: inline-block;
+    padding: 15px 5px;
+    border: 2px solid #7fad39;
+    border-radius: 30px;
+    background-color: #7fad39;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+label[for="profile-picture"]:hover {
+    background-color: #45a049;
+}
+
+label[for="profile-picture"]::before {
+    content: "\f030";
+    font-family: FontAwesome;
+    font-size: 18px;
+}

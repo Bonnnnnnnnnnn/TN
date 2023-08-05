@@ -102,4 +102,9 @@ public class AccountServicelmpl implements AccountService{
         emailService.send(mail); // Gửi message đến SMTP server
     }
 
+	@Override
+	public Account update(Account account) {
+		return dao.save(account);
+	}
+
 }

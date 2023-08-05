@@ -21,5 +21,5 @@ public interface AccountService {
 
 	Account updatePassword(Account account, String newPassword);
 	
-	
+	Account update(Account account);
 }

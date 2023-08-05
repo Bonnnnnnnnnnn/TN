@@ -17,8 +17,8 @@ CREATE TABLE [dbo].[Accounts](
 	[Password] [nvarchar](200) NOT NULL,
 	[Fullname] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
-	[Photo] [nvarchar](50)  NULL,
 	[Phone] [nvarchar](12) NULL,
+	[Photo] [nvarchar](50)  NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
 (
 	[Username] ASC
@@ -190,16 +190,16 @@ CREATE TABLE Visitors(
 -------------------------Insert data-------------------------
 
 ----------Table Accounts----------
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'longnt', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Ngô Thiên Long', N'longnt@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'taivn', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Huỳnh Văn Tài', N'taihvt@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'kiettl', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Trần Lê Tú Kiệt', N'kiettl@gmail', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'thu', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Nguyễn Ngọc Anh Thư', N'thu@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'Thuy', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Thị Thủy', N'thuy@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'khoa', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Đăng Khoa', N'khoa@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'phat', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Nguyễn Đức Phát', N'phat@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'thanh', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Phan Nguyễn Trung Thành', N'thanh@gmail', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'tien', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Việt Tiến', N'tien@gmail.com', N'Photo.gif')
-INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Photo]) VALUES (N'admin', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Vũ Phi Ưng Vương', N'vuong@gmail.com', N'Photo.gif')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'longnt', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Ngô Thiên Long', N'longnt@gmail.com', '0358132152', N'longnt.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'taivn', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Huỳnh Văn Tài', N'taihvt@gmail.com', '0354123102', N'anh3.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'kiettl', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Trần Lê Tú Kiệt', N'kiettl@gmail', '0284151215', N'anh4.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'thu', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Nguyễn Ngọc Anh Thư', N'thu@gmail.com', '0352212552', N'anh1.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'Thuy', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Thị Thủy', N'thuy@gmail.com', '0351002153', N'anh5.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'khoa', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Đăng Khoa', N'khoa@gmail.com', '0353810254', N'anh3.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'phat', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Nguyễn Đức Phát', N'phat@gmail.com', '0205151236', N'anh6.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'thanh', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Phan Nguyễn Trung Thành', N'thanh@gmail', '0248120147', N'anh8.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'tien', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Lê Việt Tiến', N'tien@gmail.com', '0336481248', N'anh6.jpg')
+INSERT [dbo].[Accounts] ([Username], [Password], [Fullname], [Email], [Phone], [Photo]) VALUES (N'admin', N'$2a$10$iretZDJynC2hAh0hnemcFOkaFa4QlJSOGYg2YHaeTJjApKS.TJF3S', N'Vũ Phi Ưng Vương', N'vuong@gmail.com', '0305412054', N'anh3.jpg')
 
 
 ----------Table Authorities----------
