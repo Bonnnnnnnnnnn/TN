@@ -49,7 +49,6 @@ public class AccountServicelmpl implements AccountService{
 	
 	 @Override
 	    public Account create(Account account) {
-	        account.setPassword(passwordEncoder.encode(account.getPassword())); // Hash the password before saving
 	        Account savedAccount = dao.save(account);
 
 	        // Gửi email chào mừng
