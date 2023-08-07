@@ -32,7 +32,7 @@
             <div class="header__top__right__auth">
 				<nav class="header__menu2">
 					<ul>
-						<li><a href="#">Xin chào,  <span id="username" th:if="${#request.remoteUser}"> [[${#request.remoteUser}]]</span> <span
+						<li><a href="#"><span th:if="${#request.remoteUser}">Xin chào,<span id="username"> [[${#request.remoteUser}]]</span></span> <span
 								th:unless="${#request.remoteUser}">&nbsp &nbsp &nbsp &nbsp
 									&nbsp &nbsp<i class="fa fa-user"></i>Tài Khoản
 							</span>
@@ -114,7 +114,7 @@
                             	<nav class="header__menu2">
                             		<ul>
                             			<li><a href="#">
-			                            		 Xin chào,<span id="username" th:if="${#request.remoteUser}"> [[${#request.remoteUser}]]</span>
+			                            		<span th:if="${#request.remoteUser}">Xin chào,<span id="username"> [[${#request.remoteUser}]]</span></span>
 			                            		 <span th:unless="${#request.remoteUser}">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa fa-user"></i>Tài Khoản</span>
 			                            	</a>
 						                    <ul class="header__menu__dropdown2">
