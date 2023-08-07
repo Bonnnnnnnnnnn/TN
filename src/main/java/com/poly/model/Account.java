@@ -43,7 +43,7 @@ public class Account implements Serializable{
 	private String phone;
 	
 	@Column(name = "Photo")
-	private String photo;
+	private String photo = "default.png";
 	
 
 	@JsonIgnore
