@@ -5,7 +5,8 @@ app.controller("ctrl-account", function($scope, $http){
 	$scope.form = {};
 	$scope.items = [];
 	$scope.loading = false;
-	$scope.loadingSuccess = false; // Thêm biến loadingSuccess
+
+	
 	
 	$scope.load_all = function(){
         var url = `${pathAccount}/account`;
@@ -40,61 +41,31 @@ app.controller("ctrl-account", function($scope, $http){
     }
     
 $scope.create = function () {
-    // Bắt đầu hiệu ứng loading
-    $scope.loading = true;
+                    // Bắt đầu hiệu ứng loading
+                    $scope.loading = true;
 
-    // Reset error and success messages
-    $scope.errorMessage = null;
-    $scope.successMessage = null;
+                    var item = angular.copy($scope.form);
+                    var url = `${pathAccount}/account`;
 
-    // Kiểm tra các trường input trước khi gửi yêu cầu đăng ký
-    if (!$scope.form.username || !$scope.form.fullname || !$scope.form.email || !$scope.form.phone || !$scope.form.password) {
-        $scope.errorMessage = "Vui lòng điền đầy đủ thông tin.";
-        // Dừng hiệu ứng loading nếu có lỗi
-        $scope.loading = false;
-        return; // Dừng thực hiện tiếp
-    }
+                    $http.post(url, item)
+                        .then(function (response) {
+                            // Xử lý kết quả trả về từ API hoặc backend
+                            $scope.items.push(item);
+                            alert("Đăng ký thành công");
+                            console.log("Success", response);
 
-    // Kiểm tra định dạng email hợp lệ
-    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test($scope.form.email)) {
-        $scope.errorMessage = "Email không hợp lệ.";
-        // Dừng hiệu ứng loading nếu có lỗi
-        $scope.loading = false;
-        return; // Dừng thực hiện tiếp
-    }
+                            // Dừng hiệu ứng loading sau khi xử lý thành công
+                            $scope.loading = false;
+                        })
+                        .catch(function (error) {
+                            // Xử lý lỗi nếu có
+                            console.error('Error:', error);
+                            alert("Error creating account. Please try again.");
 
-    // Kiểm tra mật khẩu có ít nhất 6 ký tự
-    if ($scope.form.password.length < 6) {
-        $scope.errorMessage = "Mật khẩu phải có ít nhất 6 ký tự.";
-        // Dừng hiệu ứng loading nếu có lỗi
-        $scope.loading = false;
-        return; // Dừng thực hiện tiếp
-    }
-
-    var item = angular.copy($scope.form);
-    var url = `${pathAccount}/account`;
-
-    $http.post(url, item)
-        .then(function (response) {
-            // Xử lý kết quả trả về từ API hoặc backend
-            $scope.items.push(item);
-            $scope.successMessage = "Đăng ký thành công";
-            console.log("Success", response);
-
-            // Dừng hiệu ứng loading sau khi xử lý thành công
-            $scope.loading = false;
-        })
-        .catch(function (error) {
-            // Xử lý lỗi nếu có
-            console.error('Error:', error);
-            $scope.errorMessage = "Error creating account. Please try again.";
-
-            // Dừng hiệu ứng loading sau khi xử lý thất bại
-            $scope.loading = false;
-        });
-};
-
+                            // Dừng hiệu ứng loading sau khi xử lý thất bại
+                            $scope.loading = false;
+                        });
+                };
 
     
     $scope.delete = function(username){
@@ -133,7 +104,31 @@ $scope.create = function () {
 		};
 	}
 	
-	
+	$scope.register = function() {
+    var user = {
+        username: $scope.form.username,
+        fullname: $scope.form.fullname,
+        userEmail: $scope.form.userEmail,
+        password: $scope.form.password
+    };
+
+    var url = `${pathAccount}/account`;
+    
+    $http.post(url, user)
+        .then(function(response) {
+            // Đăng ký thành công, xử lý kết quả và thông báo cho người dùng
+            console.log("Success", response);
+            alert("Registration successful!");
+            $scope.reset();
+            // Tải lại danh sách tài khoản
+            $scope.load_all();
+        })
+        .catch(function(error) {
+            // Đăng ký thất bại, xử lý lỗi và thông báo cho người dùng
+            console.log("Error", error);
+            alert("Registration failed!");
+        });
+};
 
 
     $scope.load_all();
