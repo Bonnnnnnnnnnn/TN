@@ -335,8 +335,10 @@ input {
 #success-message {
   color: green;
   font-size: 14px;
+  font-weight: bold;
   margin-top: -10px;
 }
+
 
 
 
