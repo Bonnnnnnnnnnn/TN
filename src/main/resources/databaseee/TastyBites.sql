@@ -19,6 +19,7 @@ CREATE TABLE [dbo].[Accounts](
 	[Email] [nvarchar](50) NOT NULL,
 	[Phone] [nvarchar](12) NULL,
 	[Photo] [nvarchar](50)  NULL,
+	[Phone] [nvarchar](12) NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
 (
 	[Username] ASC
