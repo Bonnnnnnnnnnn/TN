@@ -144,7 +144,6 @@ form {
     justify-content: center;
     flex-direction: column;
     padding: 0 50px;
-<<<<<<< HEAD
     text-align: center;
 }
 
@@ -156,9 +155,7 @@ form {
     flex-direction: column;
     padding: 0 50px;
     height: 100%;
-=======
     height: 90% ;
->>>>>>> parent of e67a018 (Revert "bat loi  dang ki login va dang ki done")
     text-align: center;
 }
 
