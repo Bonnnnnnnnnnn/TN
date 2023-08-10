@@ -32,7 +32,7 @@
             <div class="header__top__right__auth">
 				<nav class="header__menu2">
 					<ul>
-						<li><a href="#"><span th:if="${#request.remoteUser}">Xin chào,<span id="username"> [[${#request.remoteUser}]]</span></span> <span
+						<li><a href="#"><span th:if="${#request.remoteUser}">Xin chào,<span id="username2"> [[${#request.remoteUser}]]</span></span> <span
 								th:unless="${#request.remoteUser}">&nbsp &nbsp &nbsp &nbsp
 									&nbsp &nbsp<i class="fa fa-user"></i>Tài Khoản
 							</span>
@@ -44,7 +44,7 @@
 								</th:block>
 								<th:block th:if="${#request.remoteUser}">
 									<li><a th:href="@{/order/list}">Giỏ Hàng Của Tôi</a></li>
-									<li><a data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Thông Tin Đăng Nhập</a></li>
+									<li><a data-bs-toggle="modal" data-bs-target="#profileModal" style="cursor: pointer;">Thông Tin Đăng Nhập</a></li>
 									<li
 										th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
 										<a href="#">Trang Quản Trị</a>
@@ -114,7 +114,7 @@
                             	<nav class="header__menu2">
                             		<ul>
                             			<li><a href="#">
-			                            		<span th:if="${#request.remoteUser}">Xin chào,<span id="username"> [[${#request.remoteUser}]]</span></span>
+			                            		<span th:if="${#request.remoteUser}">Xin chào,<span id="username2"> [[${#request.remoteUser}]]</span></span>
 			                            		 <span th:unless="${#request.remoteUser}">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<i class="fa fa-user"></i>Tài Khoản</span>
 			                            	</a>
 						                    <ul class="header__menu__dropdown2">
@@ -124,7 +124,7 @@
 						                    	</th:block>	
 						                    	<th:block th:if="${#request.remoteUser}">			
 							                        <li><a th:href="@{/order/list}">Giỏ Hàng Của Tôi</a></li>
-							                        <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">Thông Tin Đăng Nhập</a></li>
+							                        <li><a data-bs-toggle="modal" data-bs-target="#profileModal" style="cursor: pointer;">Thông Tin Đăng Nhập</a></li>
 							                        <li th:if="${#request.isUserInRole('DIRE') or #request.isUserInRole('STAF')}">
 							                        	<a th:href="@{/admin/index}">Trang Quản Trị</a>
 							                        </li>
@@ -264,11 +264,11 @@
     </section>
     <!-- Hero Section End -->
     
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" style="max-width: 850px;">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Thông Tin Tài Khoản</h5>
+	        <h5 class="modal-title" id="profileModalLabel">Thông Tin Tài Khoản</h5>
 	        <span data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"><i class="fas fa-times"></i></span>
 	      </div>
 	      <div class="modal-body">

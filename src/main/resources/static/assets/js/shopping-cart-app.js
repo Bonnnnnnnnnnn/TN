@@ -9,21 +9,26 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 	$scope.items = [];
 	
 	$scope.load_one = function(){
-		var username = document.querySelector('#username').innerText.trim();
-		var url = `${pathProfile}/profile/${username}`;
-		$http.get(url).then(resp => {
-			$scope.form = resp.data;
-			console.log("Success", resp);
-		}).catch(errors => {
-			console.log("Error", errors);
-		});
+    var usernameElement = document.querySelector('#username2');
+	    if (usernameElement) {
+	        var username = usernameElement.innerText.trim();
+	        var url = `${pathProfile}/profile/${username}`;
+	        $http.get(url).then(resp => {
+	            $scope.form = resp.data;
+	            console.log("Success", resp);
+	        }).catch(errors => {
+	            console.log("Error", errors);
+	        });
+	    } else {
+	        console.log("#username element not found");
+	    }
 	}
 	
 	$scope.load_one();
 	
 	$scope.update = function(){
         var item = angular.copy($scope.form);
-        var username = document.querySelector('#username').innerText.trim();
+        var username = document.querySelector('#username2').innerText.trim();
         var url = `${pathProfile}/profile/${username}`;
         $http.put(url, item).then(resp => {
             var index = $scope.items.findIndex(item => item.username == $scope.form.username);
