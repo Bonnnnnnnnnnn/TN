@@ -20,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.poly.model.Account;
 import com.poly.service.AccountService;
@@ -32,39 +33,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	AccountService accountService;
 	
-	@Autowired
-	BCryptPasswordEncoder pe;
 	
 	@Autowired
 	HttpSession session;
 	
+	@Autowired
+    PasswordEncoder passwordEncoder; // Sử dụng PasswordEncoder chung cho mã hóa mật khẩu
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+	
 	// Cung cấp nguồn dữ liệu đăng nhập
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		 auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-		auth.userDetailsService(username -> {
-			try {
-				Account user = accountService.findById(username);
-				// pe.encode : mã hóa password
-				String password = pe.encode(user.getPassword());
-				System.out.println("Password: " + password);
-				
-				String[] roles = user.getAuthorities().stream()
-						.map(er -> er.getRole().getId())
-						.collect(Collectors.toList()).toArray(new String[0]);
-				Map<String, Object> authentication = new HashMap<>();
-				authentication.put("user", user);
-				byte[] token = (username + ":" + user.getPassword()).getBytes();
-				authentication.put("token", "Basic " + Base64.getEncoder().encodeToString(token));
-				session.setAttribute("authentication", authentication);
-				//session.setAttribute("user", user);
-				
-				return User.withUsername(username).password(password).roles(roles).build();
-			} catch (NoSuchElementException e) {
-				throw new UsernameNotFoundException(username + "not found!");
-			}
-		});
-	}
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(username -> {
+            try {
+                Account user = accountService.findById(username);
+                String password = user.getPassword(); // Lấy mật khẩu không mã hóa từ đối tượng Account
+
+                String[] roles = user.getAuthorities().stream()
+                        .map(er -> er.getRole().getId())
+                        .collect(Collectors.toList()).toArray(new String[0]);
+                Map<String, Object> authentication = new HashMap<>();
+                authentication.put("user", user);
+                byte[] token = (username + ":" + password).getBytes();
+                authentication.put("token", "Basic " + Base64.getEncoder().encodeToString(token));
+                session.setAttribute("authentication", authentication);
+
+                return User.withUsername(username).password(password).roles(roles).build();
+            } catch (NoSuchElementException e) {
+                throw new UsernameNotFoundException(username + " not found!");
+            }
+        }).passwordEncoder(passwordEncoder());
+    }
 	
 	// Phân quyền sử dụng
 	@Override
@@ -107,10 +110,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 	
 	// Cho phép truy xuất REST API từ bên ngoài (domain khác)
 	@Override

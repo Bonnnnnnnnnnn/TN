@@ -64,7 +64,7 @@ public class ProductAdminRestController {
 	}
 
 	@DeleteMapping("/rest/product/{id}")
-	public ResponseEntity<Void> delete(@PathVariable("productId") Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		Product existingProduct = productService.findById(id);
 		if (existingProduct != null) {
 			productService.delete(id);

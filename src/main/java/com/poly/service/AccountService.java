@@ -18,6 +18,8 @@ public interface AccountService {
 	List<Account> getAdministrators();
 
 	Account resetPassword(String email);
+
+	Account updatePassword(Account account, String newPassword);
 	
-	
+	Account update(Account account);
 }

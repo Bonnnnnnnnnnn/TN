@@ -27,7 +27,7 @@ public interface ProductService {
 	public void delete(Integer id);
 	
 	// Search product name or product id
-	List<Product> searchByProductNameOrId(String productName, String id);
+	List<Product> searchByProductNameOrId(String name, String kw1);
 	
 	List<Product> findAllProductCustomerLike(String username);
 

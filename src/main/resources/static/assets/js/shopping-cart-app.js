@@ -1,6 +1,84 @@
 const app = angular.module("shopping-cart", []);
 
 app.controller("shopping-cart-ctrl", function ($scope, $http) {
+
+	//Profile
+	let pathProfile = "http://localhost:8080/rest";
+	
+	$scope.form = {};
+	$scope.items = [];
+	
+	$scope.load_one = function(){
+    var usernameElement = document.querySelector('#username2');
+	    if (usernameElement) {
+	        var username = usernameElement.innerText.trim();
+	        var url = `${pathProfile}/profile/${username}`;
+	        $http.get(url).then(resp => {
+	            $scope.form = resp.data;
+	            console.log("Success", resp);
+	        }).catch(errors => {
+	            console.log("Error", errors);
+	        });
+	    } else {
+	        console.log("#username element not found");
+	    }
+	}
+	
+	$scope.load_one();
+	
+	$scope.update = function(){
+        var item = angular.copy($scope.form);
+        var username = document.querySelector('#username2').innerText.trim();
+        var url = `${pathProfile}/profile/${username}`;
+        $http.put(url, item).then(resp => {
+            var index = $scope.items.findIndex(item => item.username == $scope.form.username);
+            $scope.items[index] = resp.data;
+            console.log("Success", resp);
+            alert("Lưu Thông Tin Thành Công !");
+        }).catch(error => {
+            console.log("Error", error);
+        });
+    }
+    
+    // Upload img
+    $scope.imageChanged = function(files){
+		// tạo 1 đối tượng FormData
+		var data = new FormData();
+		// lấy file đã chọn bỏ vào FormData
+		data.append('file', files[0]);
+		$http.post('/rest/upload/img', data, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		}).then(resp => {
+			$scope.form.photo = resp.data.name; 
+		}).catch(error => {
+			alert("Error upload image");
+			console.log("Error", error);
+		})
+	}
+    
+	//Profile
+	
+	
+	 // Function to update the views in the Visitor table
+    $scope.updateViews = function () {
+        // Get the current visitor ID from some source (e.g., session or cookies)
+        // Replace 'YOUR_VISITOR_ID' with the actual way of getting the visitor ID.
+        var visitorId = '1';
+
+        // Send a PUT request to update the views
+        $http.put(`/rest/visitor/${visitorId}`, { views: 1 })
+            .then(function (response) {
+                console.log("Views updated successfully");
+            })
+            .catch(function (error) {
+                console.error("Error updating views", error);
+            });
+    };
+
+    // Call the updateViews function when the page loads
+    $scope.updateViews();
+	
   // Quản lý sản phẩm được yêu thích
 	var $like = $scope.like = {
 	//	items: [],
@@ -35,6 +113,10 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 	        event.preventDefault();
 	    }
 	};
+	
+	
+	
+	
   
   	// Thêm sự kiện tăng giảm số lượng
 	$scope.increaseQuantity = function(item) {
@@ -168,6 +250,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     purchase() {
       var discountId = document.getElementById('discountId').value;
       var order = angular.copy(this);
+      console.log(order);
       if (discountId) {
       order.discountId = discountId;
       }
@@ -178,7 +261,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       console.log(isPaypal.checked);
         alert("Đặt!");
         $http.post("/rest/checkout", order).then((resp) => {
-            $scope.cart.clear();
+           $scope.cart.clear();
            location.href = resp.data.url;
         }).catch(error=>{
           alert("Đặt hàng lỗi!");

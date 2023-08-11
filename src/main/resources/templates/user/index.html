@@ -32,7 +32,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
-<body ng-app="shopping-cart" ng-controller="shopping-cart-ctrl">
+<body ng-app="shopping-cart" ng-controller="shopping-cart-ctrl" ng-init="loadHomePage()">
     <div>
     	<div th:insert="/user/layout/header.html"></div>
     </div>
@@ -67,7 +67,9 @@
 	<script src="/assets/js/shopping-cart-app.js"></script>
 	<script src="/assets/js/miniCart.js"></script>
 	<script src="/assets/js/viewmore.js"></script>
-	
+	<script src="/assets/admin/js/visitors-service.js"></script>
+	<script src="/assets/js/contact.js"></script>
+	<script src="/assets/js/jqBootstrapValidation.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>

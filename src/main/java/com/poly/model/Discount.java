@@ -32,4 +32,9 @@ public class Discount {
     @Temporal(TemporalType.DATE)
     @Column(name = "Createdate")
     private Date createdate = new Date();
+    
+ // Add a constructor that takes a String parameter for deserialization
+    public Discount(String id) {
+        this.id = Integer.parseInt(id);
+    }
 }

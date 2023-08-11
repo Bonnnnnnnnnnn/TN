@@ -11,4 +11,9 @@ public interface DiscountDAO extends JpaRepository<Discount, Integer> {
 
     @Query("SELECT d FROM Discount d WHERE d.id=:id")
     Discount findById(Long id);
+
+	void deleteById(Long id);
+    
+    
+    
 }

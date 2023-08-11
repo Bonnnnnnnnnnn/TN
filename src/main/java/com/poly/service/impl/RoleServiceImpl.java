@@ -22,4 +22,9 @@ public class RoleServiceImpl implements RoleService{
 		return dao.findAll();
 	}
 
+	@Override
+	public Role getRoleById(String roleId) {
+		return dao.findById(roleId).orElse(null);
+	}
+
 }
