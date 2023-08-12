@@ -1,0 +1,106 @@
+<div ng-controller="ctrl-accountadmin">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-primary shadow">
+				<div class="card-header">
+					<h3 class="m-0 font-weight-bold text-primary">Account Management</h3>
+				</div>
+				<form name="myForm">
+				<div class="card-body row">
+				
+					<div class="form-group col-md-6">
+						<label for="title">Username</label>
+						<input ng-model="form.username" class="form-control">
+			            <div class="errcategory" style='color: red;' ></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Password</label>
+						<input ng-model="form.password" class="form-control">
+						<div class="erridProduct" style='color: red;' ></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">FullName</label>
+						<input ng-model="form.fullname" class="form-control">
+						<div class="errName" style='color: red;' ></div>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="title">Email</label>
+						<input ng-model="form.email" class="form-control">
+						<div class="errPrice" style='color: red;' ></div>
+					</div>
+
+						<div class="form-group col-md-6">
+						<label for="title">Image</label>
+						<div class="custom-file mb-4">
+	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
+	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
+	                    </div>						
+					</div>
+					<div class="form-group col-md-6 text-center" style="align-items: center; display: flex;">
+						<label for="image" style="margin: 0;">
+							<img ng-src="{{'/folder/images/' + form.image}}" style="width: 30%;height:50%" />
+						</label>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button ng-click="create()" class="btn btn-success btn-sm">Insert</button>
+					<button ng-click="update()" class="btn btn-warning btn-sm">Update</button>
+					<button ng-click="delete(form.username)" class="btn btn-danger btn-sm">Delete</button>
+					<button ng-click="reset()" class="btn btn-primary btn-sm">Reset</button>
+				</div>
+				
+			</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="card shadow mt-3">
+		<div class="card-header" style="display: flex; justify-content: space-between">
+			<h3 class="m-0 font-weight-bold text-primary">List Account</h3>
+			<h6>{{currentPage}} of {{totalPages()}}</h6>
+		</div>
+		<div class="card-body">
+			<table id="example1" class="table table-bordered table-striped text-center">
+				<thead>
+					<tr>
+						<td>Username</td>
+						<th>Password</th>
+						<th>Fullname</th>
+						<th>Email</th>
+						<th>Photo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="account in getCurrentItems()">
+						<td >{{account.username}}</td>
+						<td >{{account.password}}</td>
+						<td >{{account.fullname}}</td>
+						<td>{{account.email}}</td>
+						<td >{{account.photo}}</td>
+						<td>
+							<button ng-click="edit(account.username)" class="btn btn-light btn-sm">Edit</button>
+							<button ng-click="delete(account.username)" class="btn btn-danger btn-sm">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="col-12">
+				<div class="col-12">
+					<nav aria-label="..." class="mt-4 d-flex justify-content-center">
+	                	<ul class="pagination">
+	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPageFirst()">First</a></li>
+	
+	                	    <li ng-class="{disabled: currentPage == 1}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage - 1)">Previous</a></li>
+	                            
+	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPage(currentPage + 1)">Next</a></li>
+	
+	                	    <li ng-class="{disabled: currentPage == totalPages()}" class="page-item"><a class="page-link" href="" ng-click="setPageLast()">Last</a></li>
+	                	</ul>
+	                </nav>
+				</div>		
+			</div>
+			
+		</div>
+	</div>
+</div>

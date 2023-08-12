@@ -12,6 +12,7 @@ public interface AccountService {
 	Account findById(String username);
 	
 	Account create(Account account);
+	Account create2(Account account);
 	
 	List<Account> findAll();
 
@@ -22,4 +23,7 @@ public interface AccountService {
 	Account updatePassword(Account account, String newPassword);
 	
 	Account update(Account account);
+
+	void delete(String id);
+	List<Account> getAccountAuth();
 }

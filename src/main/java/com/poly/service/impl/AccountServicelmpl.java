@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 
@@ -13,6 +14,7 @@ import org.thymeleaf.context.Context;
 import com.poly.dao.AccountDAO;
 import com.poly.model.Account;
 import com.poly.model.MailInfo;
+import com.poly.model.Product;
 import com.poly.service.AccountService;
 import com.poly.service.EmailService;
 
@@ -32,10 +34,11 @@ public class AccountServicelmpl implements AccountService{
 		private TemplateEngine templateEngine;
 	
 	
-	@Override
-	public Account findById(String username) {		
-		return dao.findById(username).get();
-	}
+	  @Override
+		public Account findById(String id) {
+		    Optional<Account> optionalAccount = dao.findById(id);
+		    return optionalAccount.orElse(null);
+		}
 
 	@Override
 	public List<Account> findAll() {
@@ -104,6 +107,22 @@ public class AccountServicelmpl implements AccountService{
 	@Override
 	public Account update(Account account) {
 		return dao.save(account);
+	}
+
+	@Override
+	public void delete(String id) {
+		dao.deleteById(id);
+		
+	}
+
+	@Override
+	public Account create2(Account account) {
+		return dao.save(account);
+	}
+
+	@Override
+	public List<Account> getAccountAuth() {
+		return dao.getAccountAuth();
 	}
 
 }

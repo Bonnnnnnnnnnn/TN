@@ -17,7 +17,6 @@ CREATE TABLE [dbo].[Accounts](
 	[Password] [nvarchar](200) NOT NULL,
 	[Fullname] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
-	[Phone] [nvarchar](12) NULL,
 	[Photo] [nvarchar](50)  NULL,
 	[Phone] [nvarchar](12) NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
@@ -184,6 +183,13 @@ CREATE TABLE Visitors(
 	[views] bigint
 )
 
+
+
+SELECT *
+FROM Accounts A
+INNER JOIN Authorities Auth ON A.Username = Auth.Username
+INNER JOIN Roles R ON Auth.RoleId = R.Id
+WHERE R.Id=N'STAF'
 
 
 
@@ -556,7 +562,3 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
 
-
-SELECT * FROM Products p INNER JOIN Favourites f ON p.Id = f.ProductId WHERE Username = ?1 AND IsLiked = 1
-
-SELECT p FROM Products p WHERE p.Name like %?1% or p.Id like %?2%
