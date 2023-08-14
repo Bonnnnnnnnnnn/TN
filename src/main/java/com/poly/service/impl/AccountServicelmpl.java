@@ -63,9 +63,7 @@ public class AccountServicelmpl implements AccountService{
             throw new EntityExistsException("Email đã tồn tại");
         }
 
-        // Mã hóa mật khẩu và tạo tài khoản mới
-        String encodedPassword = passwordEncoder.encode(account.getPassword());
-        account.setPassword(encodedPassword);
+
 
         Account savedAccount = dao.save(account);
 
