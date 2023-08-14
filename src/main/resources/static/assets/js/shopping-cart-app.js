@@ -150,11 +150,12 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     $scope.getTotal = function() {
     	var discount = document.getElementById('discountPrice').innerText;
     	    var subtotal = 0;
+    	    var shippingFee = 15000;
     	    for (var i = 0; i < $scope.cart.items.length; i++) {
     	        var item = $scope.cart.items[i];
     	        subtotal += item.price * item.qty;
     	    }
-    	    return subtotal - discount;
+    	    return (subtotal + shippingFee) - discount;
     	};
   $scope.cart = {
     items: [],

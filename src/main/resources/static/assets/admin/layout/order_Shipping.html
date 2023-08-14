@@ -194,15 +194,15 @@
 			         	<div class="d-flex justify-content-between pt-2">
 			              <p class="fw-bold mb-0"></p>
 			              <p class="text-muted mb-0 mr-1">Giảm giá:
-			              	<span ng-if="order.discountId.price" style="font-weight: bold;" class="fw-bold me-4">{{order.discountId.price | number}} đ</span>
-   							<span ng-if="!order.discountId.price" style="font-weight: bold;" class="fw-bold me-4">0 đ</span>
+			              	<span ng-if="order.discount.price" style="font-weight: bold;" class="fw-bold me-4">{{order.discount.price | number}} đ</span>
+   							<span ng-if="!order.discount.price" style="font-weight: bold;" class="fw-bold me-4">0 đ</span>
 			              </p>     
 			         	</div>
 			          </div>
 			          <div class="card-footer border-0 px-4 py-5"
 			            style="background-color: #1cc88a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 			            <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Tổng Thanh Toán:
-			              &nbsp<span class="h2 mb-0 ms-2">{{(totalPrice - order.discountId.price + 15000) | number}}</span>&nbsp<span style="text-decoration: underline; font-weight: bold; font-size: 24px;text-transform: lowercase;">đ</span></h5>
+			              &nbsp<span class="h2 mb-0 ms-2">{{(totalPrice - order.discount.price + 15000) | number}}</span>&nbsp<span style="text-decoration: underline; font-weight: bold; font-size: 24px;text-transform: lowercase;">đ</span></h5>
 			          </div>
 			        </div>
 			      </div>
