@@ -12,6 +12,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.poly.dao.AccountDAO;
+import com.poly.exception.EntityExistsException;
 import com.poly.model.Account;
 import com.poly.model.MailInfo;
 import com.poly.model.Product;
@@ -50,20 +51,34 @@ public class AccountServicelmpl implements AccountService{
 		return dao.getAdministrators();
 	}
 	
-	 @Override
-	    public Account create(Account account) {
-	        Account savedAccount = dao.save(account);
+	@Override
+    public Account create(Account account) {
+        // Kiểm tra tài khoản đã tồn tại
+        if (dao.findById(account.getUsername()).isPresent()) {
+            throw new EntityExistsException("Tài khoản đã tồn tại");
+        }
 
-	        // Gửi email chào mừng
-	        try {
-	            sendWelcomeEmail(savedAccount);
-	        } catch (MessagingException e) {
-	            System.out.println("Failed to send welcome email");
-	            // Xử lý lỗi gửi email nếu cần thiết
-	        }
+        // Kiểm tra email đã tồn tại
+        if (dao.findByEmail(account.getEmail()) != null) {
+            throw new EntityExistsException("Email đã tồn tại");
+        }
 
-	        return savedAccount;
-	    }
+        // Mã hóa mật khẩu và tạo tài khoản mới
+        String encodedPassword = passwordEncoder.encode(account.getPassword());
+        account.setPassword(encodedPassword);
+
+        Account savedAccount = dao.save(account);
+
+        // Gửi email chào mừng
+        try {
+            sendWelcomeEmail(savedAccount);
+        } catch (MessagingException e) {
+            System.out.println("Failed to send welcome email");
+            // Xử lý lỗi gửi email nếu cần thiết
+        }
+
+        return savedAccount;
+    }
 	
 	@Override
     public Account updatePassword(Account account, String newPassword) {

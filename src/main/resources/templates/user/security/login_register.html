@@ -30,6 +30,7 @@
                 </div>
                 <div id="error-message-register" class="error-message-register" ng-show="errorMessage">{{ errorMessage }}</div>
             <div id="success-message-register" class="success-message-register" ng-show="successMessage">{{ successMessage }}</div>
+            <div ng-show="serverMessage" class="error-message">{{ serverMessage }}</div>
             </form>
             <div class="loading-overlay" ng-show="loading">
             <div class="loading-spinner"></div>

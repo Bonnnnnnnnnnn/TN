@@ -75,25 +75,35 @@ $scope.create = function () {
     var item = angular.copy($scope.form);
     var url = `${pathAccount}/account`;
 
-    $http.post(url, item)
-        .then(function (response) {
-            // Xử lý kết quả trả về từ API hoặc backend
-            $scope.items.push(item);
-            $scope.successMessage = "Đăng ký thành công";
-            console.log("Success", response);
+	    $http.post(url, item)
+	    .then(function (response) {
+	        if (response.data === "Tài khoản đã tồn tại") {
+	            $scope.serverMessage = "Tài khoản đã tồn tại";
+	        } else if (response.data === "Email đã tồn tại") {
+	            $scope.serverMessage = "Email đã tồn tại";
+	        } else {
+	            // Xử lý kết quả trả về từ API hoặc backend
+	            $scope.items.push(item);
+	            $scope.successMessage = "Đăng ký thành công";
+	            console.log("Success", response);
+	        }
+	
+	        // Dừng hiệu ứng loading sau khi xử lý thành công hoặc thất bại
+	        $scope.loading = false;
+	    })
+	    .catch(function (error) {
+	        // Xử lý lỗi nếu có
+	        console.error('Error:', error);
+	        $scope.serverMessage = "Error creating account. Please try again.";
+	
+	        // Dừng hiệu ứng loading sau khi xử lý thất bại
+	        $scope.loading = false;
+	    });
 
-            // Dừng hiệu ứng loading sau khi xử lý thành công
-            $scope.loading = false;
-        })
-        .catch(function (error) {
-            // Xử lý lỗi nếu có
-            console.error('Error:', error);
-            $scope.errorMessage = "Error creating account. Please try again.";
 
-            // Dừng hiệu ứng loading sau khi xử lý thất bại
-            $scope.loading = false;
-        });
+
 };
+
 
 
     
