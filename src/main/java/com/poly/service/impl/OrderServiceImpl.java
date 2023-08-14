@@ -71,7 +71,7 @@ public class OrderServiceImpl implements OrderService{
 				.stream()
 				.peek(d -> d.setOrder(order))
 				.collect(Collectors.toList());
-		
+		order.setOrderDetails(details);
 		
 		
 		
