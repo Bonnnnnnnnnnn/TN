@@ -384,6 +384,25 @@ input {
         transform: rotate(360deg);
     }
 }
-  
+
+.toggle-password {
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    margin-left: 10px;
+}
+
+.toggle-password:hover {
+    color: #4bb6b7;
+}
+
+.toggle-password2 {
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    margin-left: 10px;
+}
+
+.toggle-password2:hover {
+    color: #4bb6b7;
+}
   
   
