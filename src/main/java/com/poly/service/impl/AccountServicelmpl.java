@@ -12,7 +12,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.poly.dao.AccountDAO;
-import com.poly.exception.EntityExistsException;
 import com.poly.model.Account;
 import com.poly.model.MailInfo;
 import com.poly.model.Product;
@@ -51,18 +50,19 @@ public class AccountServicelmpl implements AccountService{
 		return dao.getAdministrators();
 	}
 	
-	@Override
-    public Account create(Account account) {
-        // Kiểm tra tài khoản đã tồn tại
-        if (dao.findById(account.getUsername()).isPresent()) {
-            throw new EntityExistsException("Tài khoản đã tồn tại");
-        }
+	 @Override
+	    public Account create(Account account) {
+	        Account savedAccount = dao.save(account);
 
-        // Kiểm tra email đã tồn tại
-        if (dao.findByEmail(account.getEmail()) != null) {
-            throw new EntityExistsException("Email đã tồn tại");
-        }
+	        // Gửi email chào mừng
+	        try {
+	            sendWelcomeEmail(savedAccount);
+	        } catch (MessagingException e) {
+	            System.out.println("Failed to send welcome email");
+	            // Xử lý lỗi gửi email nếu cần thiết
+	        }
 
+<<<<<<< HEAD
 
 
         Account savedAccount = dao.save(account);
@@ -77,6 +77,10 @@ public class AccountServicelmpl implements AccountService{
 
         return savedAccount;
     }
+=======
+	        return savedAccount;
+	    }
+>>>>>>> parent of 40e526e (bat loi account (not done))
 	
 	@Override
     public Account updatePassword(Account account, String newPassword) {
