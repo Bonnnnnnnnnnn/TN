@@ -148,7 +148,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     	    return subtotal;
     };
     $scope.getTotal = function() {
-    	var discount = document.getElementById('discount').innerText;
+    	var discount = document.getElementById('discountPrice').innerText;
     	    var subtotal = 0;
     	    for (var i = 0; i < $scope.cart.items.length; i++) {
     	        var item = $scope.cart.items[i];
@@ -238,6 +238,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
     createDate: new Date(),
     address: "",
     account: { username: $("#username").text() },
+    discount: null,
     get orderDetails() {
       return $scope.cart.items.map((item) => {
         return {
@@ -248,12 +249,14 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
       });
     },
     purchase() {
-      var discountId = document.getElementById('discountId').value;
-      var order = angular.copy(this);
-      console.log(order);
+      var discountId = document.getElementById("discountId").value;
       if (discountId) {
-      order.discountId = discountId;
+        $scope.order.discount = { id: discountId };
       }
+
+      var order = angular.copy(this);
+
+      console.log(order.discount)
       // thực hiện đặt hàng, orders này là giá trị truyền vào JsonNode orderData bên Controller
 
       var isPaypal = document.getElementById("paypal");

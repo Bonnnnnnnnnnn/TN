@@ -56,7 +56,7 @@ public class OrderController {
 	    model.addAttribute("totalProducts", totalProducts);
 
 	    var order = orderService.findById(id);
-	    Discount discount = order.getDiscountId();
+	    Discount discount = order.getDiscount();
 
 	    if (discount == null || discount.getId() == null) {
 	        discount = new Discount();
@@ -98,7 +98,7 @@ public class OrderController {
 		orderService.update(out);
 		
 		 var order = orderService.findById(id);
-	    Discount discount = order.getDiscountId();
+	    Discount discount = order.getDiscount();
 
 	    if (discount == null || discount.getId() == null) {
 	        discount = new Discount();
