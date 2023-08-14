@@ -39,6 +39,7 @@ app.controller("ctrl-account", function($scope, $http){
         });
     }
     
+    //Hien Pass
     $scope.showPassword = false;
 
     $scope.toggleShowPassword = function() {
