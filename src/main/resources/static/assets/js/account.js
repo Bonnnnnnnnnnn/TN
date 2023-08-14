@@ -39,6 +39,13 @@ app.controller("ctrl-account", function($scope, $http){
         });
     }
     
+    //Hien Pass
+    $scope.showPassword = false;
+
+    $scope.toggleShowPassword = function() {
+        $scope.showPassword = !$scope.showPassword;
+    };
+    
 $scope.create = function () {
     // Bắt đầu hiệu ứng loading
     $scope.loading = true;

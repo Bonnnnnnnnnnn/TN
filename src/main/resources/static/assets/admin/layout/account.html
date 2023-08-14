@@ -1,3 +1,14 @@
+<style>
+	.toggle-password {
+	    cursor: pointer;
+	    transition: color 0.3s ease-in-out;
+	    margin-left: 10px;
+	}
+	
+	.toggle-password:hover {
+	    color: rgb(22, 160, 113);
+	}
+</style>
 <div ng-controller="ctrl-accountadmin">
 	<div class="row">
 		<div class="col-md-12">
@@ -14,8 +25,12 @@
 			            <div class="errcategory" style='color: red;' ></div>
 					</div>
 					<div class="form-group col-md-6">
-						<label for="title">Password</label>
-						<input ng-model="form.password" class="form-control">
+						<label for="title">Password 
+							<a ng-click="toggleShowPassword()" class="toggle-password">
+							    <i ng-class="{'fas fa-eye': showPassword, 'fas fa-eye-slash': !showPassword}"></i>
+							</a>
+						</label>
+						<input type="{{ showPassword ? 'text' : 'password' }}" ng-model="form.password" class="form-control">
 						<div class="erridProduct" style='color: red;' ></div>
 					</div>
 					<div class="form-group col-md-6">

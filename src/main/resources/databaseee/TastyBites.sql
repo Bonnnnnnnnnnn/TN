@@ -561,4 +561,3 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
-

@@ -2,7 +2,13 @@ let pathAccount = "http://localhost:8080/rest";
 app.controller("ctrl-accountadmin", function($scope, $http) {
 	$scope.form = {};
 	$scope.items = [];
+	
+	//Hien Pass
+	$scope.showPassword = false;
 
+    $scope.toggleShowPassword = function() {
+        $scope.showPassword = !$scope.showPassword;
+    };
 
 	$scope.load_all = function() {
 		var url = `${pathAccount}/accountadmin`;
