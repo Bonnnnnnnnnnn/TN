@@ -53,20 +53,6 @@ public class AccountServicelmpl implements AccountService{
 	 @Override
 	    public Account create(Account account) {
 	        Account savedAccount = dao.save(account);
-
-	        // Gửi email chào mừng
-	        try {
-	            sendWelcomeEmail(savedAccount);
-	        } catch (MessagingException e) {
-	            System.out.println("Failed to send welcome email");
-	            // Xử lý lỗi gửi email nếu cần thiết
-	        }
-
-<<<<<<< HEAD
-
-
-        Account savedAccount = dao.save(account);
-
         // Gửi email chào mừng
         try {
             sendWelcomeEmail(savedAccount);
@@ -77,10 +63,7 @@ public class AccountServicelmpl implements AccountService{
 
         return savedAccount;
     }
-=======
-	        return savedAccount;
-	    }
->>>>>>> parent of 40e526e (bat loi account (not done))
+
 	
 	@Override
     public Account updatePassword(Account account, String newPassword) {
