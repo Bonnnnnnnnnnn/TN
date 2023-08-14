@@ -182,7 +182,7 @@ app.controller("ctrl-product", function($scope, $http) {
 
 	$scope.reset = function() {
 		$scope.form = {
-			productImage: 'cloud-upload.jpg',
+			image: 'default.jpg',
 		};
 		
 	}

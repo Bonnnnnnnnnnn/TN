@@ -18,7 +18,6 @@
 				</div>
 				<form name="myForm">
 				<div class="card-body row">
-				
 					<div class="form-group col-md-6">
 						<label for="title">Username</label>
 						<input ng-model="form.username" class="form-control">
@@ -44,16 +43,17 @@
 						<div class="errPrice" style='color: red;' ></div>
 					</div>
 
-						<div class="form-group col-md-6">
-						<label for="title">Image</label>
-						<div class="custom-file mb-4">
-	                    	<label for="image" class="custom-file-label">{{form.image}}</label>
-	                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
-	                    </div>						
+					<div class="form-group col-md-6">
+					<label for="title">Image</label>
+					<div class="custom-file mb-4">
+                    	<label for="image" class="custom-file-label">{{form.photo}}</label>
+                        <input onchange="angular.element(this).scope().imageChanged(this.files)" id="image" type="file" class="form-control ">
+                        
+                    </div>							
 					</div>
 					<div class="form-group col-md-6 text-center" style="align-items: center; display: flex;">
-						<label for="image" style="margin: 0;">
-							<img ng-src="{{'/folder/images/' + form.image}}" style="width: 30%;height:50%" />
+						<label for="image" style="margin: 0;width: 170px; height: 160px;">
+							<img ng-src="{{'/assets/img/user/' + form.photo}}" style="width: 100%;height:100%" />
 						</label>
 					</div>
 				</div>

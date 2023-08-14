@@ -78,11 +78,11 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 		var data = new FormData();
 		// lấy file đã chọn bỏ vào FormData
 		data.append('file', files[0]);
-		$http.post('/rest/upload/images', data, {
+		$http.post('/rest/upload/img', data, {
 			transformRequest: angular.identity,
 			headers: { 'Content-Type': undefined }
 		}).then(resp => {
-			$scope.form.image = resp.data.name;
+			$scope.form.photo = resp.data.name;
 		}).catch(error => {
 			alert("Error upload image");
 			console.log("Error", error);
@@ -91,7 +91,7 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 
 	$scope.reset = function() {
 		$scope.form = {
-			accountImage: 'cloud-upload.jpg',
+			photo: 'default.png',
 		};
 		
 	}
