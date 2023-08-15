@@ -21,10 +21,10 @@
                 <input type="text" placeholder="Fullname" ng-model="form.fullname" id="fullname" name="fullname">
                 <input type="text" placeholder="Email" ng-model="form.email" id="userEmail" name="userEmail" >
                 <input type="text" placeholder="Phone" ng-model="form.phone" id="phone" name="phone" >
-                <div class="row" style="display: flex; width: 100%;">
+                <div class="row">
             		<input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" ng-model="form.password" id="password" name="password">
 					<a ng-click="toggleShowPassword()" class="toggle-password">
-					    <i ng-class="{'fas fa-eye': showPassword, 'fas fa-eye-slash': !showPassword}"></i>
+					    <i ng-class="{'fas fa-eye-slash': showPassword, 'fas fa-eye': !showPassword}"></i>
 					</a>		
 				</div>
                 <button ng-click="create()">Register</button>
@@ -48,10 +48,10 @@
                 <a style="margin-bottom: -10px" th:href="@{/home/index}"><img alt="" src="/assets/img/logo.png"></a>
                 <h1>Login</h1>
                 <input type="text" placeholder="User Name" id="typeEmailX" name="username">
-                <div class="row" style="display: flex; width: 100%;">
+                <div class="row">
             		<input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Password" ng-model="form.password" id="typePasswordX" name="password">
 					<a class="toggle-password2">
-					    <i class="fas fa-eye-slash"></i>
+					    <i class="fas fa-eye"></i>
 					</a>		
 				</div>
                 <div class="content">
@@ -109,12 +109,12 @@
 	            
 	            if (passwordFieldType === 'password') {
 	                passwordInput.setAttribute('type', 'text');
-	                iconElement.classList.remove('fa-eye-slash');
-	                iconElement.classList.add('fa-eye');
-	            } else {
-	                passwordInput.setAttribute('type', 'password');
 	                iconElement.classList.remove('fa-eye');
 	                iconElement.classList.add('fa-eye-slash');
+	            } else {
+	                passwordInput.setAttribute('type', 'password');
+	                iconElement.classList.remove('fa-eye-slash');
+	                iconElement.classList.add('fa-eye');
 	            }
 	        });
 	    });
