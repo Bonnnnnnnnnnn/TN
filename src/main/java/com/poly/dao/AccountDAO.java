@@ -18,4 +18,7 @@ public interface AccountDAO extends JpaRepository<Account, String>{
 	
 	@Query(value="SELECT * FROM Accounts A INNER JOIN Authorities Auth ON A.Username = Auth.Username INNER JOIN Roles R ON Auth.RoleId = R.Id WHERE R.Id=N'STAF' OR R.Id=N'DIRE'", nativeQuery = true)
 	List<Account> getAccountAuth();
+	
+	@Query(value="SELECT * FROM Accounts A INNER JOIN Authorities Auth ON A.Username = Auth.Username INNER JOIN Roles R ON Auth.RoleId = R.Id WHERE R.Id=N'CUST'", nativeQuery = true)
+	List<Account> getAccountCustomer();
 }

@@ -42,6 +42,12 @@ public class AccountRestControllerAdmin {
 		return ResponseEntity.ok(accounts);
 	}
 
+	@GetMapping("/rest/accountcustomer")
+	public ResponseEntity<List<Account>> getCustomer() {
+		List<Account> accounts = accountService.getAccountCustomer();
+		return ResponseEntity.ok(accounts);
+	}
+	
 	@GetMapping("/rest/accountadmin/{id}")
 	public ResponseEntity<Account> findOne(@PathVariable("id") String id) {
 		Account account = accountService.findById(id);

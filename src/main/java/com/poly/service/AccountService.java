@@ -25,5 +25,8 @@ public interface AccountService {
 	Account update(Account account);
 
 	void delete(String id);
+	
 	List<Account> getAccountAuth();
+	
+	List<Account> getAccountCustomer();
 }
