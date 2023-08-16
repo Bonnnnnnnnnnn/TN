@@ -125,4 +125,9 @@ public class AccountServicelmpl implements AccountService{
 		return dao.getAccountAuth();
 	}
 
+	@Override
+	public List<Account> getAccountCustomer() {
+		return dao.getAccountCustomer();
+	}
+
 }

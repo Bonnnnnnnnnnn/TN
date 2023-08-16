@@ -2,6 +2,7 @@ let pathAccount = "http://localhost:8080/rest";
 app.controller("ctrl-accountadmin", function($scope, $http) {
 	$scope.form = {};
 	$scope.items = [];
+	$scope.items2 = [];
 	
 	//Hien Pass
 	$scope.showPassword = false;
@@ -10,10 +11,21 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
         $scope.showPassword = !$scope.showPassword;
     };
 
+
 	$scope.load_all = function() {
 		var url = `${pathAccount}/accountadmin`;
 		$http.get(url).then(resp => {
 			$scope.items = resp.data;
+			console.log("Success", resp)
+		}).catch(errors => {
+			console.log("Error", errors)
+		});
+	}
+
+	$scope.load_Customer = function() {
+		var url = `${pathAccount}/accountcustomer`;
+		$http.get(url).then(resp => {
+			$scope.items2 = resp.data;
 			console.log("Success", resp)
 		}).catch(errors => {
 			console.log("Error", errors)
@@ -97,6 +109,9 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 	}
 
 	$scope.load_all();
+	
+	$scope.load_Customer();
+	
 	$scope.reset();
 
 	// Pagination
@@ -129,6 +144,12 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 		var startIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
 		var endIndex = startIndex + $scope.itemsPerPage;
 		return $scope.items.slice(startIndex, endIndex);
+	};
+
+	$scope.getCurrentItems2 = function() {
+		var startIndex = ($scope.currentPage - 1) * $scope.itemsPerPage;
+		var endIndex = startIndex + $scope.itemsPerPage;
+		return $scope.items2.slice(startIndex, endIndex);
 	};
 
 	$scope.setPageFirst = function() {
