@@ -3956,3 +3956,160 @@ label[for="profile-picture"]::before {
     font-family: FontAwesome;
     font-size: 18px;
 }
+/* Section title styling */
+.section-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Checkbox label styling */
+.custom-control-label {
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Checkbox styling */
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #127500 ;
+    background-color: #127500;
+}
+
+/* Button styling */
+.btn-filter {
+    background-color: #7fad39;
+    border-color: #7fad39;
+    width: 100%;
+    padding: 10px;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-filter:hover {
+    background-color: #127500;
+    color:white;
+    border-color: #127500;
+}
+
+/* Spacing for checkboxes */
+.custom-control {
+    margin-bottom: 10px;
+}
+
+/* Container styling */
+.container {
+    padding: 20px;
+    
+}
+
+/* Background and spacing for the filter area */
+.bg-light {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 23px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+
+/* Review Form */
+.review-form {
+    padding: 30px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-form h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.rating {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    font-size: 24px;
+    color: #f6b417;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #feca03;
+}
+
+.review-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.review-form button {
+    background-color: #7fad39;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-form button:hover {
+    background-color: #127500;
+}
+
+/* Review List */
+.review-list {
+    margin-top: 30px;
+}
+
+.review-item {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.review-details {
+    flex: 1;
+}
+
+.review-details h6 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.review-details .rating {
+    margin-bottom: 10px;
+}
+
+.review-details p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #999;
+}
+
+

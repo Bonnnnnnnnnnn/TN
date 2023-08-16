@@ -183,6 +183,20 @@ CREATE TABLE Visitors(
 	[views] bigint
 )
 
+CREATE TABLE [dbo].[Reviews](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Rating] [int] NOT NULL,
+	[Comment] [nvarchar](max) NULL,
+	[ReviewDate] [datetime] NOT NULL DEFAULT GETDATE(),
+	CONSTRAINT [PK_Reviews] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
 
 
 SELECT *
@@ -550,6 +564,12 @@ GO
 ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK3ess0s7i9qs6sim1pf9kxhkpq]
 GO
 
+ALTER TABLE [dbo].[Reviews] WITH CHECK ADD  CONSTRAINT [FK_Reviews_Products] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([Id])
+Go
+
+ALTER TABLE [dbo].[Reviews] WITH CHECK ADD CONSTRAINT [FK_Reviews_Accounts] FOREIGN KEY ([Username]) REFERENCES [dbo].[Accounts] ([Username])
+Go
+
 ALTER TABLE Accounts
 ADD auth_provider VARCHAR(255);
 
@@ -561,3 +581,6 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
+
+
+
