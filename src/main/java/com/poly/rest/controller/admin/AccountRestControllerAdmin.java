@@ -93,6 +93,10 @@ public class AccountRestControllerAdmin {
 	public ResponseEntity<Account> put(@PathVariable("id") String id, @RequestBody Account account) {
 		Account existingAccount = accountService.findById(id);
 		if (existingAccount != null) {
+			// Mã hóa mật khẩu
+		    String encodedPassword = passwordEncoder.encode(account.getPassword());
+		    account.setPassword(encodedPassword);
+		    
 			account.setUsername(id);
 			Account updatedAccount = accountService.update(account);
 			return ResponseEntity.ok(updatedAccount);

@@ -279,7 +279,7 @@ public class ProductController {
 		    reviewDAO.save(review);
 
 		    // Chuyển hướng người dùng trở lại trang chi tiết sản phẩm
-		    return "redirect:/user/product/detail/" + review.getProduct().getId();
+		    return "user/product/detail/" + review.getProduct().getId();
 		}
 
 

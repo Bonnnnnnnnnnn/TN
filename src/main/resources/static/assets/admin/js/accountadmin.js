@@ -48,7 +48,11 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 		$http.put(url, item).then(resp => {
 			var index = $scope.items.findIndex(item => item.username == $scope.form.username);
 			$scope.items[index] = resp.data;
+			$scope.reset();
+			$scope.load_all();
+			$scope.load_Customer();
 			console.log("Success", resp);
+			alert("Cập nhật tài khoản thành công");
 		}).catch(error => {
 			console.log("Error", error);
 		});
@@ -64,6 +68,7 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 					$scope.items.push(item);
 					$scope.reset();
 					$scope.load_all();
+					alert("Tạo tài khoản thành công");
 					console.log("Success", resp);
 				}).catch(error => {
 					console.log("Error", error);
@@ -79,6 +84,7 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 			$scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
 			$scope.reset();
 			console.log("Success", resp);
+			alert("Xóa tài khoản thành công");
 		}).catch(error => {
 			console.log("lỗi xoá", error);
 		});

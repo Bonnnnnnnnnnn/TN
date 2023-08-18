@@ -37,7 +37,10 @@ app.controller("ctrl-product", function($scope, $http) {
 		$http.put(url, item).then(resp => {
 			var index = $scope.items.findIndex(item => item.productId == $scope.form.productId);
 			$scope.items[index] = resp.data;
+			$scope.reset();
+			$scope.load_all();
 			console.log("Success", resp);
+			alert("Cập nhật sản phẩm thành công");
 		}).catch(error => {
 			console.log("Error", error);
 		});
@@ -142,6 +145,7 @@ app.controller("ctrl-product", function($scope, $http) {
 					$scope.reset();
 					$scope.load_all();
 					console.log("Success", resp);
+					alert("Tạo sản phẩm thành công");
 				}).catch(error => {
 					console.log("Error", error);
 				});
@@ -158,6 +162,7 @@ app.controller("ctrl-product", function($scope, $http) {
 			$scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
 			$scope.reset();
 			console.log("Success", resp);
+			alert("Xóa sản phẩm thành công");
 		}).catch(error => {
 			console.log("lỗi xoá", error);
 		});

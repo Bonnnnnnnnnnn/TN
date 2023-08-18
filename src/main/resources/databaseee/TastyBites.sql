@@ -196,18 +196,6 @@ CREATE TABLE [dbo].[Reviews](
 	) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-
-
-
-SELECT *
-FROM Accounts A
-INNER JOIN Authorities Auth ON A.Username = Auth.Username
-INNER JOIN Roles R ON Auth.RoleId = R.Id
-WHERE R.Id=N'STAF'
-
-
-
-
 -------------------------Insert data-------------------------
 
 ----------Table Accounts----------
@@ -584,3 +572,13 @@ ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
 
 
 
+SELECT SUM(TotalPriceAfterDiscount) as FinalTotal
+FROM (
+    SELECT d.Price,
+           COALESCE(SUM(od.Price * od.Quantity) - COALESCE(d.Price, 0), 0) + 15000 as TotalPriceAfterDiscount
+    FROM Orders o
+    INNER JOIN OrderDetails od ON o.Id = od.OrderId 
+    LEFT JOIN Discount d ON o.DiscountId = d.Id
+    WHERE o.Status = N'Đã giao'
+    GROUP BY d.Price
+) Subquery;

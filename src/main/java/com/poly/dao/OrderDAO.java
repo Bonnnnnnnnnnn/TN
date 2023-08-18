@@ -40,11 +40,17 @@ public interface OrderDAO extends JpaRepository<Order, Long>{
 	@Query(value = "SELECT COUNT(*) AS TotalOrders FROM Orders; ", nativeQuery = true)
 	long getTotalOrder();
 	
-	@Query(value = "SELECT COALESCE(SUM(od.Price), 0.0) as totalPriceOrder "
-			+ "FROM Orders o "
-			+ "INNER JOIN OrderDetails od ON o.Id = od.OrderId "
-			+ "WHERE o.Status = N'Đã giao';", nativeQuery = true)
-		float getTotalPriceOrder();
+	@Query(value = "SELECT COALESCE(SUM(TotalPriceAfterDiscount),0.0) as FinalTotal\r\n"
+			+ "FROM (\r\n"
+			+ "    SELECT d.Price,\r\n"
+			+ "           COALESCE(SUM(od.Price * od.Quantity) - COALESCE(d.Price, 0), 0) + 15000 as TotalPriceAfterDiscount\r\n"
+			+ "    FROM Orders o\r\n"
+			+ "    INNER JOIN OrderDetails od ON o.Id = od.OrderId \r\n"
+			+ "    LEFT JOIN Discount d ON o.DiscountId = d.Id\r\n"
+			+ "    WHERE o.Status = N'Đã giao'\r\n"
+			+ "    GROUP BY d.Price\r\n"
+			+ ") Subquery;", nativeQuery = true)
+	float getTotalPriceOrder();
 	
 	@Query(value = "SELECT views FROM Visitors; ", nativeQuery = true)
 	Integer getViewVisitor();

@@ -30,7 +30,10 @@ app.controller("ctrl-category", function($scope, $http) {
         $http.put(url, category).then(resp => {
             var index = $scope.items.findIndex(item => item.id == $scope.form.id);
             $scope.items[index] = resp.data;
+            $scope.reset();
+            $scope.load_all();
             console.log("Success", resp);
+            alert("Cập nhật danh mục thành công");
         }).catch(error => {
             console.log("Error", error);
         });
@@ -44,6 +47,7 @@ app.controller("ctrl-category", function($scope, $http) {
             $scope.items.push(resp.data);
             $scope.reset();
             console.log("Success", resp);
+            alert("Tạo danh mục thành công");
         }).catch(error => {
             console.log("Error", error);
         });
@@ -56,6 +60,7 @@ app.controller("ctrl-category", function($scope, $http) {
             $scope.items.splice(index, 1);
             $scope.reset();
             console.log("Success", resp);
+            alert("Xóa danh mục thành công");
         }).catch(error => {
             console.log("Error", error);
         });

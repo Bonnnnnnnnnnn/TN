@@ -121,55 +121,56 @@
 	                            <!-- Tab for Reviews -->
 <div class="tab-pane" id="tabs-3" role="tabpanel">
     <div class="product__details__tab__desc">
-        <h6>Reviews</h6>
-        <!-- Review Form -->
-        <div class="review-form">
-            <h5>Add a review</h5>
-            <form th:action="@{/product/addReview}" method="post">
-                <input name="productId" th:value="${item.id}" />
-
-                <div class="rating">
-                    <input type="radio" name="rating" id="star5" value="5" />
-                    <label for="star5"></label>
-                    <input type="radio" name="rating" id="star4" value="4" />
-                    <label for="star4"></label>
-                    <input type="radio" name="rating" id="star3" value="3" />
-                    <label for="star3"></label>
-                    <input type="radio" name="rating" id="star2" value="2" />
-                    <label for="star2"></label>
-                    <input type="radio" name="rating" id="star1" value="1" />
-                    <label for="star1"></label>
-                </div>
-
-                <textarea class="form-control" name="comment" placeholder="Write your review"></textarea>
-                <button type="submit" class="site-btn">Submit</button>
-            </form>
-        </div>
-
-        <!-- List of Reviews -->
-        <div class="review-list">
-            <h5>Customer Reviews</h5>
-            <ul>
-                <li class="review-item" th:each="review : ${reviews}">
-                    <div class="review-avatar">
-                        <img src="/assets/img/avatar.jpg" alt="Avatar">
-                    </div>
-                    <div class="review-details">
-                        <h6 th:text="${review.username}"></h6>
-                        <div class="rating">
-                            <span th:each="i : ${#numbers.sequence(1, review.rating)}">
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <span th:if="${review.rating < 5}">
-                                <i class="fa fa-star-half-o"></i>
-                            </span>
-                        </div>
-                        <p th:text="${review.comment}"></p>
-                        <span class="review-date" th:text="${#dates.format(review.reviewDate, 'MMMM d, yyyy')}"></span>
-                    </div>
-                </li>
-            </ul>
-        </div>
+		<div class="review-container">
+		    <div class="left-column">
+		        <!-- Review Form -->
+		        <div class="review-form">
+		            <h5>Add a review</h5>
+		            <form method="post">
+		                <input name="userName" placeholder="Your Name" />
+			            <input type="email" name="email" placeholder="Your Email" />
+			            <div class="input-rating">
+							<span>Your Rating: </span>
+							<div class="stars">
+								<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+								<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+								<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+								<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+								<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+							</div>
+						</div>
+			
+			            <textarea class="form-control" name="comment" placeholder="Write your review"></textarea>
+			            <button type="submit" class="site-btn">Submit</button>
+		            </form>
+		        </div>
+		    </div>
+		
+		    <div class="right-column">
+		        <!-- Review List -->
+		        <div class="review-list">
+		            <h5>Customer Reviews</h5>
+		            <ul>
+			            <li class="review-item">
+			                <div class="review-details">
+			                    <h6>Customer Name</h6>
+			                    <div class="rating">
+			                        <span>
+			                            <i class="fa fa-star"></i>
+			                        </span>
+			                        <span>
+			                            <i class="fa fa-star-half-o"></i>
+			                        </span>
+			                    </div>
+			                    <p>This is a customer review.</p>
+			                    <span class="review-date">August 18, 2023</span>
+			                </div>
+			            </li>
+			            <!-- Add more review items as needed -->
+			        </ul>
+		        </div>
+		    </div>
+		</div>
     </div>
 </div>
 

@@ -36,7 +36,10 @@ app.controller("ctrl-discount", function($scope, $http) {
     $http.put(url, discount).then(resp => {
       var index = $scope.discounts.findIndex(item => item.id == $scope.form.id);
       $scope.discounts[index] = resp.data;
+      $scope.reset();
+      $scope.load_all();
       console.log("Success", resp);
+      alert("Cập nhật mã giảm thành công");
     }).catch(error => {
       console.log("Error", error);
     });
@@ -61,6 +64,7 @@ app.controller("ctrl-discount", function($scope, $http) {
           $scope.reset();
           $scope.load_all();
           console.log("Success", resp);
+          alert("Tạo mã giảm thành công");
         }).catch(error => {
           console.log("Error", error);
         });
@@ -76,6 +80,7 @@ app.controller("ctrl-discount", function($scope, $http) {
       $scope.discounts.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
       $scope.reset();
       console.log("Success", resp);
+      alert("Xóa mã giảm thành công");
     }).catch(error => {
       console.log("Error", error);
     });
