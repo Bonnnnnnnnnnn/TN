@@ -53,16 +53,22 @@ app.controller("ctrl-category", function($scope, $http) {
     };
 
     $scope.delete = function(id) {
+		var xacnhan = confirm('Bạn có chắc muốn xóa!');
         var url = `${pathCategory}/category/${id}`;
-        $http.delete(url).then(resp => {
-            var index = $scope.items.findIndex(item => item.id == id);
-            $scope.items.splice(index, 1);
-            $scope.reset();
-            console.log("Success", resp);
-            alert("Xóa danh mục thành công");
-        }).catch(error => {
-            console.log("Error", error);
-        });
+        if(xacnhan) {
+			$http.delete(url).then(resp => {
+	            var index = $scope.items.findIndex(item => item.id == id);
+	            $scope.items.splice(index, 1);
+	            $scope.reset();
+	            console.log("Success", resp);
+	            alert("Xóa danh mục thành công");
+	        }).catch(error => {
+	            console.log("Error", error);
+	        });	
+		}else{
+			console.log("Cancel");
+		}
+        
     };
 
     $scope.imageChanged = function(files) {

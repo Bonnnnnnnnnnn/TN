@@ -73,17 +73,24 @@ app.controller("ctrl-discount", function($scope, $http) {
   }
 
   $scope.deleteDiscount = function(discountId) {
-    var url = `${pathDiscount}/discount/${discountId}`;
-    $http.delete(url).then(resp => {
-      // tìm ra phần tử tại vị trí sẽ xóa.
-      var index = $scope.discounts.findIndex(item => item.id == discountId);
-      $scope.discounts.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
-      $scope.reset();
-      console.log("Success", resp);
-      alert("Xóa mã giảm thành công");
-    }).catch(error => {
-      console.log("Error", error);
-    });
+	var url = `${pathDiscount}/discount/${discountId}`;
+	var xacnhan = confirm('Bạn có chắc muốn xóa!');
+	if(xacnhan) {
+		$http.delete(url).then(resp => {
+	      // tìm ra phần tử tại vị trí sẽ xóa.
+	      var index = $scope.discounts.findIndex(item => item.id == discountId);
+	      $scope.discounts.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
+	      $scope.reset();
+	      console.log("Success", resp);
+	      alert("Xóa mã giảm thành công");
+	    }).catch(error => {
+	      console.log("Error", error);
+	    });
+	}else{
+		console.log("Cancel");
+	}
+    
+    
   }
 
   $scope.reset = function() {
