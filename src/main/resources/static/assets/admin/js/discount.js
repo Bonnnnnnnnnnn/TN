@@ -7,7 +7,12 @@ app.controller("ctrl-discount", function($scope, $http) {
   $scope.discounts = [];
   
   
-
+  $scope.formatDate = function(dateString) {
+		if (!dateString) return null;
+		var date = new Date(dateString);
+		var formattedDate = moment(date).format('YYYY-MM-DD');
+		return formattedDate;
+	};
 
 
   $scope.load_all = function() {
@@ -24,6 +29,9 @@ app.controller("ctrl-discount", function($scope, $http) {
     var url = `${pathDiscount}/discount/${id}`;
     $http.get(url).then(resp => {
       $scope.form = resp.data;
+      $scope.form.applyDay = new Date(resp.data.applyDay);
+      $scope.form.expiration = new Date(resp.data.expiration);
+      $scope.form.createdate = new Date(resp.data.createdate);
       console.log("Success", resp);
     }).catch(errors => {
       console.log("Error", errors);
