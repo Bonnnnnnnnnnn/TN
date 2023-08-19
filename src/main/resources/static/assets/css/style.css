@@ -3962,7 +3962,6 @@ label[for="profile-picture"]::before {
 .section-title {
     font-size: 18px;
     color: #333;
-    margin-bottom: 15px;
 }
 
 /* Checkbox label styling */
@@ -4007,7 +4006,7 @@ label[for="profile-picture"]::before {
     padding: 20px;
     border-radius: 23px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 
