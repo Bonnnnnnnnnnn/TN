@@ -46,7 +46,7 @@
 				<!-- ng-model để liên kết biến $scope.selectedProductId với select box. -->
 				<!-- ng-change để gọi hàm showUserLikedProduct() -->
 				<select ng-model="selectedProductId" ng-change="showUserLikedProduct()" class="form-control">
-					<option ng-repeat="x in products" ng-value="x.productId">{{x.name}}</option>
+					<option ng-repeat="x in products" ng-value="x.id">{{x.name}}</option>
 				</select>
 			</div>
 			<table id="example2" class="table table-bordered table-striped">
@@ -59,8 +59,8 @@
 				<tbody>
 					<!-- ng-repeat hiển thị dữ liệu lên bảng table. -->
 					<tr ng-repeat="acc in accounts">
-						<td>{{acc.userFullname}}</td>
-						<td>{{acc.userEmail}}</td>
+						<td>{{acc.username}}</td>
+						<td>{{acc.email}}</td>
 					</tr>
 				</tbody>
 			</table>
