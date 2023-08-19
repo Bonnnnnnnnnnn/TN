@@ -41,7 +41,6 @@ app.controller("ctrl-category", function($scope, $http) {
 
     $scope.create = function() {
         var item = angular.copy($scope.form);
-        item.id = $scope.items.length + 1; // Lấy giá trị ID dựa trên độ dài của mảng items
         var url = `${pathCategory}/category`;
         $http.post(url, item).then(resp => {
             $scope.items.push(resp.data);
