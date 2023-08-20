@@ -136,6 +136,10 @@
 				              <p class="text-muted mb-0">Địa chỉ giao hàng:
 				              	<span style="font-weight: bold;" readonly="readonly">{{order.address}}</span>
 				              </p>
+				              <p class="text-muted mb-0">Thanh toán:
+				             	<span style="font-weight: bold;" class="fw-bold me-4" ng-if="order.paypalOrderStatus === 'PAID'">Đã thanh toán</span> 
+				             	<span style="font-weight: bold;" class="fw-bold me-4" ng-if="order.paypalOrderStatus !== 'PAID'">Chưa thanh toán</span> 
+				              </p>
 				            </div>	
 			              	<div class="row">
 			                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">

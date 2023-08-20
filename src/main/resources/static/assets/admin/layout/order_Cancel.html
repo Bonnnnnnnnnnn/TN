@@ -33,6 +33,7 @@
 						<th>Paypal Order Id</th>
 						<th>Paypal Order Status</th>
 						<th>Status</th>
+						<th>Cancellation Reason</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -46,6 +47,7 @@
 						<td>{{item.paypalOrderId}}</td>
 						<td>{{item.paypalOrderStatus}}</td>
 						<td><span class="status-cancel">{{item.status}}</span></td>
+						<td>{{item.cancellationReason}}</td>
 						<td>
 							<a type="button" ng-click="load_orderDetail(item.id)" class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row"
 								title="Xem chi tiết" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
@@ -120,14 +122,17 @@
 				              <p class="text-muted mb-0">Email: 
 				              	<span style="font-weight: bold;"readonly="readonly">{{order.account.email}}</span>
 				              </p>
-				              <p class="text-muted mb-0">Ngày đặt:
-				             	<span style="font-weight: bold;" class="fw-bold me-4">{{order.createDate | date: 'dd/MM/yyyy'}}</span> 
+				              <p class="text-muted mb-0">Lý do hủy:
+				             	<span style="font-weight: bold;" class="fw-bold me-4">{{order.cancellationReason}}</span> 
 				              </p>
 				            </div>
 							
 							<div class="d-flex justify-content-between pt-2 pb-4">
 				              <p class="text-muted mb-0">Địa chỉ giao hàng:
 				              	<span style="font-weight: bold;" readonly="readonly">{{order.address}}</span>
+				              </p>
+				              <p class="text-muted mb-0">Ngày đặt:
+				             	<span style="font-weight: bold;" class="fw-bold me-4">{{order.createDate | date: 'dd/MM/yyyy'}}</span> 
 				              </p>
 				            </div>	
 			              	<div class="row">

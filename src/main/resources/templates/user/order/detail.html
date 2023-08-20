@@ -126,12 +126,25 @@
 		              	<span style="font-weight: bold;" th:text="*{createDate}" readonly="readonly"></span>
 		              </p>
 		            </div>
-					  <div class="d-flex justify-content-between pt-2">
-						  <p class="text-muted mb-0">Trạng thái thanh toán:
-							  <span th:if="*{paypalOrderStatus} == 'PAID'" style="font-weight: bold;" readonly="readonly">Đã thanh toán</span>
-							  <span th:unless="*{paypalOrderStatus} == 'PAID'" style="font-weight: bold;" readonly="readonly">Chưa thanh toán</span>
-						  </p>
-					  </div>
+		            
+		            <div class="d-flex justify-content-between pt-2">
+		              <p class="text-muted mb-0">Trạng thái đơn hàng:
+		              	<span style="font-weight: bold;" th:text="*{status}" readonly="readonly"></span>
+		              </p>
+		            </div>
+		            
+		            <div class="d-flex justify-content-between pt-2" th:if="*{status} == 'Đã hủy'">
+		              <p class="text-muted mb-0">Lý do hủy:
+		              	<span style="font-weight: bold;" th:text="*{cancellationReason}" readonly="readonly"></span>
+		              </p>
+		            </div>
+		            
+					<div class="d-flex justify-content-between pt-2">
+					  <p class="text-muted mb-0">Trạng thái thanh toán:
+						  <span th:if="*{paypalOrderStatus} == 'PAID'" style="font-weight: bold;" readonly="readonly">Đã thanh toán</span>
+						  <span th:unless="*{paypalOrderStatus} == 'PAID'" style="font-weight: bold;" readonly="readonly">Chưa thanh toán</span>
+					  </p>
+					</div>
 		          </div>
 		          <div class="card-footer border-0 px-4 py-5"
 		            style="background-color: #7fad39; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">

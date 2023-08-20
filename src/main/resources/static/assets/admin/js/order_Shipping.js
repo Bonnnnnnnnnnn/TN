@@ -59,6 +59,7 @@ app.controller("ctrl-waitingForShipping", function($scope, $http, $filter){
 	$scope.cancel = function(id) {
 		var xacNhan = confirm("Bạn có muốn huỷ không?");
 		if (xacNhan) {
+			var cancellationReason = prompt("Vui lòng cho biết lý do bạn muốn hủy đơn?");
 			// Find the order in $scope.items by its ID
 	        const orderToUpdate = $scope.items.find(item => item.id === id);
 	        if (!orderToUpdate) {
@@ -66,6 +67,9 @@ app.controller("ctrl-waitingForShipping", function($scope, $http, $filter){
 	            return;
 	        }
 	
+			// Set the new cancellationReason
+			orderToUpdate.cancellationReason = cancellationReason;
+			
 	        // Set the new status
 	        orderToUpdate.status = 'Đã hủy';
 	

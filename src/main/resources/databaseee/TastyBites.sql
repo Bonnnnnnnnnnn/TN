@@ -86,6 +86,7 @@ CREATE TABLE [dbo].[Orders](
 	[PaypalOrderId] varchar(32) NULL,
 	[PaypalOrderStatus] varchar(32) NULL,
 	[Status] nvarchar(250) NOT NULL,
+	[CancellationReason] nvarchar(200) NULL,
  CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -570,6 +571,8 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
 
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT DF_Orders_CancellationReason DEFAULT NULL FOR [CancellationReason];
 
 
 SELECT SUM(TotalPriceAfterDiscount) as FinalTotal

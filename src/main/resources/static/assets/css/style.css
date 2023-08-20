@@ -3201,7 +3201,7 @@ ol {
 
 @media only screen and (min-width: 1200px) {
 	.container {
-		max-width: 1170px;
+		max-width: 1270px;
 	}
 }
 
@@ -4166,6 +4166,32 @@ review-form .input-rating .stars {
   font-size: 16px;
   color: #ffc107;
 }
+
+
+.cancel-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #ff4949;
+    transform: scale(1.05);
+}
+
+.cancel-icon {
+    margin-right: 5px;
+}
+
+.cancel-text {
+    font-weight: bold;
+}
+
 
 
 
