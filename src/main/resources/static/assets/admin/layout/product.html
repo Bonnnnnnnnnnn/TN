@@ -98,7 +98,6 @@
 						<th>Price</th>
 						<th>Create date</th>
 						<th>Available</th>
-						<th>Status</th>
 						<th>CategoryId</th>
 						<th></th>
 					</tr>
@@ -109,10 +108,9 @@
 						<td style="width: 20%">{{product.name}}</td>
 						<td style="width: 10%"><img style="width: 50%; height: auto" ng-src="/folder/images/{{product.image}}" alt="" /></td>
 						<td style="width: 5%">{{product.productQuantity}}</td>
-						<td>${{product.price}}</td>
+						<td>{{product.price}}</td>
 						<td>{{product.createDate}}</td>
-						<td>${{product.available}}</td>
-						<td>${{product.status}}</td>
+						<td>{{product.available ? 'Có sẵn' : 'Không có sẵn' }}</td>
 						<td style="width: 5%">{{product.category.id}}</td>
 						<td>
 							<button ng-click="edit(product.id)" class="btn btn-light btn-sm">Edit</button>

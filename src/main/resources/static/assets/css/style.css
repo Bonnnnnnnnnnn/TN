@@ -1011,6 +1011,8 @@ ol {
 }
 .categories__item:hover {
 	transform:scale(1.1);
+	-webkit-transition: 1s all;
+	transition: 1s all;
 }
 
 .categories__item h5 {
@@ -1215,6 +1217,8 @@ ol {
 .btn-view-more:hover {
   background-color: #678c2f; /* Màu nền khi rê chuột vào nút */
   transform:scale(1.1);
+  -webkit-transition: 1s all;
+  transition: 1s all;
 }
 
 /*---------------------

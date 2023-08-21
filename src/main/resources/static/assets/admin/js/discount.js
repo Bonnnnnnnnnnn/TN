@@ -55,7 +55,11 @@ app.controller("ctrl-discount", function($scope, $http) {
 
   $scope.createDiscount = function() {
     var discount = angular.copy($scope.form);
-    let check = false;
+    let check = false
+
+    // Set the createDate field to the current date
+    discount.createdate = new Date();
+    
     console.log(discount);
     if ($scope.myForm.$valid) {
       // Validate your form fields here if needed
