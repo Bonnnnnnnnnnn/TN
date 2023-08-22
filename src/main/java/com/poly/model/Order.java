@@ -39,9 +39,11 @@ public class Order implements Serializable{
 	private Date createDate= new Date();
 	@ManyToOne
 	@JoinColumn(name = "Discountid")
-	private Discount discountId;
+	private Discount discount;
 	@Column(name = "Status")
 	private String status = "Đợi xác nhận";
+	@Column(name = "Cancellationreason")
+	private String cancellationReason = null;
 	@Column(name = "Paypalorderid")
 	private String paypalOrderId;
 	@Column(name = "Paypalorderstatus")

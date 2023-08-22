@@ -7,7 +7,12 @@ app.controller("ctrl-discount", function($scope, $http) {
   $scope.discounts = [];
   
   
-
+  $scope.formatDate = function(dateString) {
+		if (!dateString) return null;
+		var date = new Date(dateString);
+		var formattedDate = moment(date).format('YYYY-MM-DD');
+		return formattedDate;
+	};
 
 
   $scope.load_all = function() {
@@ -24,6 +29,9 @@ app.controller("ctrl-discount", function($scope, $http) {
     var url = `${pathDiscount}/discount/${id}`;
     $http.get(url).then(resp => {
       $scope.form = resp.data;
+      $scope.form.applyDay = new Date(resp.data.applyDay);
+      $scope.form.expiration = new Date(resp.data.expiration);
+      $scope.form.createdate = new Date(resp.data.createdate);
       console.log("Success", resp);
     }).catch(errors => {
       console.log("Error", errors);
@@ -36,7 +44,10 @@ app.controller("ctrl-discount", function($scope, $http) {
     $http.put(url, discount).then(resp => {
       var index = $scope.discounts.findIndex(item => item.id == $scope.form.id);
       $scope.discounts[index] = resp.data;
+      $scope.reset();
+      $scope.load_all();
       console.log("Success", resp);
+      alert("Cập nhật mã giảm thành công");
     }).catch(error => {
       console.log("Error", error);
     });
@@ -44,7 +55,11 @@ app.controller("ctrl-discount", function($scope, $http) {
 
   $scope.createDiscount = function() {
     var discount = angular.copy($scope.form);
-    let check = false;
+    let check = false
+
+    // Set the createDate field to the current date
+    discount.createdate = new Date();
+    
     console.log(discount);
     if ($scope.myForm.$valid) {
       // Validate your form fields here if needed
@@ -61,6 +76,7 @@ app.controller("ctrl-discount", function($scope, $http) {
           $scope.reset();
           $scope.load_all();
           console.log("Success", resp);
+          alert("Tạo mã giảm thành công");
         }).catch(error => {
           console.log("Error", error);
         });
@@ -69,16 +85,24 @@ app.controller("ctrl-discount", function($scope, $http) {
   }
 
   $scope.deleteDiscount = function(discountId) {
-    var url = `${pathDiscount}/discount/${discountId}`;
-    $http.delete(url).then(resp => {
-      // tìm ra phần tử tại vị trí sẽ xóa.
-      var index = $scope.discounts.findIndex(item => item.id == discountId);
-      $scope.discounts.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
-      $scope.reset();
-      console.log("Success", resp);
-    }).catch(error => {
-      console.log("Error", error);
-    });
+	var url = `${pathDiscount}/discount/${discountId}`;
+	var xacnhan = confirm('Bạn có chắc muốn xóa!');
+	if(xacnhan) {
+		$http.delete(url).then(resp => {
+	      // tìm ra phần tử tại vị trí sẽ xóa.
+	      var index = $scope.discounts.findIndex(item => item.id == discountId);
+	      $scope.discounts.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
+	      $scope.reset();
+	      console.log("Success", resp);
+	      alert("Xóa mã giảm thành công");
+	    }).catch(error => {
+	      console.log("Error", error);
+	    });
+	}else{
+		console.log("Cancel");
+	}
+    
+    
   }
 
   $scope.reset = function() {

@@ -17,7 +17,6 @@ CREATE TABLE [dbo].[Accounts](
 	[Password] [nvarchar](200) NOT NULL,
 	[Fullname] [nvarchar](50) NOT NULL,
 	[Email] [nvarchar](50) NOT NULL,
-	[Phone] [nvarchar](12) NULL,
 	[Photo] [nvarchar](50)  NULL,
 	[Phone] [nvarchar](12) NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
@@ -87,6 +86,7 @@ CREATE TABLE [dbo].[Orders](
 	[PaypalOrderId] varchar(32) NULL,
 	[PaypalOrderStatus] varchar(32) NULL,
 	[Status] nvarchar(250) NOT NULL,
+	[CancellationReason] nvarchar(200) NULL,
  CONSTRAINT [PK_Orders] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -184,9 +184,18 @@ CREATE TABLE Visitors(
 	[views] bigint
 )
 
-
-
-
+CREATE TABLE [dbo].[Reviews](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[Rating] [int] NOT NULL,
+	[Comment] [nvarchar](max) NULL,
+	[ReviewDate] [datetime] NOT NULL DEFAULT GETDATE(),
+	CONSTRAINT [PK_Reviews] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
 -------------------------Insert data-------------------------
 
@@ -544,6 +553,12 @@ GO
 ALTER TABLE [dbo].[Products] CHECK CONSTRAINT [FK3ess0s7i9qs6sim1pf9kxhkpq]
 GO
 
+ALTER TABLE [dbo].[Reviews] WITH CHECK ADD  CONSTRAINT [FK_Reviews_Products] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Products] ([Id])
+Go
+
+ALTER TABLE [dbo].[Reviews] WITH CHECK ADD CONSTRAINT [FK_Reviews_Accounts] FOREIGN KEY ([Username]) REFERENCES [dbo].[Accounts] ([Username])
+Go
+
 ALTER TABLE Accounts
 ADD auth_provider VARCHAR(255);
 
@@ -556,7 +571,17 @@ ALTER COLUMN Photo VARCHAR(255) NULL;
 ALTER TABLE [dbo].[Orders]
 ADD CONSTRAINT DF_Orders_Status DEFAULT N'Đợi xác nhận' FOR [Status];
 
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT DF_Orders_CancellationReason DEFAULT NULL FOR [CancellationReason];
 
-SELECT * FROM Products p INNER JOIN Favourites f ON p.Id = f.ProductId WHERE Username = ?1 AND IsLiked = 1
 
-SELECT p FROM Products p WHERE p.Name like %?1% or p.Id like %?2%
+SELECT SUM(TotalPriceAfterDiscount) as FinalTotal
+FROM (
+    SELECT d.Price,
+           COALESCE(SUM(od.Price * od.Quantity) - COALESCE(d.Price, 0), 0) + 15000 as TotalPriceAfterDiscount
+    FROM Orders o
+    INNER JOIN OrderDetails od ON o.Id = od.OrderId 
+    LEFT JOIN Discount d ON o.DiscountId = d.Id
+    WHERE o.Status = N'Đã giao'
+    GROUP BY d.Price
+) Subquery;

@@ -39,6 +39,13 @@ app.controller("ctrl-account", function($scope, $http){
         });
     }
     
+    //Hien Pass
+    $scope.showPassword = false;
+
+    $scope.toggleShowPassword = function() {
+        $scope.showPassword = !$scope.showPassword;
+    };
+    
 $scope.create = function () {
     // Bắt đầu hiệu ứng loading
     $scope.loading = true;
@@ -64,6 +71,15 @@ $scope.create = function () {
         return; // Dừng thực hiện tiếp
     }
 
+	// Kiểm tra số điện thoại có hợp lệ
+    var phonePattern = /^\d{10}$/;
+    if (!phonePattern.test($scope.form.phone)) {
+        $scope.errorMessage = "Số điện thoại không hợp lệ.";
+        // Dừng hiệu ứng loading nếu có lỗi
+        $scope.loading = false;
+        return; // Dừng thực hiện tiếp
+    }
+	
     // Kiểm tra mật khẩu có ít nhất 6 ký tự
     if ($scope.form.password.length < 6) {
         $scope.errorMessage = "Mật khẩu phải có ít nhất 6 ký tự.";

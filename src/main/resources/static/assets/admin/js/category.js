@@ -30,7 +30,10 @@ app.controller("ctrl-category", function($scope, $http) {
         $http.put(url, category).then(resp => {
             var index = $scope.items.findIndex(item => item.id == $scope.form.id);
             $scope.items[index] = resp.data;
+            $scope.reset();
+            $scope.load_all();
             console.log("Success", resp);
+            alert("Cập nhật danh mục thành công");
         }).catch(error => {
             console.log("Error", error);
         });
@@ -38,28 +41,34 @@ app.controller("ctrl-category", function($scope, $http) {
 
     $scope.create = function() {
         var item = angular.copy($scope.form);
-        item.id = $scope.items.length + 1; // Lấy giá trị ID dựa trên độ dài của mảng items
-
         var url = `${pathCategory}/category`;
         $http.post(url, item).then(resp => {
             $scope.items.push(resp.data);
             $scope.reset();
             console.log("Success", resp);
+            alert("Tạo danh mục thành công");
         }).catch(error => {
             console.log("Error", error);
         });
     };
 
     $scope.delete = function(id) {
+		var xacnhan = confirm('Bạn có chắc muốn xóa!');
         var url = `${pathCategory}/category/${id}`;
-        $http.delete(url).then(resp => {
-            var index = $scope.items.findIndex(item => item.id == id);
-            $scope.items.splice(index, 1);
-            $scope.reset();
-            console.log("Success", resp);
-        }).catch(error => {
-            console.log("Error", error);
-        });
+        if(xacnhan) {
+			$http.delete(url).then(resp => {
+	            var index = $scope.items.findIndex(item => item.id == id);
+	            $scope.items.splice(index, 1);
+	            $scope.reset();
+	            console.log("Success", resp);
+	            alert("Xóa danh mục thành công");
+	        }).catch(error => {
+	            console.log("Error", error);
+	        });	
+		}else{
+			console.log("Cancel");
+		}
+        
     };
 
     $scope.imageChanged = function(files) {

@@ -1,6 +1,6 @@
  <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/index :: dynamic(~{::main})}">
-<body>
+<body ng-controller="shopping-cart-ctrl" >
 	<main>
 		<!-- Breadcrumb Section Begin -->
 	    <section class="breadcrumb-section set-bg" data-setbg="/assets/img/breadcrumb.jpg">
@@ -8,7 +8,7 @@
 	            <div class="row">
 	                <div class="col-lg-12 text-center">
 	                    <div class="breadcrumb__text">
-	                        <h2>Organi Shop</h2>
+	                        <h2>Tastybites Shop</h2>
 	                        <div class="breadcrumb__option">
 	                            <a th:href="@{/home/index}">Home</a>
 	                            <span>Shop</span>
@@ -26,89 +26,47 @@
 	            <div class="row">
 	                <div class="col-lg-3 col-md-5">
 	                    <div class="sidebar">
-	                        <div class="sidebar__item">
-	                            <h4>Price</h4>
-	                            <div class="price-range-wrap">
-	                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-	                                    data-min="10" data-max="540">
-	                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-	                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-	                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-	                                </div>
-	                                <div class="range-slider">
-	                                    <div class="price-input">
-	                                        <input type="text" id="minamount">
-	                                        <input type="text" id="maxamount">
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="sidebar__item sidebar__item__color--option">
-	                            <h4>Colors</h4>
-	                            <div class="sidebar__item__color sidebar__item__color--white">
-	                                <label for="white">
-	                                    White
-	                                    <input type="radio" id="white">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__color sidebar__item__color--gray">
-	                                <label for="gray">
-	                                    Gray
-	                                    <input type="radio" id="gray">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__color sidebar__item__color--red">
-	                                <label for="red">
-	                                    Red
-	                                    <input type="radio" id="red">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__color sidebar__item__color--black">
-	                                <label for="black">
-	                                    Black
-	                                    <input type="radio" id="black">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__color sidebar__item__color--blue">
-	                                <label for="blue">
-	                                    Blue
-	                                    <input type="radio" id="blue">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__color sidebar__item__color--green">
-	                                <label for="green">
-	                                    Green
-	                                    <input type="radio" id="green">
-	                                </label>
-	                            </div>
-	                        </div>
-	                        <div class="sidebar__item">
-	                            <h4>Popular Size</h4>
-	                            <div class="sidebar__item__size">
-	                                <label for="large">
-	                                    Large
-	                                    <input type="radio" id="large">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="medium">
-	                                    Medium
-	                                    <input type="radio" id="medium">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="small">
-	                                    Small
-	                                    <input type="radio" id="small">
-	                                </label>
-	                            </div>
-	                            <div class="sidebar__item__size">
-	                                <label for="tiny">
-	                                    Tiny
-	                                    <input type="radio" id="tiny">
-	                                </label>
-	                            </div>
-	                        </div>
+	                       <!-- Price Start -->
+					
+					<div  class="bg-light p-4 mb-30">
+						<form th:action="@{/product/list/filter}" method="get">
+						<h5 class="section-title position-relative text-uppercase mb-3"><span
+							>Filter by price</span></h5>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="all" value="true" class="custom-control-input" id="price-all">
+								<label class="custom-control-label" for="price-all">All Price</label>
+							</div>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="0-50000" value="true" class="custom-control-input" id="price-1">
+								<label class="custom-control-label" for="price-1">0Đ - 50.000đ</label>
+							</div>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="50000-100000" value="true" class="custom-control-input" id="price-2">
+								<label class="custom-control-label" for="price-2">50.000đ - 100.000đ</label>
+							</div>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="100000-200000" value="true" class="custom-control-input" id="price-3">
+								<label class="custom-control-label" for="price-3">100.000đ-200.000đ</label>
+							</div>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="200000-300000" value="true" class="custom-control-input" id="price-4">
+								<label class="custom-control-label" for="price-4">200.000đ-300.000đ</label>
+							</div>
+							<div
+								class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+								<input onclick="updateCheckboxes(this)" type="checkbox" name="300000-500000" value="true" class="custom-control-input" id="price-5">
+								<label class="custom-control-label" for="price-5">300.000đ-500.000đ</label>
+							</div>
+
+							<input style="width: 100%" class="btn btn-filter px-3" type="submit" value="Filter" />
+						</form>
+					</div>
+
 	                        <div class="sidebar__item">
 	                            <div class="latest-product__text">
 			                        <h4>Đánh Giá Cao</h4>
@@ -198,17 +156,11 @@
 	                    <div class="filter__item">
 	                        <div class="row">
 	                            <div class="col-lg-4 col-md-5">
-	                                <div class="filter__sort">
-	                                    <span>Sort By</span>
-	                                    <select>
-	                                        <option value="0">Default</option>
-	                                        <option value="0">Default</option>
-	                                    </select>
-	                                </div>
+
 	                            </div>
 	                            <div class="col-lg-4 col-md-4">
 	                                <div class="filter__found">
-	                                    <h6><span>16</span> Products found</h6>
+	                                   <h6><span th:text="${items.size()}"></span> Products found</h6>
 	                                </div>
 	                            </div>
 	                            <div class="col-lg-4 col-md-3">
@@ -279,9 +231,20 @@
 						</div>
 	                </div>
 	            </div>
-	        </div>
+	        </div><!-- Hàm JavaScript để xử lý sự kiện chỉ cho phép người dùng chọn duy nhất 1 checkbox. -->
+		<script>
+		function updateCheckboxes(clickedCheckbox) {
+				var checkboxes = document.querySelectorAll("[id^='price-']");
+				for (var i = 0; i < checkboxes.length; i++) {
+			    	if (checkboxes[i] != clickedCheckbox) {
+			      		checkboxes[i].checked = false;
+			    	}
+			 	}
+			}
+		</script>
 	    </section>
 	    <!-- Product Section End -->
+	    
 	</main>
 </body>
 </html>

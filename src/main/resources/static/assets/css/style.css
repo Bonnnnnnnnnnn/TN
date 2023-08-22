@@ -1011,6 +1011,8 @@ ol {
 }
 .categories__item:hover {
 	transform:scale(1.1);
+	-webkit-transition: 1s all;
+	transition: 1s all;
 }
 
 .categories__item h5 {
@@ -1215,6 +1217,8 @@ ol {
 .btn-view-more:hover {
   background-color: #678c2f; /* Màu nền khi rê chuột vào nút */
   transform:scale(1.1);
+  -webkit-transition: 1s all;
+  transition: 1s all;
 }
 
 /*---------------------
@@ -3201,7 +3205,7 @@ ol {
 
 @media only screen and (min-width: 1200px) {
 	.container {
-		max-width: 1170px;
+		max-width: 1270px;
 	}
 }
 
@@ -3956,3 +3960,243 @@ label[for="profile-picture"]::before {
     font-family: FontAwesome;
     font-size: 18px;
 }
+
+/* Filter Product */
+/* Section title styling */
+.section-title {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Checkbox label styling */
+.custom-control-label {
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Checkbox styling */
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #127500 ;
+    background-color: #127500;
+}
+
+/* Button styling */
+.btn-filter {
+    background-color: #7fad39;
+    border-color: #7fad39;
+    width: 100%;
+    padding: 10px;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-filter:hover {
+    background-color: #127500;
+    color:white;
+    border-color: #127500;
+}
+
+/* Spacing for checkboxes */
+.custom-control {
+    margin-bottom: 10px;
+}
+
+/* Background and spacing for the filter area */
+.bg-light {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 23px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+
+/* Review Form */
+
+/* CSS for Review Form */
+
+.review-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Left Column (Review Form) */
+.left-column {
+    flex-basis: calc(50% - 20px);
+}
+
+/* Right Column (Review List) */
+.right-column {
+    flex-basis: calc(50% - 20px);
+}
+
+.review-form {
+  margin-bottom: 30px;
+}
+
+.review-form h5 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.review-form form {
+  max-width: 400px;
+}
+
+.review-form input,
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review-form .input-rating {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+review-form .input-rating .stars {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.review-form .input-rating .stars input[type="radio"] {
+  display: none;
+}
+
+.review-form .input-rating .stars>label {
+  float: right;
+  cursor: pointer;
+  padding: 0px 3px;
+  margin: 0px;
+}
+
+.review-form .input-rating .stars>label:before {
+  content: "\f006";
+  font-family: FontAwesome;
+  color: #E4E7ED;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.review-form .input-rating .stars>label:hover:before, .review-form .input-rating .stars>label:hover~label:before {
+  color: #ffc107;
+}
+
+.review-form .input-rating .stars>input:checked label:before, .review-form .input-rating .stars>input:checked~label:before {
+  content: "\f005";
+  color: #ffc107;
+}
+
+.review-form textarea {
+  height: 120px;
+}
+
+.review-form button {
+  background-color: #7fad39;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* CSS for Review List */
+.review-list {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.review-list h5 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.review-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: -10px; /* Counteract default spacing */
+}
+
+.review-item {
+  flex-basis: calc(50% - 10px); /* Subtracting margin to fit two items per row */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.review-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.review-details {
+  margin-top: 10px;
+}
+
+.review-details h6 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.review-details .rating {
+  margin-bottom: 5px;
+}
+
+.review-details p {
+  margin-bottom: 5px;
+}
+
+.review-date {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Additional styling for stars if needed */
+.review-details .rating i {
+  font-size: 16px;
+  color: #ffc107;
+}
+
+
+.cancel-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #ff4949;
+    transform: scale(1.05);
+}
+
+.cancel-icon {
+    margin-right: 5px;
+}
+
+.cancel-text {
+    font-weight: bold;
+}
+
+
+
+
+

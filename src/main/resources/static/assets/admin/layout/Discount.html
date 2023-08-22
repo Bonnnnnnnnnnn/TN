@@ -7,14 +7,7 @@
         </div>
         <form name="myForm">
           <div class="card-body row">
-
-		<div class="form-group col-md-6">
-              <label for="title">Discount Id</label>
-              <input ng-model="form.id" class="form-control">
-              <div class="errName" style='color: red;'></div>
-            </div>
-	
-
+			  
             <div class="form-group col-md-6">
               <label for="title">Discount name</label>
               <input ng-model="form.name" class="form-control">
@@ -41,21 +34,16 @@
 
             <div class="form-group col-md-6">
               <label for="title">Apply Day</label>
-              <input type="date" ng-model="form.applyDay" class="form-control">
+              <input type="date" ng-model="form.applyDay" ng-value="formatDate(form.applyDay)" class="form-control">
               <div class="errApplyDay" style='color: red;'></div>
             </div>
 
             <div class="form-group col-md-6">
               <label for="title">Expiration</label>
-              <input type="date" ng-model="form.expiration" class="form-control">
+              <input type="date" ng-model="form.expiration" ng-value="formatDate(form.expiration)" class="form-control">
               <div class="errExpiration" style='color: red;'></div>
             </div>
 
-            <div class="form-group col-md-6">
-              <label for="title">Created Date</label>
-              <input type="date" ng-model="form.createdate" class="form-control">
-              <div class="errCreatedDate" style='color: red;'></div>
-            </div>
           </div>
 
           <div class="card-footer">
@@ -87,7 +75,7 @@
             <th>Apply Day</th>
             <th>Expiration</th>
             <th>Created Date</th>
-            <th>Edit</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -97,9 +85,9 @@
             <td style="width: 10%">{{discount.code}}</td>
             <td>{{discount.price}}</td>
             <td>{{discount.quality}}</td>
-            <td>{{discount.applyDay}}</td>
-            <td>{{discount.expiration}}</td>
-            <td>{{discount.createdate}}</td>
+            <td>{{discount.applyDay | date:'dd/MM/yyyy'}}</td>
+            <td>{{discount.expiration | date:'dd/MM/yyyy'}}</td>
+            <td>{{discount.createdate | date:'dd/MM/yyyy'}}</td>
             <td>
               <button ng-click="editDiscount(discount.id)" class="btn btn-light btn-sm">Edit</button>
               <button ng-click="deleteDiscount(discount.id)" class="btn btn-danger btn-sm">Delete</button>
