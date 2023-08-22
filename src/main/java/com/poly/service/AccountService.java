@@ -22,7 +22,6 @@ public interface AccountService {
 
 	Account changePassword(Account account, String newPassword);
 
-	
 	Account update(Account account);
 
 	void delete(String id);
