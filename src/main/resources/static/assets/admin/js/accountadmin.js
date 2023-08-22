@@ -78,16 +78,24 @@ app.controller("ctrl-accountadmin", function($scope, $http) {
 
 	$scope.delete = function(id) {
 		var url = `${pathAccount}/accountadmin/${id}`;
-		$http.delete(url).then(resp => {
-			// tìm ra phần tử tại vị trí sẽ xóa.
-			var index = $scope.items.findIndex(item => item.id == id);
-			$scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
-			$scope.reset();
-			console.log("Success", resp);
-			alert("Xóa tài khoản thành công");
-		}).catch(error => {
-			console.log("lỗi xoá", error);
-		});
+		var xacnhan = confirm("Bạn có chắc muốn xóa ?");
+		if(xacnhan) {
+			$http.delete(url).then(resp => {
+				// tìm ra phần tử tại vị trí sẽ xóa.
+				var index = $scope.items.findIndex(item => item.id == id);
+				$scope.items.splice(index, 1); // tại vị trí đó và xóa 1 phần tử
+				$scope.reset();
+				$scope.load_all();
+				$scope.load_Customer();
+				console.log("Success", resp);
+				alert("Xóa tài khoản thành công");
+			}).catch(error => {
+				console.log("lỗi xoá", error);
+			});
+		}else{
+			console.log("Error!");
+		}
+		
 	}
 
 	// Upload img
